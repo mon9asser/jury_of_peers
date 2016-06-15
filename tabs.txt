@@ -1,0 +1,16 @@
+Profile
+Home
+News
+groups
+events
+courtrooms
+friends
+albums
+videos
+musics
+apps
+sign-up
+log-in
+messages
+profiles-views
+firend_requests 
