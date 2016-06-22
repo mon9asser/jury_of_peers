@@ -11,6 +11,11 @@
 
 
 @font-face {
+    font-family: 'SourceSansPro-BoldIt';
+    src: url(../fonts/SourceSansPro-BoldIt.otf);
+}
+
+@font-face {
     font-family: 'Blacksword';
     src: url(../fonts/Blacksword.otf);
 }
@@ -775,4 +780,268 @@ right: 0px;
     min-height: 500px;
     background: rgba(250,250,250,0.5);
     margin-top: 10px;
+}
+.block-headline {
+    width: 100%; 
+    display: block ;
+    overflow: hidden ;
+    padding: 10px;
+    margin: 10px;
+    background: #fff;
+    border: 1px solid #dfdfdf;
+}
+.block-headline h3 {
+    display: inline-block ;
+    overflow: hidden ;
+    padding: 0px ;
+    margin: 0px;
+}
+.block-headline span {
+    background: #222;
+    color: #fff;
+    padding:2px 5px;
+    border-radius: 5px;
+    margin-left: 10px;  
+}
+.video-container {
+    display: block ;
+    overflow: hidden ;
+    position: relative ;
+    background: #fff;
+    width: 100% ;
+    height: 300px;
+    margin: 10px;
+    border: 1px solid #dfdfdf;
+ }
+ .vi {
+    background-size: cover ;
+    background-repeat: no-repeat ;
+    background-position: center ;
+    background-image: url(../images/captain-america-civil-war.jpg) ;
+    height: 300px;
+    display: inline-block;
+    width: 100%;
+    border-bottom: 1px solid #dfdfdf;
+    box-shadow: 0px 0px 5px 0px #fff;
+   
+ }
+.mask-video {
+    display: block ;
+    overflow:  hidden ;
+    top: 0px;
+    left: 0px;
+    bottom: 0px; 
+    right:  0px;
+    background: #fff ;
+    position: absolute ;
+    opacity: 0.5; 
+}
+.img-blocks {
+    cursor: pointer ;
+    overflow: hidden ;
+    width: 90px;
+    z-index: 1000;
+    position: relative;
+    margin: 15% auto ;
+    display: block;
+}
+.video-controler {
+    width: 100%;
+    display: inline-block;
+    overflow: hidden;
+     height: auto;
+    background: #fff;
+    margin:0px 10px;
+    padding: 10px;
+    border: 1px solid #dfdfdf ;
+}
+.vid-menu {
+    display: block ;
+    overflow: hidden;
+    padding: 0px;
+    margin: 0px;
+}
+.vid-menu li {
+    display: inline-block;
+    overflow: hidden ;
+}
+.update {
+    padding: 0px;
+    display: inline;
+}
+.vi img {
+    border-radius: 50%;
+    box-shadow: 0px 0px 15px 0px #000;
+}
+.voting {
+    background: #fff;
+    border: 1px solid #dfdfdf;
+    width: 100%;
+    min-height: 500px;
+    display: block;
+    margin-top: 10px;
+}
+.menu-cont li a , .menu-cont li a:active , .menu-cont li a:focus , .menu-cont li a:link {
+    text-decoration: none;
+}
+.vid-rating:hover {
+    color: teal ;
+}
+.video-controler2 {
+    overflow: hidden;
+    min-height: 40px;
+}
+
+/*SourceSansPro-BoldIt*/
+.vot-number {
+    font-family: 'SourceSansPro-BoldIt';
+    padding: 10px;
+    margin: 0px;
+    display: inline-block;
+    width: 100%;
+    overflow: hidden ;
+}
+.progress-video {
+    width: 290px;
+    height: 20px;
+    background: transparent;
+       display: inline-block ;
+    margin:0px 20px;
+    position: relative ;
+    border: 1px solid #eee;
+}
+.vot-number span {
+   display: inline-block ;
+}
+.progress-video > .fill {
+    width: 80%;
+    height: 100%;
+    background: teal;
+    display: block;
+}
+.block-theater {
+    width: 100%;
+    display: block ;
+    overflow: hidden ;
+ 
+}
+.nbtr h5 {
+    display: inline-block ;
+    padding: 0px 10px;
+    font-family: sans-serif ,arial ;
+    width: 100%;
+    background: #222;
+    padding: 5px 10px;
+    color: #fff;
+    margin-top: -10px;
+}
+.vid-ratingx {
+    width: 20px;
+     
+}
+
+.friend-req {
+    width: 100%;
+    height: 100px;
+    background: transparent;
+    margin: 5px;
+    display: inline-block;
+    overflow: hidden;
+    border: 1px solid #eee;
+}
+
+.friend-add {
+    width: 365px;
+    height: 130px;
+    background: transparent;
+    margin: 5px;
+    display: inline-block;
+    overflow: hidden;
+    border: 1px solid #eee;
+}
+.img-pics {
+    display: inline-block ;
+    width: 130px;
+    height: 130px;
+    background: green;
+    background-size: cover ;
+    background-repeat: no-repeat ;
+     border-right: 1px solid #eee;
+    float: left;
+}
+
+.img-pics-req {
+    display: inline-block ;
+    width: 100px;
+    height: 100px;
+    background: green;
+    background-size: cover ;
+    background-repeat: no-repeat ;
+     border-right: 1px solid #eee;
+    float: left;
+}
+
+.img-nae {
+    display: inline-block;
+    width: 220px;
+    padding-left: 5px;
+    height: 130px;
+    float: left;
+    background: transparent;
+    
+}
+
+.img-nae-req {
+    display: inline-block;
+    width: 200px;
+    padding-left: 5px;
+    height: 130px;
+    float: left;
+    background: transparent;
+    
+}
+.img-nae b {
+    width: 100%;
+    display: block;
+    overflow: hidden;
+    text-align: left;
+    padding: 20px;
+}
+
+.img-nae-req b {
+    width: 100%;
+    display: block;
+    overflow: hidden;
+    text-align: left;
+    padding: 10px;
+}
+.mdfgg {
+    color: #888;
+}
+
+.mdfgg-req {
+    color: #888;
+}
+.addbtn {
+    background: none ;
+    border: 1px solid #dfdfdf ;
+    padding: 5px 10px;
+    margin: 0px 3px;
+    float: left;
+}
+.frds {
+   min-height: 200px;
+   height: auto;
+}
+.btn-req {
+    padding: 2px 10px;
+    border: 0px;
+    border-radius: 0px;
+    margin: 8px 3px;
+    float: left;
+}
+.msg-btn , .msg-btn:hover ,.msg-btn:active , .msg-btn:focus , .msg-btn:link {
+    background: #fff;
+    color: #222;
+    border: 1px solid #eee;
 }
