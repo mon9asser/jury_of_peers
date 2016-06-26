@@ -1,0 +1,92 @@
+/* 
+    Document   : groups
+    Created on : Jun 27, 2016, 1:19:22 AM
+    Author     : Montasser Mossallem
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+  
+.img-blocks-pro {
+    height: 130px;
+    position: relative;
+    display: inline-block ;
+    overflow: hidden;
+    width: 124px;
+    float: left ;
+    background-repeat: no-repeat ;
+    background-size: cover ;
+    
+}
+.profile-cover-block {
+  height: 130px;  
+}
+
+.home-group-cover {
+    z-index: 195 ;
+    display: inline-block;
+    overflow: hidden ;
+    position: absolute ;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    background: #fff;
+}
+.mask-image {
+    z-index: 200;
+}
+.event-title-headlinie {
+    top: 20px;
+    bottom: inherit;
+    left: 20px;
+}
+.descri {
+    font-size: 13px;
+     width: 100%;
+    display: block ;
+    overflow: hidden;
+ }
+.grb-name {
+    width: 100%;
+    display: block ;
+    overflow: hidden;
+    font-size: 35px;
+}
+.main-profile-menu {
+    float: right;
+}
+
+.main-profile-menu:first-child {
+    float: left;
+}
+
+.ico-group {
+    font-size:17px;
+    display: inline-block ;
+    float: left;
+    padding-right: 5px;
+}
+.left-part {
+    width: 70%;
+}
+.right-part {
+    width: 29%;
+}
+.addnewmember {
+    width: 90%;
+    display: block ;
+    border: 1px solid #eee;
+    margin: 10px auto ;
+}
+.addnewmember input {
+    width: 200px;
+    padding: 5px;
+    border: 0px;
+}
+.addnewmember i {
+    padding-left: 5px;
+}
+.posts-get {
+    margin-top: 20px;
+}
