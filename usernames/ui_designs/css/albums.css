@@ -1,0 +1,63 @@
+/* 
+    Document   : albums
+    Created on : Jun 25, 2016, 8:45:26 PM
+    Author     : Montasser Mossallem
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.mm-album {
+    width: 100%;
+    display: block ;
+    overflow: hidden ;
+    border: 1px solid #eee;
+    background: #fff;
+    padding: 10px;
+}
+
+.pic-headline {
+    width: 100%;
+    display: block ;
+    overflow: hidden ;
+    font-family: arial , sans-serif;
+    font-size: 20px;
+    text-align: center;
+    padding: 0px;
+    margin: 0px;
+}
+.setting-album {
+    width: 100%;
+    display: block ;
+    text-align: center ;
+    color: #888;
+    padding-bottom:10px;
+}
+.images-albums {
+    width: 100%;
+    display: block ;
+    overflow: hidden ;
+    margin-bottom: 25px;
+}
+.img-alb-block {
+    width: 202.5px;
+    height: 202px;
+    background: red;
+    margin: 3px;
+    display: inline-block;
+    position: relative ;
+    overflow: hidden ;
+    background-size: cover ;
+    background-repeat: no-repeat;
+    background-position: 100% 0%;
+    cursor: pointer;
+}
+.camvote {
+    padding: 10px;
+    display: block ;
+    width: 100%;
+    bottom: 0px;
+    position: absolute;
+}
+.reto-default {
+    color: #ecf0f1;
+}

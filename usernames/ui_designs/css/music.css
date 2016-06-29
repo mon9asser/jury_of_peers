@@ -1,0 +1,298 @@
+/* 
+    Document   : music
+    Created on : Jun 22, 2016, 4:18:55 PM
+    Author     : Montasser
+    Description:
+        Purpose of the stylesheet follows.
+*/
+@font-face {
+    font-family: 'AUdimat-Bold';
+    src: url(../fonts/AUdimat-Bold.otf);
+}
+.music-container {
+    width: 100%;
+    display: block ;
+    overflow: hidden ;
+    min-height: 550px;
+    position: relative;
+    
+   max-height: 1500px;
+
+}
+.music-container-mask {
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background: rgba(255,255,255,.7);
+    position: absolute;
+}
+.play-song {
+    display: inline-block ;
+    position: absolute ;
+    left: 0px;
+    right: 0px;
+     
+    bottom: 0px;
+    height: 40px;
+    overflow: hidden ;
+}
+
+.play-pause {
+    width: 60px;
+    height: 40px;
+    background: transparent;
+    float: left;
+    overflow: hidden;
+    position: relative;
+}
+.play-song {
+    font-size: 35px;  
+    margin: 0px auto;
+     overflow: hidden;
+  border-top: 1px solid #dfdfdf;
+  height: 50px;
+  padding-top: 5px;
+}
+.play-track {
+    width: 65%;
+    float: left;
+    height: 40px;
+      overflow: hidden;
+      position: relative;
+}
+.play-volume {
+     width: 23%;
+    float: left;
+    height: 40px;
+      overflow: hidden;
+      position: relative;
+}
+.pl {
+    font-size: 30px;
+    padding: 0px;
+    margin: 0px;
+    display: block;
+    margin-top: 10%;
+    cursor: pointer ;
+     
+    color: #8DCA09;
+    color: -webkit-linear-gradient(top, #8DCA09, #72A307);
+    color: -moz-linear-gradient(top, #8DCA09, #72A307);
+    color: linear-gradient(top, #8DCA09, #72A307);
+     
+}
+.mm-track {
+    height: 15px;
+    background: tan;
+    width: 100%;
+    display: block;
+    margin-top: 1.8%;
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+    padding: 0px;
+    
+}
+.mm-fill-track {
+    width: 66%;
+    height: 100%;
+    background: rgba(0,128,128,0.3);
+    border-radius: 5px;
+}
+
+.mm-fill-track-main {
+    width: 42%;
+    height: 100%;
+    background: #008080;
+    border-radius: 5px;
+    position: absolute;
+}
+.track-num {
+    width: 30px;
+    height: 30px;
+    background: red;
+    float: right;
+}
+.track-voumes {
+    width: 100%;
+    display: block;
+     height: auto;  
+    background: transparent;
+    width: 80%;
+    display: block;
+    margin-top: 0%;
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+    padding: 0px;
+    margin-left: 10px;
+    float: left;
+    background-size: 30px 30px;
+    padding-left: 30px;
+    background-repeat: no-repeat;
+    background-position: 5px -1px ;
+    background-image: url(../images/volume.png);
+    padding-bottom: 15px;
+    margin-top:8px;
+   
+}
+.vol {
+    width: 100%;
+    height: 5px;
+    background: tan;
+    display: block;
+margin-top: 10px;
+}
+.music-info-contaienr , .headline-music {
+    position: relative ;
+    overflow: hidden ; 
+    width: 100%;
+    display: block;
+}
+.music-name {
+    padding: 5px 20px;
+    margin: 0px;
+    display: block ;
+    font-family: 'AUdimat-Bold';
+}
+.artist-name {
+    display: block ;
+    overflow:  hidden ;
+    width: 100%;
+    text-align: left;
+}
+.name-artist {
+    float: left ;
+    display: inline-block ;
+    font-family: arial , sans-serif ;
+    font-size: 18px;
+}
+.song-vot {
+     float: left ;
+    display: inline-block ;
+    font-family: arial , sans-serif ;
+    font-size: 18px;
+    padding-left: 20px;
+}
+.mu-container {
+    width: 100%;
+    display: inline-block;
+    overflow: hidden ;
+    
+ }
+ .rat-song {
+     padding-left: 20px;
+ }
+ .trackSlider {
+     width: 25px;
+     height: 25px;
+     background: tomato;
+     position: absolute ;
+     left: 40%;
+     top: 20%;
+     border-radius: 15px;
+     cursor: pointer;
+     box-shadow: 0px 0px 2px #fff;
+     border: 1px solid tan;
+     transition: 0.5s ,width , linear;
+     -webkit-transition: 0.5s ,width , linear;
+     -moz-transition: 0.5s ,width , linear;
+ }
+ .play-track > .slider {
+     position: relative;
+    -moz-user-select: none;
+    box-sizing: border-box;
+    height: 38px;
+    margin-left: 8px;
+    margin-right: 8px;
+    width: 95%;
+    display: block;
+ }
+ #volume-slider-slider {
+     height: 29px;
+     width: 124px;
+ }
+ .action-music {
+     width: 100%;
+     height: 400px;
+      position: relative;
+ }
+ 
+ .duration-of-this-track{
+     
+     width: 40%;
+     height: 100%;
+     margin: 20px;
+     display: inline-block ;
+     overflow: hidden;
+     float: left;
+ }
+  .playlist-of-this-track{
+     background: transparent;
+     width: 50%;
+     height: 100%;
+     margin: 20px;
+     display: inline-block ;
+     float: right;
+     overflow: hidden
+ }
+ .durTime {
+     font-size: 180px;
+     width: 100%;
+     display: block ;
+     overflow: hidden;
+     text-align: center;
+     font-family: 'AUdimat-Bold';
+     color: #666;
+ }
+ .rats {
+     width: 100%;
+     display: block;
+     overflow: hidden;
+     height: auto;
+      
+ }
+ .RatNow img {
+     width: 18px;
+ }
+ .PlayList-for-all {
+    width: 350px;
+    height: 400px;
+    display: block ;
+    background: rgba(0,0,0,.5);
+    float: right;
+    overflow-y: auto;
+}
+ 
+.menulisted {
+    display: block ;
+    list-style: none ;
+    overflow: hidden ;
+    padding: 0px;
+}
+.menulisted li {
+    display: block ;
+    width: 99%;
+    overflow: hidden ;
+    padding: 0px;
+    padding: 0px;
+     margin: 1px;
+     border-bottom: 1px solid #888;
+}
+.menulisted li a  , .menulisted li a:active , .menulisted li a:focus , .menulisted li a :link {
+    text-decoration: none ;
+    padding: 10px 10px;
+    line-height: 2;
+    cursor: pointer ;
+    color: #fff;
+    display: inline-block;
+    
+}
+.trac {
+    float: right;
+}
+.pls {
+    font-size: 20px;
+    line-height: 1.5;
+}
