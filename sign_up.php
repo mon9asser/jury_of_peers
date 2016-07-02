@@ -27,15 +27,19 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+        
+    </style>
     </head>
     <body>
-        <!-- ------------------------------------------------- -->
-        <!-- ------------------- Background ------------------ -->
-        <!-- ------------------------------------------------- -->
         <div id="slide-container" class="body-bg">
             <div class="parent-bg img-background" style="background-image: url(img_sliders/1.jpg); "> </div>
             <div class="mask-layer"></div>
         </div>
+        <!-- ------------------------------------------------- -->
+        <!-- --------------------- Header -------------------- -->
+        <!-- ------------------------------------------------- -->
+        
         <!-- ------------------------------------------------- -->
         <!-- --------------------- Contents ------------------ -->
         <!-- ------------------------------------------------- -->
@@ -51,24 +55,61 @@
                    
                 </div>
                 <div class="col-xs-12 col-md-6">
-                    <div class="sign-box">
-                        <div class="box-logs">
-                            <input class="inputs" placeholder="Username Or Email" type="text" />
+                    <div class="sign-box sign-up">
+                        <div class='error-logs'></div>
+                        <div class="box-logs" style="border: 0px;">
+                            <input style="border-bottom: 2px solid #eee;" class="inputs by-half fname" placeholder="First Name" type="text" />
+                            <input style="border-bottom: 2px solid #eee;" class="inputs by-half sname" placeholder="Last Name" type="text" />
                         </div>
                         <div class="box-logs">
-                            <input class="inputs" placeholder="Password" type="text" />
+                           <input class="inputs by-half usname" placeholder="Username" type="text" /> 
                         </div>
-                        <a class="box-logs-btn text-center">
-                            Login
-                        </a>
+                        
+                        <div class="box-logs">
+                            <input class="inputs by-half emails" placeholder="Email" type="text" />
+                            
+                        </div>
+                        <div class="box-logs">
+                            <input class="inputs by-half Password" placeholder="Password" type="password" />
+                            
+                        </div>
+                        <div class="box-logs">
+                            <input class="inputs dateofbirth" placeholder="Date of Birth: 20/02/1988" type="text" />
+                        </div>
+                         <div class="box-logs gender-box">
+                             
+                             <ul class="gender">
+                                 <li>
+                                   <label style="color: #999;">
+                                 Gender :-
+                             </label>
+                                </li>
+                                
+                                <li>
+                                    <input value="0" type="radio" id="f-option" name="gender">
+                                  <label for="f-option">Male</label>
+                                    <div class="check"></div>
+                                </li>
+
+                                <li>
+                                    <input type="radio" value="1" id="s-option" name="gender">
+                                  <label for="s-option">Female</label>
+                                  <div class="check"><div class="inside"></div></div>
+                                </li>
+                              </ul>
+                        </div>
                         <div class="cont-another">
                             <a class="checkbox">
-                                <label><input type="checkbox" value="">remember me</label>
+                                <label class="checklines"><input type="checkbox">I have read the agreement</label>
                             </a>
-                            <a>Forget password</a>
+                            <a></a>
                         </div>
+                        <a style="margin-bottom: 15px;" onclick="sign_up_new_user(this);" class="box-logs-btn text-center">
+                            Create my account now
+                        </a>
+                        
                         <div class="is-member text-center">
-                            <a>Not a member? <span>Create an account</span></a> 
+                            <a>Already have an account? <span>Login</span></a> 
                         </div>
                     </div>
                 </div>
@@ -90,9 +131,7 @@
                   <li><a href="#"></a></li>
             </ul>
         </div>
-        
-        
-        
+
         <!-- 
     jQuery (necessary for Bootstrap's JavaScript plugins)
     https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js

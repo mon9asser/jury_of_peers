@@ -60,9 +60,8 @@ class main_get_app extends connections_db  {
         
         switch ($type) {
               case '%':
-                  
-                   foreach ($args as $key => $value) {
-                            $arguments .=" {$key} LIKE '%".$value ."%'";
+                    foreach ($args as $key => $value) {
+                            $arguments .=" {$key} LIKE '%".  mysqli_real_escape_string($this->open_connection(), htmlentities( strip_tags(trim($value)))) ."%'";
                            if($i != (count($args)-1))
                                $arguments .= " ".$operatorType." ";
                           $i++ ;
@@ -71,7 +70,7 @@ class main_get_app extends connections_db  {
               
               case 'and':
                    foreach ($args as $key => $value) {
-                            $arguments .=  " `".$key."`='{$value}'";
+                            $arguments .=  " `".$key."`='".mysqli_real_escape_string($this->open_connection(), htmlentities( strip_tags(trim($value))))."'";
                            if($i != (count($args)-1))
                                $arguments .= " AND";
                           $i++ ;
@@ -80,7 +79,7 @@ class main_get_app extends connections_db  {
               
               case 'or':
                    foreach ($args as $key => $value) {
-                            $arguments .=  " `".$key."`='{$value}'";
+                            $arguments .=  " `".$key."`='".mysqli_real_escape_string($this->open_connection(), htmlentities( strip_tags(trim($value))))."'";
                            if($i != (count($args)-1))
                                $arguments .= " OR";
                           $i++ ;
@@ -89,7 +88,7 @@ class main_get_app extends connections_db  {
               
             default: // mean type is NULL exist
                  foreach ($args as $key => $value) {
-                             $arguments .=  " `".$key."`='{$value}'";
+                             $arguments .=  " `".$key."`='".mysqli_real_escape_string($this->open_connection(), htmlentities( strip_tags(trim($value))))."'";
                            if($i != (count($args)-1))
                                $arguments .= "AND";
                           $i++ ;

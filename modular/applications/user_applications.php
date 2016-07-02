@@ -1,7 +1,5 @@
-<?php
- 
-
-$autoload_tbl = dirname(__FILE__)."/../connections/jury_of_peers_tbls.php";
+ <?php
+ $autoload_tbl = dirname(__FILE__)."/../connections/jury_of_peers_tbls.php";
 if(is_file($autoload_tbl )) require_once $autoload_tbl ;
 
 $autoload_file = dirname(__FILE__)."/../apis/apis_autoload.php";
@@ -33,43 +31,60 @@ class user_applications extends jury_of_peers_tbls {
        $getApps = new main_get_app();
        return $getApps->get_data_according_to_array($this->table(), $args, $type, $operatorType);
     }
-    public function user_application_check_exist ($args, $type = NULL){
-       $getApps = new main_get_app();
-       return $getApps->get_data_according_to_array($this->table(), $args, $type, $operatorType= NULL); 
+    public function user_application_check_exist ($value_args=[], $type = NULL){
+               $getApps = new main_get_app();
+       return $getApps->get_data_according_to_array($this->table(), $value_args, $type, $operatorType= NULL); 
     }
+    
     /******************************************************************************************/
     /******************************** Add Functions *******************************************/
     /******************************************************************************************/
     
     public function user_application_add_new_field ($args = []){
+        
+                // check if this an email or not 
+             if(!filter_var($args['e_mail'] , FILTER_VALIDATE_EMAIL))
+                {
+                     return false ;
+                }    
                 // check if this exist or not
               $email_exist = $this->user_application_check_exist(['e_mail'=>$args['e_mail']]);
               $username_exist = $this->user_application_check_exist(['u_name'=>$args['u_name']]);
               if($email_exist != NULL )
               {
-                  echo "EMAIL_EXIST";
-                  return false ;
+                   return false ;
               }
               if($username_exist != NULL )
               {
-                  echo "USERNAME_EXIST";
-                  return false ;
+                   return false ;
               }
+                $args['p_assword'] = md5($args['p_assword']);
               // Add Module Apis
               $Add_module = new main_add_app;
               $add_result = $Add_module->add_new_fields($this->table() , $args );
               if($add_result) {
-                  
+                  $email_exist = $this->user_application_check_exist(['e_mail'=>$args['e_mail']]);
                   // CREATE USER DIRECTORY 
                   $dir_apps = new apps();
                   $dir_apps->create_user_directory(dirname(__FILE__).'/../../usernames', dirname(__FILE__).'/../../'.strtolower($args['u_name']));
-                  // CREATE ACTIVATION CODE FOR EACH USER 
-                  // SEND EMAIL TO ALLOW HIM ACTIVATE HIS ACCOUNT 
-                  // ADD USER LOGS
-                  // ........... HERE ......
-                  
-                
-                  echo "ADDED_SUCCESSED";
+                 
+                  /*
+                   // CREATE ACTIVATION CODE FOR EACH USER 
+                  $activationCode = $dir_apps->generateRandomString(10);
+                  $user_id = $email_exist->id ;
+                  $file_activation = dirname(__FILE__)."/user_activation_application.php";
+                  if(is_file($file_activation)) require_once $file_activation ;
+                  $activationCode_api = new activation_code_applications() ;
+                  $activationCode_api->activation_code_application_add_new_field([
+                     'user_id'=>$user_id  ,
+                    'activation_code'=> $activationCode ,
+                    'timestamps'=> time()
+                  ]);
+                  // SEND EMAIL TO ALLOW HIM ACTIVATE HIS ACCOUNT
+                  $dir_apps->send_activation_to_usermail($user_id,$activationCode,$email_exist->e_mail , $email_exist->u_name);
+                   */
+                     return TRUE ;
+                    
                   }
     }
     
@@ -129,20 +144,7 @@ class user_applications extends jury_of_peers_tbls {
     }
      
 }   
-$va = new user_applications() ;
- 
-$va->user_application_add_new_field([
-    'f_name'=>      'Ghada'                ,
-    's_name'=>             'Adel'         ,
-    'u_name'=>               'Ghada88'   ,
-    'e_mail'=>               'Ghada88@email.com'   ,
-    'gender'=>              1    ,
-    'zip_code'=>            '1235'    ,
-    'is_activated'=>        1    ,
-    'is_deleted'=>        0  ,
-    'timestamps'=> time()  ,
-]); 
- 
+   
  
 
 ?>

@@ -1,0 +1,214 @@
+/* 
+    Document   : login
+    Created on : Jun 5, 2016, 8:54:31 PM
+    Author     : Montasser
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+ /*Fonts*/
+ @font-face {
+  font-family: 'Canterbury';
+ src: url('../fonts/Canterbury.ttf') format('opentype');
+}
+
+ @font-face {
+  font-family: 'AnglicanText';
+ src: url('../fonts/AnglicanText.ttf') format('opentype');
+}
+
+a:link ,a:hover , a:focus , a:visited {
+    text-decoration: none;
+    cursor: pointer;
+}
+.body-bg {
+     background-image: url(../img_sliders/1.jpg);
+     background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 80% 80% ; 
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    position: fixed;
+    z-index: 1;
+ }
+ .mask-layer {
+      top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    position: fixed;
+    z-index: 16;
+   background: rgba(203,185,150,0.7); /* For browsers that do not support gradients */
+  
+ }
+ .parent-bg {
+     
+    background-size: cover;
+    background-repeat: no-repeat;
+     
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    z-index: 5;
+    right: 0px;
+    position: fixed;
+ }
+ .img-background {
+    opacity: 0;
+    -webkit-transition: opacity 4s ease-in-out;
+  -moz-transition: opacity 4s ease-in-out;
+  -ms-transition: opacity 4s ease-in-out;
+  -o-transition: opacity 4s ease-in-out;
+  transition: opacity 4s ease-in-out;
+ }
+ .header-con {
+      top: 100px;
+ }
+ .contetns {
+     position: relative;
+     z-index: 20;
+    
+ }
+ .sign-box {
+     float: right;
+     width: 370px;
+     height: auto;
+     background: #fff;
+     border-radius: 5px;
+     overflow: hidden;
+ }
+ 
+ .box-logs {
+     width: 85%;
+     display: block;
+     overflow: hidden;
+     margin: 18px auto;
+     border-bottom:  2px solid #eee;
+ }
+ .box-logs:first-child {
+      margin: 25px auto;
+ }
+ 
+ .box-logs-btn {
+     width: 85%;
+     display: block;
+     overflow: hidden;
+     margin: 18px auto 0px auto;
+    background: #e62a28; 
+          color: #fff;
+          border-radius: 3px;
+          padding: 10px 15px;
+          border-bottom: 4px solid #b01513;
+ }
+ .box-logs-btn:hover {
+     color: #fff;
+ }
+ .cont-another {
+      width: 85%;
+     display: block;
+     overflow: hidden;
+     margin: 0px auto;
+     margin: 5px auto 0px auto;
+    padding: 10px 0px;
+ }
+ .inputs {
+     width: 100%;
+     padding: 5px;
+      border: 1px solid transparent;
+
+ }
+ .cont-another a:first-child {
+     margin-top: 5px;
+     display: inline-block;
+     color: #999;
+     float: left ;
+ 
+ }
+ 
+  .cont-another a:last-child {
+     margin-top: 5px;
+     display: inline-block;
+     color: #e62a28;
+     float: right ;
+ }
+ .is-member {
+     width: 100%;
+     background: #f1f1f1;
+     padding: 9px 10px;
+     
+ }
+ 
+ .is-member a {
+     color: #000;
+ }
+ .is-member a span{
+     color: #e62a28;
+    
+ }
+ .logo {
+      font-family: 'PT Serif', serif;
+      padding: 0px;
+      margin: 0px ;
+      color: #222;
+      font-size: 42px;
+ }
+ .slogan {
+     font-family: 'AnglicanText';
+     font-size: 63px;
+     color: #e62a28;
+ }
+ .footer {
+     background: rgba(250,250,250,0.5);
+ }
+ .nav > li > a:focus, .nav > li > a:hover , .nav > li > a:focus, .nav > li > a:focus , .nav > li > a:focus, .nav > li > a:active ,.nav > li > a:focus, .nav > li > a{
+     background: none ;
+     color: #222;
+     outline: none;
+     border-left: 1px solid rgba(213,213,213,0.5);;
+     
+ }
+ @media only screen and (max-width:800px){
+      .footer {
+          display: none;
+       }   
+ }
+ .sign-up {
+     width: 80%;
+ }
+ .by-half {
+     width: 47%;
+     margin-left: 5px;
+ }
+ .gender {
+  list-style: none;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+ }
+ 
+  .gender li{
+  color: #AAAAAA;
+  display: inline;
+  position: relative;
+  float: left;
+  margin-left: 20px;
+ display: inline-block;
+}
+.gender li:first-child {
+    margin-right: 20px;
+}
+.error-logs {
+    height:auto;
+    width: 100%;
+    display: block ;
+    overflow: hidden ;
+    background: tomato;
+}
+.error-logs {
+    display: none ;
+    padding: 8px 10px;
+    color: #fff;
+}

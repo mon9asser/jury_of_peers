@@ -84,9 +84,73 @@ class jury_of_peers_tbls extends connections_db {
    }
    
    
-   private static $me_in_contolling = 'me_in_contolling';
-   protected function  me_in_contolling_get (){
-        return jury_of_peers_tbls::$me_in_contolling;
+   private static $ourtroom_in_contolling = 'courtroom_in_contolling';
+   protected function  courtroom_in_contolling_get (){
+        return jury_of_peers_tbls::$ourtroom_in_contolling;
+   }
+    
+   private static $Profile_picture= 'Profile_picture';
+   protected function  Profile_picture_get (){
+        return jury_of_peers_tbls::$Profile_picture;
+   }
+   
+   private static $user_posts = 'user_posts';
+   protected function  user_posts_get (){
+        return jury_of_peers_tbls::$user_posts;
+   }
+   
+   private static $video_film_categories = 'video_film_categories';
+   protected function  video_film_categories_get (){
+        return jury_of_peers_tbls::$video_film_categories;
+   }
+   
+   private static $video_posts = 'video_posts';
+   protected function  video_posts_get (){
+        return jury_of_peers_tbls::$video_posts;
+   }
+   
+   private static $music_albums = 'music_albums';
+   protected function  music_albums_get (){
+        return jury_of_peers_tbls::$music_albums;
+   }
+   
+   private static $music_posts = 'music_posts';
+   protected function  music_posts_get (){
+        return jury_of_peers_tbls::$music_posts;
+   }
+    
+     private static $photo_albums = 'photo_albums';
+   protected function  photo_albums_get (){
+        return jury_of_peers_tbls::$photo_albums;
+   }
+    
+      private static $images = 'images';
+   protected function  images_get (){
+        return jury_of_peers_tbls::$images;
+   }
+      private static $user_links = 'user_links';
+   protected function   user_links_get (){
+        return jury_of_peers_tbls::$user_links;
+   }
+      private static $user_contents = 'user_contents';
+   protected function  user_contents_get (){
+        return jury_of_peers_tbls::$user_contents;
+   }
+      private static $reviews_rating = 'reviews_rating';
+   protected function  reviews_rating_get (){
+        return jury_of_peers_tbls::$reviews_rating ;
+   }
+      private static $user_like_dislikes = 'user_like_dislikes';
+   protected function  user_like_dislikes_get (){
+        return jury_of_peers_tbls::$user_like_dislikes;
+   }
+      private static $comments = 'comments';
+   protected function  comments_get (){
+        return jury_of_peers_tbls::$comments;
+   }
+      private static $trending_courtrooms = 'trending_courtrooms';
+   protected function  trending_courtrooms_get (){
+        return jury_of_peers_tbls::$trending_courtrooms;
    }
    
    
