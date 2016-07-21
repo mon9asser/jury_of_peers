@@ -36,9 +36,11 @@ class main_drop_app extends connections_db  {
                         $query = mysqli_query($this->open_connection(), $queryStringDelete);
                          ini_set('mysql.connect_timeout', 300);
                          ini_set('default_socket_timeout', 300);
-                        if(!$query)
-                                  throw new SW_Exception_Module("Delete Faild , there is Error In System Loop".  mysqli_error($this->open_connection()));
-
+                        if(!$query){
+                           print ("Delete Faild , there is Error In System Loop".  mysqli_error($this->open_connection()));
+                           return false ;
+                           
+                            }
                                 $this->close_connection(); 
                                 return TRUE ;
                     

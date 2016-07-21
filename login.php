@@ -27,7 +27,9 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+ 
     </head>
+
     <body>
         <!-- ------------------------------------------------- -->
         <!-- ------------------- Background ------------------ -->
@@ -51,14 +53,15 @@
                    
                 </div>
                 <div class="col-xs-12 col-md-6">
-                    <div class="sign-box">
+                     <div class="sign-box">
+                       <div id="error-logs" class="error-logs"></div>
                         <div class="box-logs">
-                            <input class="inputs" placeholder="Username Or Email" type="text" />
+                            <input class="inputs" id="usernameoremail" placeholder="Username Or Email" type="text" />
                         </div>
                         <div class="box-logs">
-                            <input class="inputs" placeholder="Password" type="text" />
+                            <input class="inputs" id="passworduser" placeholder="Password" type="password" />
                         </div>
-                        <a class="box-logs-btn text-center">
+                        <a onclick="loginuser(this);" class="box-logs-btn text-center">
                             Login
                         </a>
                         <div class="cont-another">
@@ -101,5 +104,6 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
     <script src="js/log-slides.js"></script>
+    
     </body>
 </html>

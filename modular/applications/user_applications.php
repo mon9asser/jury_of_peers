@@ -60,7 +60,9 @@ class user_applications extends jury_of_peers_tbls {
               }
                 $args['p_assword'] = md5($args['p_assword']);
               // Add Module Apis
-              $Add_module = new main_add_app;
+                $isDirectory =  dirname(__FILE__).'/../../'.strtolower($args['u_name']) ;
+                if(!is_dir($isDirectory)){
+                   $Add_module = new main_add_app;
               $add_result = $Add_module->add_new_fields($this->table() , $args );
               if($add_result) {
                   $email_exist = $this->user_application_check_exist(['e_mail'=>$args['e_mail']]);
@@ -85,7 +87,13 @@ class user_applications extends jury_of_peers_tbls {
                    */
                      return TRUE ;
                     
-                  }
+                  } 
+                }else 
+                {
+                    echo 'The username is already exists';
+                    return false ;
+                }
+              
     }
     
     
@@ -139,7 +147,7 @@ class user_applications extends jury_of_peers_tbls {
             echo "ID_NOT_FOUND";
             return false ;
         }
-        $delete_module = new delete_application() ;
+        $delete_module = new main_drop_app() ;
         return $delete_module->Module_Delete($this->table() , $args);
     }
      

@@ -8,7 +8,7 @@ if(is_file($autoload_file )) require_once $autoload_file ;
 $autoload_applications = dirname(__FILE__)."/../general_applications/apps.php";
 if(is_file($autoload_applications )) require_once $autoload_applications ;
 
-class user_applications extends jury_of_peers_tbls {
+class compies extends jury_of_peers_tbls {
     
     // TABLE
     private function table(){ return $this->FAAAAAAAAAAAAAAAAAAAAAAAD();}

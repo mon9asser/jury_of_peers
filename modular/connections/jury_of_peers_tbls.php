@@ -16,6 +16,10 @@ if(is_file($conx_file ))    require_once $conx_file  ;
 
 class jury_of_peers_tbls extends connections_db {
     
+    private static $text_posts_app = 'text_posts';
+   protected function text_posts_get (){
+        return jury_of_peers_tbls::$text_posts_app;
+   }
    
    private static $user_app = 'user_apps';
    protected function user_applications_get (){
@@ -89,7 +93,7 @@ class jury_of_peers_tbls extends connections_db {
         return jury_of_peers_tbls::$ourtroom_in_contolling;
    }
     
-   private static $Profile_picture= 'Profile_picture';
+   private static $Profile_picture= 'profile_picture';
    protected function  Profile_picture_get (){
         return jury_of_peers_tbls::$Profile_picture;
    }
@@ -154,7 +158,44 @@ class jury_of_peers_tbls extends connections_db {
    }
    
    
+    private static $courtroom_init = 'ourtroom_init';
+   protected function  courtroom_init_get (){
+        return jury_of_peers_tbls::$courtroom_init;
+   }
    
+   
+    private static $courtroom_winned = 'courtroom_winned';
+   protected function  courtroom_winned_get (){
+        return jury_of_peers_tbls::$courtroom_winnedt;
+   }
+   
+   
+   
+    private static $courtroom_votes = 'courtroom_votes';
+   protected function  courtroom_votes_get (){
+        return jury_of_peers_tbls::$courtroom_votes;
+   }
+   
+   
+   
+    private static $courtroom_invitations = 'courtroom_invitations';
+   protected function   courtroom_invitations_get (){
+        return jury_of_peers_tbls::$courtroom_invitations;
+   }
+   
+   
+   
+    private static $courtroom_comments = 'courtroom_comments';
+   protected function   courtroom_comments_get (){
+        return jury_of_peers_tbls::$courtroom_comments;
+   }
+   
+   
+   
+    private static $jury_of_peers = 'jury_of_peers';
+   protected function    jury_of_peers_get (){
+        return jury_of_peers_tbls::$jury_of_peers;
+   }
 }
 
  

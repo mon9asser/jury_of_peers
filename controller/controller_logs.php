@@ -27,6 +27,14 @@ if(session_id()=='')
                 echo 'All fileds are required';
                 return false ;
             }
+            if(!isset($_POST['mail'])){
+                  echo 'All fileds are required';
+                 return FALSE ;
+            }else if (!filter_var($_POST['mail'] , FILTER_VALIDATE_EMAIL)){
+                echo 'This is not email , please fill with valid email';
+                return false ;
+            }
+            
             if(!isset($_POST['birthDay'])){
                 echo 'All fileds are required';
                 return FALSE ;
@@ -36,16 +44,16 @@ if(session_id()=='')
                  return FALSE ;
             }
             
-             if(!isset($_POST['mail'])){
-                  echo 'All fileds are required';
-                 return FALSE ;
-            }else if (!filter_var($_POST['mail'] , FILTER_VALIDATE_EMAIL)){
-                echo 'This is not email , please fill with valid email';
-                return false ;
-            }
+             
             
            
-           
+           if(preg_replace('#[^0-9 /]#i','', $_POST['birthDay']))
+           {
+             
+           }  else {
+               echo 'Date of birth field must be fill with american format like 20/02/1988' ;
+               return false ;
+           }
           $application_file =  dirname(__FILE__)."/../modular/applications/user_applications.php";
           if(is_file($application_file ))
               require_once $application_file ;
@@ -63,7 +71,9 @@ if(session_id()=='')
                    echo "This username is already exist";
                   return false ;
               }
-         
+              
+              
+              
       $user_exist =   $add_user_module ->user_application_add_new_field([
               'f_name'=>$_POST['firstName'] ,
               's_name'=>$_POST['lastName'] ,
@@ -95,9 +105,68 @@ if(session_id()=='')
                 echo "1";
               }
         }else if ($_POST['proccessType']=='login_user'){
+             if(!isset($_POST['user_name'])){
+                echo 'All fileds are required';
+                return false ;
+            }
+            if(!isset($_POST['password'])){
+                echo 'All fileds are required';
+                return false ;
+            }
+          
+            $application_file =  dirname(__FILE__)."/../modular/applications/user_applications.php";
+          if(is_file($application_file ))
+              require_once $application_file ;
+           $add_user_module = new user_applications();
+           
+            
+           
+              $email_exist = $add_user_module->user_application_check_exist([
+                  'e_mail'=>$_POST['user_name'] ,
+                   'p_assword' =>trim(md5($_POST['password']))
+              ]);
+              $username_exist = $add_user_module->user_application_check_exist([
+                  'u_name'=>$_POST['user_name'],
+                  'p_assword' =>trim(md5($_POST['password']))
+                  ]);
+              
+              
+              
+              if($username_exist != NULL || $email_exist != NULL  )
+              {
+                  
+                if(  $username_exist != NULL  ) 
+                {
+                    $_SESSION['user_info'] = [
+                    'user_id'=>$username_exist->id  ,
+                    'first_name'=>$username_exist->f_name  ,
+                    'second_name'=>$username_exist->s_name ,
+                    'user_name'=>$username_exist->u_name ,
+                    'user_mail'=>$username_exist->e_mail ,
+                    'birthday'=>$username_exist->birthDay ,
+                    'timestamps'=>$username_exist->timestamps 
+                    ];
+                }else {
+                    $_SESSION['user_info'] = [
+                    'user_id'=>$email_exist->id  ,
+                    'first_name'=>$email_exist->f_name  ,
+                    'second_name'=>$email_exist->s_name ,
+                    'user_name'=>$email_exist->u_name ,
+                    'user_mail'=>$email_exist->e_mail ,
+                    'birthday'=>$email_exist->birthDay ,
+                    'timestamps'=>$email_exist->timestamps 
+                    ];
+                }
+                     
+                
+                echo "1";
+              }else 
+                  echo "This email does not exist";
+             
+            
             
         }
         
         session_write_close() ;
-        ob_end_flush() ;
+         
  ?>

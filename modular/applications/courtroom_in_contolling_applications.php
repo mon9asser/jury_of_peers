@@ -62,7 +62,7 @@ class courtroom_in_contolling_applications extends jury_of_peers_tbls {
     /******************************************************************************************/   
     public function courtroom_in_contolling_delete_fields ($args=[]){
         
-        $delete_module = new delete_application() ;
+        $delete_module = new main_drop_app() ;
         return $delete_module->Module_Delete($this->table() , $args);
     }
      

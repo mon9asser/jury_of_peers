@@ -23,9 +23,7 @@ class main_get_app extends connections_db  {
                 echo "This table does not exist ... ";
                 return FALSE ;
             }
-      
-         
-         $qString = sprintf("SELECT * FROM `{$tableName}` %s",$data);
+          $qString = sprintf("SELECT * FROM `{$tableName}` %s",$data);
         $query = mysqli_query($this->open_connection(), $qString );
         $this->close_connection();
         if(!$query)
@@ -40,6 +38,36 @@ class main_get_app extends connections_db  {
        $this->close_connection();
        return $arrList ;
      }
+     
+     
+     
+     
+     private function get_apps_desc ($tableName , $data = NULL){
+         // check if table exists in databases
+       $tbl_query = mysqli_query($this->open_connection(), "SHOW TABLES LIKE '{$tableName}'")   ;
+       $this->close_connection();
+         if(mysqli_num_rows($tbl_query  )  == 0)
+            {
+                echo "This table does not exist ... ";
+                return FALSE ;
+            }
+         $qString = sprintf("SELECT * FROM `{$tableName}` %s",$data);
+        $query = mysqli_query($this->open_connection(), $qString );
+        $this->close_connection();
+        if(!$query)
+            return NULL ;
+        
+        if(mysqli_num_rows($query) == 0)
+            return NULL  ; 
+        
+       $arrList = [];
+       for ($i=mysqli_num_rows($query) -1 ; $i >= 0 ;$i--)
+        $arrList[@count($arrList)] = mysqli_fetch_object ($query);
+       $this->close_connection();
+       return $arrList ;
+     }
+     
+     
      
      
      public function get_data_according_to_array( $tableName ,$args = [] , $type = NULL , $operatorType = NULL /*case ' % ' */  ){
@@ -121,6 +149,10 @@ class main_get_app extends connections_db  {
      public function get_all_rows ($tableName , $data = NULL){
          return $this->get_apps($tableName, $data);
      }
+     
+     public function get_all_rows_desc ($tableName , $data = NULL){
+         return $this->get_apps_desc($tableName, $data);
+     } 
 }
 
 ?>

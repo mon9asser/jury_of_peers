@@ -54,7 +54,7 @@
                     </h1>
                    
                 </div>
-                <div class="col-xs-12 col-md-6">
+                <div style="margin-top: -44px;" class="col-xs-12 col-md-6">
                     <div class="sign-box sign-up">
                         <div class='error-logs'></div>
                         <div class="box-logs" style="border: 0px;">

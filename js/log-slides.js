@@ -43,6 +43,53 @@ $(document).ready(function(){
            wss_elem = $("#slide-container"); wssSlide();
            
            
+           window.loginuser = function (_this){
+               
+               var useroremail = $("#usernameoremail");
+               var password = $("#passworduser");
+               if(useroremail.val() ==''   )
+                   {  
+                       $('.error-logs').html(null);
+                       // $('.error-logs').css('display','block');
+                       $('.error-logs').slideDown();
+                       $('.error-logs').append('all fileds required to login') ;
+                       return false ;
+                   }
+                if(  password.val() == '' )
+                   {
+                       $('.error-logs').html(null);
+                     //  $('.error-logs').css('display','block');
+                       $('.error-logs').slideDown();
+                       $('.error-logs').append('all fileds required to login') ;
+                       return false ;
+                   }    
+                   var dataStrings = {
+                       'proccessType' : 'login_user' ,
+                        'user_name' :useroremail.val() ,
+                        'password' :password.val() 
+                   };
+                $.ajax({
+                     url :'controller/controller_logs.php',
+                     type : 'POST' , 
+                     data : dataStrings  , 
+                     success :function (response) {
+                         $('.error-logs').html(response);
+                         $('.error-logs').slideDown();
+                          if($.trim(response) ==1){
+                             $('.error-logs').css('display','none');
+                             window.location.href ='home.php' ;
+                         }
+                         
+                     } 
+                 });
+                   
+                   
+           }
+           
+           
+           
+           
+           
            
             window.sign_up_new_user = function (_this) {
                 $('.error-logs').css('display','none');
@@ -103,13 +150,13 @@ $(document).ready(function(){
                             errorList[errorList.length] = 'err'
                             $('.checklines').css('color','tomato');
                           
-                             if( $('.error-logs').css('display') == 'none')
+                             if( $('#error-logs').css('display') == 'none')
                                  {
-                                     $('.error-logs').html(null);
-                                     $('.error-logs').slideDown();
-                                     $('.error-logs').append('please read our agreement') ;
+                                     $('#error-logs').html(null);
+                                     $('#error-logs').slideDown();
+                                     $('#error-logs').append('please read our agreement') ;
                                  }else
-                           $('.error-logs').append('<br />please read our agreement') ;
+                           $('#error-logs').append('<br />please read our agreement') ;
                         }
                      
                      
@@ -140,9 +187,9 @@ $(document).ready(function(){
                          
                          if($.trim(response) ==1){
                              $('.error-logs').css('display','none');
-                             window.location.href ='activation_code.php' ;
+                             window.location.href ='home.php' ;
                          }
-                     }
+                     } 
                  });
                  
                  $(_this).html('Create my account now')
