@@ -1,0 +1,11 @@
+Options +FollowSymLinks -MultiViews
+
+RewriteEngine On
+RewriteBase /jury_of_peerstv/
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+
+#RewriteCond %{REQUEST_FILENAME}.php -f
+#RewriteRule !.*\.php$ %{REQUEST_FILENAME}.php [QSA,L]
+#RewriteRule ^user/([^/]+)$ user.php?name=$1 [NC,L]
