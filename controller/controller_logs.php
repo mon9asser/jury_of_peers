@@ -161,7 +161,7 @@ if(session_id()=='')
                 
                 echo "1";
               }else 
-                  echo "This email does not exist";
+                  echo "This email or username does not exist";
              
             
             
