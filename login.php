@@ -80,6 +80,7 @@
         <script src="js/jquery-1.12.4_1.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="js/bootstrap.min.js"></script>
+        <script src="js/background-slider.js"></script>
         <script src="js/log-apps.js"></script>
     </body>
 </html>
