@@ -43,8 +43,7 @@ class user_logs_applications extends jury_of_peers_tbls {
     public function user_logs_applications_add_new_field ($args = []){
                $Add_module = new main_add_app;
               $add_result = $Add_module->add_new_fields($this->table() , $args );
-              if($add_result)  
-                      return TRUE ;
+              return $add_result ;
      }
     
     
@@ -69,5 +68,6 @@ class user_logs_applications extends jury_of_peers_tbls {
 }   
    
  
+       
 
 ?>

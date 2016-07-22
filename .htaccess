@@ -1,26 +1,20 @@
-ErrorDocument 404 /404.html
-ErrorDocument 403 /403.html
-DirectoryIndex index.php
-RewriteEngine On
-RewriteBase /
+#ErrorDocument 404 /404.html
+#ErrorDocument 403 /403.html
+#DirectoryIndex index.php
+#RewriteEngine On
+#RewriteBase /
 
 
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.+)$ http://juryofpeers.tv/?user=$1 [L,QSA]
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteRule ^(.+)$ http://juryofpeers.tv/index?user=$1 [L,QSA]
+#RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+index\?user=([^&\s]+) [NC]
+#RewriteRule ^ /index?%1 [R=302,L]
+ 
+
+#for hide all extensions
 RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule !.*\.php$ %{REQUEST_FILENAME}.php [QSA,L]
 
-
-
-#-------------NEW
-RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+index\?user=([^&\s]+) [NC]
-RewriteRule ^ /index?%1 [R=302,L]
-
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}\.php -f
-RewriteRule ^(.*)$ $1.php [QSA,L]
-#--------------------
-
-
+ 
 

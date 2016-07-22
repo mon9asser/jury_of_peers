@@ -12,10 +12,10 @@
  */
 
 class server_setting {
-    private static $SERVER_NAME = 'localhost'; 
-    private static $DATABASE_NAME = 'jury_of_peers' ;
-    private static $PASSWORD = '';
-    private static $USER_NAME ='root';
+    private static $SERVER_NAME = 'vps.juryofpeers.tv'; 
+        private static $DATABASE_NAME = 'juryofpe_ers2016' ;
+        private static $PASSWORD = 'rV_#G.$Jtqo#';
+        private static $USER_NAME ='juryofpe_pro';
     /* 
      
         private static $SERVER_NAME = 'vps.juryofpeers.tv'; 

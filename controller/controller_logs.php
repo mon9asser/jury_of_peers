@@ -2,12 +2,17 @@
 ob_start() ;
 if(session_id()=='')
     session_start () ;
-
+ 
+   $files = dirname(__FILE__). "/../modular/autoload_apps.php";
+          
     if(!isset($_POST))
         return FALSE ;
     if(!isset($_POST['proccessType'])){
         return FALSE ;
      } 
+   if(is_file($files)) require_once $files ;
+      $userSettingApis = new user_logs_applications();
+          
      // sign up controller
     if($_POST['proccessType']=='s_up_add')
         {
@@ -54,9 +59,7 @@ if(session_id()=='')
                echo 'Date of birth field must be fill with american format like 20/02/1988' ;
                return false ;
            }
-          $application_file =  dirname(__FILE__)."/../modular/applications/user_applications.php";
-          if(is_file($application_file ))
-              require_once $application_file ;
+        
            $add_user_module = new user_applications();
               $email_exist = $add_user_module->user_application_check_exist(['e_mail'=>$_POST['mail']]);
               $username_exist = $add_user_module->user_application_check_exist(['u_name'=>$_POST['user_name']]);
@@ -83,7 +86,7 @@ if(session_id()=='')
               'birthDay'=> $_POST['birthDay'] ,
               'gender'=>$_POST['gender'] ,
               'timestamps'=>  time(),
-              'is_activated'=> 1
+              'is_activated'=> 0
           ]);
       
       
@@ -114,9 +117,7 @@ if(session_id()=='')
                 return false ;
             }
           
-            $application_file =  dirname(__FILE__)."/../modular/applications/user_applications.php";
-          if(is_file($application_file ))
-              require_once $application_file ;
+ 
            $add_user_module = new user_applications();
            
             
@@ -146,6 +147,7 @@ if(session_id()=='')
                     'birthday'=>$username_exist->birthDay ,
                     'timestamps'=>$username_exist->timestamps 
                     ];
+                    
                 }else {
                     $_SESSION['user_info'] = [
                     'user_id'=>$email_exist->id  ,
@@ -157,7 +159,22 @@ if(session_id()=='')
                     'timestamps'=>$email_exist->timestamps 
                     ];
                 }
-                     
+                // will return to this func later
+                $userSettingApis = new user_logs_applications();
+                $userSettingApis->user_logs_applications_add_new_field([
+                    'user_id'=> $_SESSION['user_info']['user_id']  ,
+                    'ip_address'=>trim(get_client_ip()),
+                    'isp'=>  gethostbyaddr($_SERVER['REMOTE_ADDR']) ,
+                    'country'=>trim (ip_info( get_client_ip() , "Location")['country']),
+                    'city'=>trim (ip_info( get_client_ip() , "Location")['country']),
+                    'state'=> trim (ip_info( get_client_ip() , "Location")['state']),
+                    'lat'=>get_lat_info(get_client_ip()),
+                    'long'=>get_lng_info(get_client_ip()),
+                    'operating_system'=>trim(getOS()) ,
+                    'brower'=>trim(getBrowser()),
+                    'continent'=>trim (ip_info( get_client_ip() , "Location")['continent']) ,
+                    'last_login'=>  time()
+                ]);
                 
                 echo "1";
               }else 

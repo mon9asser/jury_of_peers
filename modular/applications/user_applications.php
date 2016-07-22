@@ -84,7 +84,7 @@ class user_applications extends jury_of_peers_tbls {
                   $user_name =  $email_exist->u_name ;
                   $aboutJOP = "Welcome to Jury of peers Member , social network to judge your friends" ;
                   $activationCodes= $activationCode ;
-                  $linkActivationCode= "http://juryofpeers.tv/activation" ;;
+                  $linkActivationCode= "http://juryofpeers.tv/activation?activation_code=".$activationCode."&username=". $email_exist->u_name ; 
                   $fromEmail= "Juryofpeers@juryofpeers.tv" ;
                   $toEmail= $email_exist->e_mail ;
                   $subjects = "Jury of peers activation code" ;
