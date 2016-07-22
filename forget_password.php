@@ -2,55 +2,7 @@
 ob_start() ;
 if(session_id()=='')
  session_start () ;
-/*
-     activation_code
-     username
-*/
-if(isset($_GET['activation_code']) and isset($_GET['username'])){
-    
-    $fileDirs = dirname(__FILE__)."/modular/autoload_apps.php";
-    if(is_file($fileDirs )) require_once $fileDirs  ;
-        
-        $userName = trim(htmlentities(strip_tags($_GET['username']))) ;
-        $activation_code = trim(htmlentities(strip_tags($_GET['activation_code']))) ;
-    
-        $user_apis  = new user_applications();
-        $activation_apis = new activation_code_applications() ;
-        $connx = new connections_db();
-       
-        $userInfo =  $user_apis->user_application_check_exist([
-            'u_name'=>  mysqli_real_escape_string($connx->open_connection(), $userName) 
-        ]);
-       
-        $actCode = $activation_apis->activation_code_application_check_exist([
-            'activation_code'=>mysqli_real_escape_string($connx->open_connection(), $activation_code)  ,
-            'user_id'=>$userInfo->id
-        ]);
-       
-        if($actCode != NULL and $userInfo != NULL )
-        {
-            // update activation status 
-            $user_apis->user_application_update_fields(['id'=>$userInfo->id],[
-                'is_activated'=>1
-            ]);
-            // login by session 
-            $_SESSION['user_info'] = [
-                    'user_id'=>$userInfo->id  ,
-                    'first_name'=>$userInfo->f_name  ,
-                    'second_name'=>$userInfo->s_name ,
-                    'user_name'=>$userInfo->u_name ,
-                    'user_mail'=>$userInfo->e_mail ,
-                    'birthday'=>$userInfo->birthDay ,
-                    'timestamps'=>$userInfo->timestamps 
-                ];
-            // transfer to home page 
-            header('location: home');
-            exit(1);
-        } 
-            
-  } 
-
-?>
+ ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -59,7 +11,7 @@ if(isset($_GET['activation_code']) and isset($_GET['username'])){
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <title>Re-send Activation code</title>
+        <title>Forget my password</title>
         <!-- Fonts -->
         <link href='https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700,700italic&subset=latin-ext' rel='stylesheet' type='text/css'>
         <!-- Bootstrap -->
@@ -95,8 +47,8 @@ if(isset($_GET['activation_code']) and isset($_GET['username'])){
                         <div class="box-logs">
                             <input class="inputs" id="usernameoremail" placeholder="Username Or Email" type="text" />
                         </div>
-                         <a onclick="changepassword(this);" class="box-logs-btn text-center">
-                            Save new password
+                         <a onclick="resendEmaiPassword(this);" class="box-logs-btn text-center">
+                            Send me an Email
                         </a>
                          
                     </div>

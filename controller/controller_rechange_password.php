@@ -1,8 +1,11 @@
 <?php
+ob_start() ;
+if(session_id()=='')
+ session_start () ;
 
- if(!isset($_POST['userOrEmail']))
+ if(!isset($_POST['passwordtochange']))
  {
-     echo "Email Field is Required to send verification";
+     echo "Password Fields are Required .";
      return FALSE ;
  }
  
@@ -10,43 +13,22 @@
     if(is_file($fileDirs )) require_once $fileDirs  ;
 
     
-    $emailOrUser = trim(htmlentities(strip_tags($_POST['userOrEmail']))) ;
+    $emailOrUser = md5(trim(($_POST['passwordtochange']) ) );
     
    $userApps = new user_applications() ;
    $userExist = NULL ;
-   $user1 =  $userApps->user_application_check_exist(['e_mail'=>$emailOrUser]);
-   $user2 = $userApps->user_application_check_exist(['u_name'=>$emailOrUser]);
+   $user1 =  $userApps->user_application_check_exist(['id'=>$_SESSION['user_info']['user_id']]);
    if($user1 != NULL )
-       $userExist = $user1 ;
-   else if($user2 != NULL )
-         $userExist = $user2 ;
-   else {
-       
-       echo "This user unregistered in our system !";
-       return false ;
-       exit(1);
+   {
+       $connx = new connections_db();
+      $ch=  $userApps->user_application_update_fields(['id'=>$user1->id],[
+           'p_assword'=> mysqli_real_escape_string($connx->open_connection() ,$emailOrUser) 
+       ]);
+      if($ch) echo "1";
    }
-    if($userExist != NULL )
-    {
-        $general_api = new apps() ; 
-        $activationApis = new activation_code_applications() ;
-        $activationCoded = $activationApis->activation_code_application_check_exist([
-            'user_id'=>$userExist->id
-        ]);
-        $logoSrc = "http://juryofpeers.tv/images/logo.png" ;
-        $user_name =  $userExist->u_name ;
-        $aboutJOP = "Welcome to Jury of peers Member , social network to judge your friends" ;
-        $activationCode = $activationCoded->activation_code ;
-        $linkActivationCode= "http://juryofpeers.tv/activation?activation_code=".$activationCode."&username=". $user_name ; 
-        $fromEmail= "Juryofpeers@juryofpeers.tv" ;
-        $toEmail= $userExist->e_mail ;
-        $subjects = "Jury of peers activation code" ;
-        if($activationCoded != NULL ){
-            $is_sent =   $general_api->send_activation_to_usermail($logoSrc, $user_name, $aboutJOP,$activationCode , $linkActivationCode, $fromEmail, $toEmail, $subjects);
-            if($is_sent)
-                echo "1";
-        }
-
-    }
+   
+   
+   
+    
      
     ?>

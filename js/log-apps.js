@@ -180,13 +180,24 @@ $(document).ready(function (){
             }
             
             window.changepassword = function (_this){
+                
+                var pass = $("#tpassword").val();
+                var repass = $("#rtpassword").val();
+                
+                if( pass != repass || pass == "" || repass == "" )
+                    {
+                        $('.error-logs').html("Password not correct or something error");
+                        return false ;
+                    }
+                
+                
                  $('.error-logs').css('background','tomato');
                var loadingTag = '<div id="fountainG"><div id="fountainG_1" class="fountainG"></div><div id="fountainG_2" class="fountainG"></div><div id="fountainG_3" class="fountainG"></div><div id="fountainG_4" class="fountainG"></div><div id="fountainG_5" class="fountainG"></div><div id="fountainG_6" class="fountainG"></div><div id="fountainG_7" class="fountainG"></div><div id="fountainG_8" class="fountainG"></div></div>';
                  $.ajax({
                      url :'controller/controller_rechange_password.php',
                      type : 'POST' , 
                      data : {
-                         'userOrEmail' :  $("#usernameoremail").val()
+                         'passwordtochange' :  pass  
                      }  , 
                       beforeSend : function (){
                          $(_this).html(loadingTag);
@@ -200,9 +211,38 @@ $(document).ready(function (){
                          
                          if($.trim(response) ==1){
                              $('.error-logs').css('background','mediumseagreen');
-                             $('.error-logs').html('Activation code has been sent to your email');
+                             $('.error-logs').html('Password changed successed');
+                             window.location.href = "home" ;
                           }
                      } 
                  });
             }
+        
+        
+        window.resendEmaiPassword = function (_this){
+             
+                $('.error-logs').css('background','tomato');
+               var loadingTag = '<div id="fountainG"><div id="fountainG_1" class="fountainG"></div><div id="fountainG_2" class="fountainG"></div><div id="fountainG_3" class="fountainG"></div><div id="fountainG_4" class="fountainG"></div><div id="fountainG_5" class="fountainG"></div><div id="fountainG_6" class="fountainG"></div><div id="fountainG_7" class="fountainG"></div><div id="fountainG_8" class="fountainG"></div></div>';
+                 $.ajax({
+                     url :'controller/controller_resend_password.php',
+                     type : 'POST' , 
+                     data : {
+                         'userOrEmail' :  $("#usernameoremail").val()
+                     }  , 
+                      beforeSend : function (){
+                         $(_this).html(loadingTag);
+                     },
+                     success :function (response) {
+                         
+                         $(_this).html('Re-send Activation Code');
+                          
+                         $('.error-logs').html(response);
+                         $('.error-logs').slideDown();
+                         
+                         if($.trim(response) ==1){
+                             $('.error-logs').css('background','mediumseagreen');
+                             $('.error-logs').html('We have sent you a link to change your password !');
+                          }
+                     } }); 
+        }
 });

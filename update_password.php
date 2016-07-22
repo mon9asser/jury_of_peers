@@ -1,3 +1,60 @@
+<?php
+ob_start() ;
+if(session_id()=='')
+ session_start () ;
+/*
+     activation_code
+     username
+*/
+if(!isset($_GET['activation_code']) or !isset($_GET['username'])){
+    if(!isset($_SESSION))
+    {
+         header ("location: home");
+        exit(1);
+    }
+  } 
+
+  
+    
+    $fileDirs = dirname(__FILE__)."/modular/autoload_apps.php";
+    if(is_file($fileDirs )) require_once $fileDirs  ;
+        
+        $userName = trim(htmlentities(strip_tags($_GET['username']))) ;
+        $activation_code = trim(htmlentities(strip_tags($_GET['activation_code']))) ;
+    
+        $user_apis  = new user_applications();
+        $activation_apis = new activation_code_applications() ;
+        $connx = new connections_db();
+       
+        $userInfo =  $user_apis->user_application_check_exist([
+            'u_name'=>  mysqli_real_escape_string($connx->open_connection(), $userName) 
+        ]);
+       
+        $actCode = $activation_apis->activation_code_application_check_exist([
+            'activation_code'=>mysqli_real_escape_string($connx->open_connection(), $activation_code)  ,
+            'user_id'=>$userInfo->id
+        ]);
+       
+        if($actCode != NULL and $userInfo != NULL )
+        {
+            // update activation status 
+            $user_apis->user_application_update_fields(['id'=>$userInfo->id],[
+                'is_activated'=>1
+            ]);
+            // login by session 
+            $_SESSION['user_info'] = [
+                    'user_id'=>$userInfo->id  ,
+                    'first_name'=>$userInfo->f_name  ,
+                    'second_name'=>$userInfo->s_name ,
+                    'user_name'=>$userInfo->u_name ,
+                    'user_mail'=>$userInfo->e_mail ,
+                    'birthday'=>$userInfo->birthDay ,
+                    'timestamps'=>$userInfo->timestamps 
+                ];
+             
+        }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -5,7 +62,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <title>Login to jury of peers</title>
+        <title>Re-send Activation code</title>
         <!-- Fonts -->
         <link href='https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700,700italic&subset=latin-ext' rel='stylesheet' type='text/css'>
         <!-- Bootstrap -->
@@ -34,29 +91,20 @@
                     <h1 class="slogan">
                         Where the people decide 
                     </h1>
-                   
-                </div>
+                 </div>
                 <div class="col-xs-12 col-md-6">
-                     <div class="sign-box">
+                    <div class="sign-box" style="padding-bottom: 20px;">
                        <div id="error-logs" class="error-logs"></div>
                         <div class="box-logs">
-                            <input class="inputs" id="usernameoremail" placeholder="Username Or Email" type="text" />
+                            <input class="inputs" id="tpassword" placeholder="Type Password" type="password" />
                         </div>
-                        <div class="box-logs">
-                            <input class="inputs" id="passworduser" placeholder="Password" type="password" />
+                       <div class="box-logs">
+                            <input class="inputs" id="rtpassword" placeholder="Re-type Password" type="password" />
                         </div>
-                        <a onclick="loginuser(this);" class="box-logs-btn text-center">
-                            Login
+                         <a onclick="changepassword(this);" class="box-logs-btn text-center">
+                            Save new password
                         </a>
-                        <div class="cont-another">
-                            <a class="checkbox">
-                                <label><input type="checkbox" value="">remember me</label>
-                            </a>
-                            <a href="forget_password">Forget password</a>
-                        </div>
-                        <div class="is-member text-center">
-                            <a>Not a member? <span>Create an account</span></a> 
-                        </div>
+                         
                     </div>
                 </div>
             </div>
@@ -85,3 +133,10 @@
     </body>
 </html>
 
+
+
+
+<?php
+session_write_close() ;
+ob_end_flush() ;
+?>

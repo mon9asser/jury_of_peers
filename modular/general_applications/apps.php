@@ -64,6 +64,43 @@ class apps {
       return mail($to_email, $subject, $message,$headers );
    }
    
+   
+   
+   
+   public function send_changePassword_to_usermail($logoSrc , $user_name , $aboutJOP , $activationCode , $linkActivationCode , $fromEmail , $toEmail , $subjects ){
+        // email setting
+            $logo_src =$logoSrc ;
+            $user_name = $user_name ;
+            $about_juryofpeers = $aboutJOP ;
+            $ActivationCode = $activationCode ;
+            $link_activation_code = $linkActivationCode ;
+            $from_email = $fromEmail;
+            $to_email = $toEmail ;
+            $subject = $subjects;
+
+            // Message
+            $message = "<html><body>";
+            $message .= "<div style='width:95%;  overflow:hidden; display:block;overflow:hidden; margin:10px auto;padding: 20px 20px 0px 60px;'>";
+            $message .= "<img src='{$logo_src}' />";
+            $message .= "</div> ";
+            $message .= "<div style='width:95%; overflow:hidden; margin:10px auto;'>";
+            $message .= "<p style='font-family:arial,sans-serif; font-weight:bold;color:#555;border: 1px solid #eee;padding: 20px 20px 10px 20px;margin: 20px 20px 20px 20px;overflow: hidden;display: block;'>";
+            $message .= "<font style='width:100%; display:block;overflow:hidden;'>Dear / {$user_name} </font>";
+            $message .= "<font style='width:100%; display:block;overflow:hidden;'>{$about_juryofpeers}</font>";
+            $message .= "<font style='width:100%; display:block;overflow:hidden;'>Your @id :{$ActivationCode}</font>";
+            $message .= "<a href='{$link_activation_code}' style='width:auto;display:block ; float:left; background:tomato; padding:5px 10px; margin:20px auto;cursor:pointer;color:#fff; display:block;overflow:hidden;border: 1px solid red;'>Change Password Now !</a> ";
+            $message .= "</p>";
+            $message .= "</div>" ;
+            $message .= "</html></body>";
+
+            // Header 
+            $headers  = "From: ".$from_email."\r\n"; 
+            $headers .= "MIME-Version: 1.0\r\n";
+            $headers .= 'Content-Type: text/html; charset="utf-8"\r\n';
+            $headers .= "X-Priority: 1\r\n"; 
+      return mail($to_email, $subject, $message,$headers );
+   }
+   
 
    public function time_elapsed_string($ptime)
     {
