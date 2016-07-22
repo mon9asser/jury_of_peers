@@ -1,11 +1,26 @@
-Options +FollowSymLinks -MultiViews
-
+ErrorDocument 404 /404.html
+ErrorDocument 403 /403.html
+DirectoryIndex index.php
 RewriteEngine On
-RewriteBase /jury_of_peerstv/
+RewriteBase /
+
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)$ http://juryofpeers.tv/?user=$1 [L,QSA]
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule !.*\.php$ %{REQUEST_FILENAME}.php [QSA,L]
+
+
+
+#-------------NEW
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+index\?user=([^&\s]+) [NC]
+RewriteRule ^ /index?%1 [R=302,L]
 
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php [QSA,L]
+#--------------------
 
-#RewriteCond %{REQUEST_FILENAME}.php -f
-#RewriteRule !.*\.php$ %{REQUEST_FILENAME}.php [QSA,L]
-#RewriteRule ^user/([^/]+)$ user.php?name=$1 [NC,L]
+
+
