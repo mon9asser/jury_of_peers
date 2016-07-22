@@ -580,3 +580,10 @@ a:link ,a:hover , a:focus , a:visited {
 		background-color:rgb(255,255,255);
 	}
 }
+.quart-part {
+    width: 25%;
+margin-left: 5px;
+padding: 5px;
+border: 1px solid #eee;
+margin: 10px 0px;
+}

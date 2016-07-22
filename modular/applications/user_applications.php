@@ -68,23 +68,21 @@ class user_applications extends jury_of_peers_tbls {
                   $email_exist = $this->user_application_check_exist(['e_mail'=>$args['e_mail']]);
                   // CREATE USER DIRECTORY 
                   $dir_apps = new apps();
-                  $dir_apps->create_user_directory(dirname(__FILE__).'/../../usernames', dirname(__FILE__).'/../../'.strtolower($args['u_name']));
-                 
-                  /*
-                   // CREATE ACTIVATION CODE FOR EACH USER 
+                 // $dir_apps->create_user_directory(dirname(__FILE__).'/../../usernames', dirname(__FILE__).'/../../'.strtolower($args['u_name']));
+                    // CREATE ACTIVATION CODE FOR EACH USER 
                   $activationCode = $dir_apps->generateRandomString(10);
                   $user_id = $email_exist->id ;
                   $file_activation = dirname(__FILE__)."/user_activation_application.php";
                   if(is_file($file_activation)) require_once $file_activation ;
                   $activationCode_api = new activation_code_applications() ;
                   $activationCode_api->activation_code_application_add_new_field([
-                     'user_id'=>$user_id  ,
+                    'user_id'=>$user_id  ,
                     'activation_code'=> $activationCode ,
                     'timestamps'=> time()
                   ]);
                   // SEND EMAIL TO ALLOW HIM ACTIVATE HIS ACCOUNT
                   $dir_apps->send_activation_to_usermail($user_id,$activationCode,$email_exist->e_mail , $email_exist->u_name);
-                   */
+                    
                      return TRUE ;
                     
                   } 

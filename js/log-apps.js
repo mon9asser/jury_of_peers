@@ -45,4 +45,110 @@ $(document).ready(function (){
                      } 
                  });
             }
+            window.sign_up_new_user = function (_this) {
+            var loadingTag = '<div id="fountainG"><div id="fountainG_1" class="fountainG"></div><div id="fountainG_2" class="fountainG"></div><div id="fountainG_3" class="fountainG"></div><div id="fountainG_4" class="fountainG"></div><div id="fountainG_5" class="fountainG"></div><div id="fountainG_6" class="fountainG"></div><div id="fountainG_7" class="fountainG"></div><div id="fountainG_8" class="fountainG"></div></div>';
+
+                $('.error-logs').css('display','none');
+                 // Create my account now
+                var firstName , secondName , userName , email ,password ,dateBirth , gender ,errorList = [] ;
+                firstName = $('.fname').val();
+                secondName = $('.sname').val();
+                userName  = $('.usname').val(); 
+                email = $('.emails').val();  
+                password = $('.Password').val(); 
+                
+                var dateBirthYear= $('.dateBirthYear').val();
+                var dateBirthMonth= $('.dateBirthMonth').val();
+                var dateBirthDay= $('.dateBirthDay').val();
+               
+                gender = $('input[name=gender]:checked').val(); 
+                
+                 $('.fname , .sname , .usname , .emails , .dateBirthYear,.dateBirthMonth,.dateBirthDay').css({
+                         'border-bottom':'1px solid #eee'
+                     });
+                     
+                     $('.Password').parent().css( 'border-bottom','1px solid #eee');   
+                if(firstName == '' && secondName == '' || userName == '' || email =='' || password =='' || dateBirthYear =='' || dateBirthMonth =='' || dateBirthDay =='' || gender =='')
+                    {
+                        $('.error-logs').slideDown();
+                         // case errors
+                       $('.error-logs').html("Please fill all data");
+                     }
+                     
+                      $('.checklines').css('color','#999');
+                   if(firstName =='' ){
+                       errorList[errorList.length] = 'err'
+                      $('.fname').css('border-bottom','1px solid tomato'); 
+                   }  
+                   
+                    if(secondName =='' ){
+                       errorList[errorList.length] = 'err'
+                      $('.sname').css('border-bottom','1px solid tomato'); 
+                   }  
+                   
+                   if(userName =='' ){
+                       errorList[errorList.length] = 'err'
+                      $('.usname').parent().css('border-bottom','1px solid tomato'); 
+                   }  
+                   
+                   if(email =='' ){
+                       errorList[errorList.length] = 'err'
+                      $('.emails').parent().css('border-bottom','1px solid tomato'); 
+                   }
+                   
+                   if(password =='' ){
+                       errorList[errorList.length] = 'err'
+                      $('.Password').parent().css('border-bottom','1px solid tomato'); 
+                   }
+                   if(dateBirthDay=='' || dateBirthYear =='' || dateBirthMonth =='' ){
+                       errorList[errorList.length] = 'err'
+                      $('.dateBirthDay').parent().css('border-bottom','1px solid tomato'); 
+                   }
+                  //checklines
+                  if( $('input[type=checkbox]:checked').length == 0)
+                        {
+                            errorList[errorList.length] = 'err'
+                            $('.checklines').css('color','tomato');
+                          
+                             if( $('#error-logs').css('display') == 'none')
+                                 {
+                                     $('#error-logs').html(null);
+                                     $('#error-logs').slideDown();
+                                     $('#error-logs').append('please read our agreement') ;
+                                 }else
+                           $('#error-logs').append('<br />please read our agreement') ;
+                        }
+                     
+                      if(errorList.length > 0 ){
+                         return false ;}
+                  
+                   var dataStrings = {
+                       'proccessType' : 's_up_add' ,
+                       'firstName' : firstName , 
+                       'lastName' : secondName , 
+                       'user_name' : userName , 
+                       'password': password , 
+                       'birthDay' : dateBirthDay+"/"+dateBirthMonth+"/"+dateBirthYear , 
+                       'gender' : gender  , 
+                       'mail' :email
+                   };
+                   $.ajax({
+                     url :'controller/controller_logs.php',
+                     type : 'POST' , 
+                     data : dataStrings  , 
+                      beforeSend : function (){
+                         $(_this).html(loadingTag);
+                     },
+                     success :function (response) {
+                         $(_this).html('Create my account now');
+                         $('.error-logs').html(response);
+                         $('.error-logs').slideDown();
+                         
+                         if($.trim(response) ==1){
+                             $('.error-logs').css('display','none');
+                             window.location.href ='home' ;
+                         }
+                     } 
+                 });
+            }
 });
