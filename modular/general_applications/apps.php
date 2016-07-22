@@ -30,35 +30,38 @@ class apps {
     }
     
    // send email (Activation code )
-   public function send_activation_to_usermail($id , $actCode , $email ,$u_name){
-       // email settings
-       $to = $email;
-       $subject = 'Jury of peers activation code';
-       $link = NULL ;
-       $username = $u_name ;
-       $activation = $actCode ;
-       $headers = "From: seo@juryofpeers.tv\r\n";
-       $headers .= "Reply-To: seo@juryofpeers.tv\r\n";
-       $headers .= "CC: seo@juryofpeers.tv\r\n";
-       $headers .= "MIME-Version: 1.0\r\n";
-       $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-       
-       $message  = "<html><body>";
-       $message .= "<div style='width=90%;  overflow:hidden; display:block;'><img style='padding-bottom:5px; width:100%;' src='images/email_banner.jpg' title='jury of peers logo' /></div>";
-       $message .= "<div style='width:95%; overflow:hidden; margin:10px auto;'>
-            <p style='font-family:arial,sans-serif; font-weight:bold;color:#555;padding: 0px;margin: 0px;'>
-                <font style='width:100%; display:block;overflow:hidden;'>Dear / ".$username.",</font>
-                <font style='width:100%; display:block;overflow:hidden;'>
-                    thank you for registration! Now lets get you started. - please activate your account by use a copy past to your browser then complete your profile 
-                </font>
-               <span style='width:auto;display:block ; float:left; background:tomato; padding:5px 10px; margin:20px auto;cursor:pointer;color:#fff; display:block;overflow:hidden;'>
-                   ".$activation."
-                </span>
-            </p>
-        </div>";
-       $message .= "</body></html>";
-       $message .= "</body></html>";
-      return mail($to, $subject, $message, $headers);
+   public function send_activation_to_usermail($logoSrc , $user_name , $aboutJOP , $activationCode , $linkActivationCode , $fromEmail , $toEmail , $subjects ){
+        // email setting
+            $logo_src =$logoSrc ;
+            $user_name = $user_name ;
+            $about_juryofpeers = $aboutJOP ;
+            $ActivationCode = $activationCode ;
+            $link_activation_code = $linkActivationCode ;
+            $from_email = $fromEmail;
+            $to_email = $toEmail ;
+            $subject = $subjects;
+
+            // Message
+            $message = "<html><body>";
+            $message .= "<div style='width:95%;  overflow:hidden; display:block;overflow:hidden; margin:10px auto;padding: 20px 20px 0px 60px;'>";
+            $message .= "<img src='{$logo_src}' />";
+            $message .= "</div> ";
+            $message .= "<div style='width:95%; overflow:hidden; margin:10px auto;'>";
+            $message .= "<p style='font-family:arial,sans-serif; font-weight:bold;color:#555;border: 1px solid #eee;padding: 20px 20px 10px 20px;margin: 20px 20px 20px 20px;overflow: hidden;display: block;'>";
+            $message .= "<font style='width:100%; display:block;overflow:hidden;'>Dear / {$user_name} </font>";
+            $message .= "<font style='width:100%; display:block;overflow:hidden;'>{$about_juryofpeers}</font>";
+            $message .= "<font style='width:100%; display:block;overflow:hidden;'>Activation Code :{$ActivationCode}</font>";
+            $message .= "<a href='{$link_activation_code}' style='width:auto;display:block ; float:left; background:tomato; padding:5px 10px; margin:20px auto;cursor:pointer;color:#fff; display:block;overflow:hidden;border: 1px solid red;'>Activate Now</a> ";
+            $message .= "</p>";
+            $message .= "</div>" ;
+            $message .= "</html></body>";
+
+            // Header 
+            $headers  = "From: ".$from_email."\r\n"; 
+            $headers .= "MIME-Version: 1.0\r\n";
+            $headers .= 'Content-Type: text/html; charset="utf-8"\r\n';
+            $headers .= "X-Priority: 1\r\n"; 
+      return mail($to_email, $subject, $message,$headers );
    }
    
 
