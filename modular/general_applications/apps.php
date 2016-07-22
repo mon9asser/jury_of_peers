@@ -58,7 +58,7 @@ class apps {
         </div>";
        $message .= "</body></html>";
        $message .= "</body></html>";
-     //  return mail($to, $subject, $message, $headers);
+      return mail($to, $subject, $message, $headers);
    }
    
 
