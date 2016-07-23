@@ -55,7 +55,7 @@
                             <a href="forget_password">Forget password</a>
                         </div>
                         <div class="is-member text-center">
-                            <a>Not a member? <span>Create an account</span></a> 
+                            <a>Not a member? <a href="signup">Create an account</a></a> 
                         </div>
                     </div>
                 </div>

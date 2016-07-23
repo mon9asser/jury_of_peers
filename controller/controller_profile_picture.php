@@ -29,7 +29,7 @@ session_start() ;
                     
                     $userName_folder = $_SESSION['user_info']['user_name'] ;
                      $image_rename = rand(2000 , 1000000) . "_" .time() . "_".rand(2000 , 1000000) . "_juryofpeers_".$userName_folder.$fileName; 
-                    $fileRoot = dirname (__FILE__) . "/../$userName_folder/photo_albums/profile_picture/$image_rename";
+                    $fileRoot = dirname (__FILE__) . "/../photo_albums/profile_picture/$image_rename";
 
                     // upload file to server 
                     move_uploaded_file($fileTmpLoc , $fileRoot) ;

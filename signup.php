@@ -199,7 +199,7 @@
                         </a>
                         
                         <div class="is-member text-center">
-                            <a>Already have an account? <span>Login</span></a> 
+                            <a>Already have an account? <a href="login">Login</a></a> 
                         </div>
                     </div>
                 </div>

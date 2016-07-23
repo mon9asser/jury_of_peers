@@ -44,7 +44,7 @@ if(isset($_GET['activation_code']) and isset($_GET['username'])){
                     'timestamps'=>$userInfo->timestamps 
                 ];
             // transfer to home page 
-            header('location: home');
+            header('location: profile_picture');
             exit(1);
         } 
             
