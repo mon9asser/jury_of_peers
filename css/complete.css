@@ -78,15 +78,16 @@ cursor: pointer;
     overflow: hidden ;
      height: auto;
     position: absolute ;
-    top:45%;
+    top:40%;
 }
 .progress-filler {
     width: 90%;
-    display: block ;
+    display: block;
     margin: 0px auto;
-    background:teal;
+    background: whitesmoke;
     height: 15px;
-   overflow: hidden; 
+    overflow: hidden;
+    border: 1px solid #eee;
 }
 .fill-progress-ppic b {
     padding: 5px;
@@ -720,4 +721,34 @@ overflow: hidden;
  .img-profile-pic-change { transition:all , .5s , ease-out ;
      -moz-transition:all , .5s , ease-out ;
      -webkit-transition: all , .5s , ease-out ;
+}
+
+#upload-image-profile-pic {
+   
+}
+.uploadimage {
+    background: tomato ;
+    border: 1px solid #eee;
+    color: #fff;
+    padding: 5px 10px;
+    float: left ;       
+}
+.footerimages {
+    padding-bottom: 15px;
+    width: 100%;
+    display: block ;
+    overflow: hidden;
+}
+.btuns , .btuns:hover , .btuns:focus , btuns:visited {
+    text-decoration: none ;
+    cursor: pointer ;
+    color: #fff;
+    float: left;
+}
+.img-it {
+            float:  left   ;
+            position:  relative  ;
+            overflow:  hidden ;
+            width:  300px  ;
+            height:  300px ;
 }

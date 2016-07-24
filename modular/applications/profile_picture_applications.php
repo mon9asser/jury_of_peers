@@ -27,7 +27,7 @@ class profile_picture_applications extends jury_of_peers_tbls {
        $getApps = new main_get_app();
        return $getApps->get_data_according_to_array($this->table(), $args, '%', $operatorType);
     }
-    public function profile_pictureg_get_by_values ($args, $type /*OR-AND*/, $operatorType = NULL ){
+    public function profile_pictureg_get_by_values ($args, $type = NULL /*OR-AND*/, $operatorType = NULL ){
        $getApps = new main_get_app();
        return $getApps->get_data_according_to_array($this->table(), $args, $type, $operatorType);
     }

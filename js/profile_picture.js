@@ -1,5 +1,8 @@
  $(document).ready(function(){
       // upload image 
+        $('.uploadimage').click(function (){
+            $("#upload-image-profile-pic").trigger('click');
+        });
         $("#upload-image-profile-pic").change(function (){
              $('.fill-progress-ppic').html('<b>Please wait while progress complete...</b><div class="progress-filler"><div class="color-fill"></div></div>');
              $('.img-profile-pic-change').css('opacity','0.2');
@@ -23,8 +26,12 @@
                 
                    if($.trim(event.target.responseText) == 1 )
                       { 
+                          
                           $('.fill-progress-ppic').html("<b style='color:green'>Profile Picture Saved</b>");
                           $('.img-profile-pic-change').css('opacity','1');
+                          
+                          // crop image 
+                            
                         }else {
                            $('.fill-progress-ppic').html("<span class='errorDisplayed'>There are an errors in uploading , please try again</span>");
                        }
@@ -42,5 +49,18 @@
            reader.readAsDataURL(input.files[0]);
                 }
             }
+            
+            
+            
+        // cropping this image 
+         $('#profile-image').imgAreaSelect({  aspectRatio: '1:1', handles: true , onSelectChange:function (img , selection ){
+                var x1 =  selection.x1 ;  
+                var y1 = selection.y1 ;
+                var x2 = selection.x2 ;
+                var y2 = selection.y2 ;
+                var width_new = selection.width ;
+                var height_new = selection.height ;
+          }});
+            
  });
 

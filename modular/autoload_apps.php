@@ -13,4 +13,5 @@ load_all_pages('applications');
 load_all_pages('connections'); 
 load_all_pages('paginations'); 
 load_all_pages('general_applications'); 
+ 
 ?>

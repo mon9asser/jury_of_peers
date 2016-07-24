@@ -80,13 +80,8 @@ session_start() ;
                         'is_current'=>1 ,
                         'post_serial_id'=>$post_serial_id ,
                          'app_serial'=>strtoupper($_SESSION['user_info']['user_id']."_photo_timeline_".$_SESSION['user_info']['user_name']) ,
-                        'photo_height' => NULL ,
-                        'photo_width' => NULL ,
-                        'photo_w_h'=>$_POST['photo_w_h'],
-                         'position_y_x'=> $_POST['position_y_x'],
-                        'posted_by_id'=>$_SESSION['user_info']['user_id']  
-                         
-                     ]);
+                         'posted_by_id'=>$_SESSION['user_info']['user_id']  
+                      ]);
 
                      // addne post include albume id 
                     $user_post_apis->user_posts_add_new_field([
@@ -101,29 +96,7 @@ session_start() ;
  
                      if($img_add )
                          echo '1';
-    }else if($_POST['proccessType']=='UPDATE_IMAGE_RESOUTION' ) {
-          $zooming = $_POST['photo_w_h'] ;
-          $position = $_POST['position_y_x'] ;
-          
-          $photo_files = dirname(__FILE__)."/../modular/applications/profile_picture_applications.php";
-          if(is_file($photo_files)) require_once $photo_files ;
-         
-          
-          $photo_apis = new profile_picture_applications() ;
-          $gitLastRecord = $photo_apis->profile_pictureg_get_by_values([
-             'user_id'=> $_SESSION['user_info']['user_id']
-          ] , 'and') ;
-          if(count($gitLastRecord) != 0 )
-          {
-              $appUpd = $photo_apis->profile_pictureg_update_fields([
-                  'id'=>$gitLastRecord[count($gitLastRecord)-1]->id
-              ],[
-                  'photo_w_h'=>$zooming ,
-                  'position_y_x'=>$position
-              ]);
-              if($appUpd)
-                  echo '1';
-          }
+    }else if($_POST['proccessType']=='croping-image' ) { 
           
     }
                 

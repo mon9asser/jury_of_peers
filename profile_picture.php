@@ -17,6 +17,11 @@
          <link href="css/simple-slider.css" rel="stylesheet" type="text/css" />
          <link href="css/simple-slider-volume.css" rel="stylesheet" type="text/css" />  
          <link href="css/profile.css" rel="stylesheet">
+         
+         <link rel="stylesheet" type="text/css" href="css/imgareaselect-default.css" />
+         <link rel="stylesheet" type="text/css" href="css/imgareaselect-animated.css" />
+         <link rel="stylesheet" type="text/css" href="css/imgareaselect-deprecated.css" />
+           
          <link href="css/complete.css" rel="stylesheet"> 
          <script src="js/is_mobile.js"></script>
          <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -52,6 +57,8 @@
     <script src="js/jquery-1.12.4_1.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery.imgareaselect.js"></script>
+    <script type="text/javascript" src="js/jquery.imgareaselect.pack.js"></script>
     <script src="js/main_app.js"></script>
     <script src="js/profile_picture.js"></script>
     </body>
