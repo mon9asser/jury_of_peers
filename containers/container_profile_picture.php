@@ -31,7 +31,7 @@
                                 
                             </div>
 
-
+                             <!--
                              <div class="uploadImageController">
                                 <div class="xx container-btns">
                                      <div class="fill-progress-ppicx text-center">
@@ -41,10 +41,11 @@
                                      </div>
                                 </div>
                             </div>
+                            -->
             <input type="hidden" name="proccessType" value="ADD_ALBUM_PROFILE_PICTURE" />
                 <div class="next-save text-right">
-                    <a class="savebtn btnskip">Skip this step</a>
-                    <button type="submit" class="savebtn">Save & Next</button>
+                    <a href="add_friends" class="savebtn btnskip">Skip this step</a>
+                    <a href="add_friends" class="savebtn btnskip">Save & Next</a>
                  </div> 
             </form>
          </div>

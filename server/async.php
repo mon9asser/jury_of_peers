@@ -65,9 +65,9 @@ $data = $image['output']['data'];
                       } 
                     
                     $userName_folder = $_SESSION['user_info']['user_name'] ;
-                     $image_rename = rand(2000 , 1000000) . "_" .time() . "_".rand(2000 , 1000000) . "_juryofpeers_".$userName_folder.$fileName; 
-                    $fileRoot = dirname (__FILE__) . "/../photo_albums/profile_picture/$image_rename";
-                    $file = Slim::saveFile($data, $name, $fileRoot  );
+                     $image_rename =  $name ; 
+                    $fileRoot = dirname(__FILE__). "../photo_albums/profile_picture/$image_rename";
+                    $file = Slim::saveFile($data, $name, "../photo_albums/profile_picture/"  );
                     // upload file to server 
                   //   move_uploaded_file($fileTmpLoc , $fileRoot) ;
                    
@@ -112,7 +112,7 @@ $data = $image['output']['data'];
                         'photo_name'=> $fileName,
                         'photo_size' => $fileSize,
                         'photo_blob'=>addslashes(file_get_contents($fileRoot)),
-                        'photo_src'=> $image_rename ,
+                        'photo_src'=> $file['name'] ,
                          'photo_type' =>$fileType,
                         'timestamps' =>time() ,
                         'is_current'=>1 ,
