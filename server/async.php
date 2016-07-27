@@ -1,28 +1,49 @@
-<?php 
+<?php
 ob_start();
 if(session_id()=='')
 session_start() ;
+// Uncomment if you want to allow posts from other domains
+// header('Access-Control-Allow-Origin: *');
+
+require_once('slim.php');
+
+// get posted data, if something is wrong, exit
+try {
+    $images = Slim::getImages();
+}
+catch (Exception $e) {
+    Slim::outputJSON(SlimStatus::Failure);
+    return;
+}
+
+// if no images found
+if (count($images)===0) {
+    Slim::outputJSON(SlimStatus::Failure);
+    return;
+}
+
+// should always be one file (when posting async)
+//$image = $images[0];
+//$file = Slim::saveFile($image['output']['data'], $image['input']['name']);
+
+// echo results
+//Slim::outputJSON(SlimStatus::Success, $file['name'], $file['path']);
+
  
 
-$file_apis_crop = dirname(__FILE__)."/../server/slim.php";
-if(is_file($file_apis_crop )) require_once $file_apis_crop  ;
+  
 //$images = Slim::getImages('slim');
 $image = $images[0];
 //sprint_r($image['actions']['crop']);
  
   
- 
+  
  $name = $image['input']['name'];
 $data = $image['output']['data'];
  
 
  
- 
-  if(!isset($_POST['proccessType']))
-   
   
-  if($_POST['proccessType']=='ADD_ALBUM_PROFILE_PICTURE' )
-    {
         // image settings to set dir and store in databases ...
                     $fileName = $name; // The file name
                     $fileTmpLoc = $data ; // File in the PHP tmp folder
@@ -113,56 +134,6 @@ $data = $image['output']['data'];
  
                      if($img_add )
                          echo '1';
-    }else if($_POST['proccessType']=='croping_image' ) { 
-         
-                  $photo_files = dirname(__FILE__)."/../modular/applications/profile_picture_applications.php";
-                    if(is_file($photo_files)) require_once $photo_files ;
-                    $imgpp_apis = new profile_picture_applications() ;
-                     
-                    $profilePict = $imgpp_apis->profile_pictureg_get_by_values([
-                    'user_id'=>$_SESSION['user_info']['user_id']  
-                    ],'and');
-                    if(count($profilePict) != 0 ){
-                             $filename = "../photo_albums/profile_picture/" . $profilePict[count($profilePict)-1]->photo_src ;
-                   $filesource = dirname(__FILE__).'/'.$filename  ;
-                   if(is_file($filesource))
-                        {   //cropped_src
-                                $rename_image = $_SESSION['user_info']['user_id']."__Cropped__". $profilePict[count($profilePict)-1]->photo_src;
-                                $sourc_img = "../photo_albums/profile_picture/".$rename_image ;
-                                
-                               // crop settings
-                                $dst_x = 0;
-                                $dst_y  = 0 ;
-                                $src_x = $_POST['x1'];
-                                $src_y =  $_POST['y1'];
-                                $dst_w = 150;
-                                $dst_h = 150;
-                                $src_w = $_POST['width_'];
-                                $src_h = $_POST['height_'];
-                                
-                                $dst_image = imagecreatetruecolor($dst_w, $dst_h);
-                                $src_image = imagecreatefromjpeg($filename);
-                                imagecopyresampled($dst_image, $src_image, $dst_x, $dst_y, $src_x, $src_y, $dst_w, $dst_h, $src_w, $src_h) ;
-                                
-                                 switch ($profilePict[count($profilePict)-1]->photo_type){
-                                    case 'image/jpeg':
-                                        imagejpeg($dst_image ,$sourc_img) ;
-                                        break; 
-                                    case 'image/gif':
-                                        imagegif($dst_image ,$sourc_img) ;
-                                        break; 
-                                    case 'image/jpg':
-                                        imagejpeg($dst_image ,$sourc_img) ;
-                                        break; 
-                                    case 'image/png':
-                                        imagepng($dst_image ,$sourc_img) ;
-                                        break; 
-                                 }
-                                 echo $rename_image ;
-                        }
-                    }
-               
-                   
-    }
+     
                 
-?>
+ ?>

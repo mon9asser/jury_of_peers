@@ -17,24 +17,36 @@
             Profile picture
         </div>
         <div class="clearFix"></div>
-       
-                    <div class="post-controls profimge">
-                            <div id="img-settings" class="img-settings default">
-                                <img id="profile-image" class="img-responsive img-profile-pic-change" src="../photo_albums/profile_picture/<?php echo checkProfileExists($_SESSION['user_info']['user_id']); ?>" />
+        <form class="AjaxForm" method="post"  enctype="multipart/form-data" >
+                        <div class="uploadImageController">
+                                      <div id="img-settings" class="img-settings default slim" 
+                                            data-ratio="4:4"
+                                            data-service="server/async.php"
+                                            data-size="600,100"
+                                            data-label="Drop your avatar here Or click here to upload image"
+                                             data-button-edit-label="<i class='fa fa-cog'></i>"
+                                            data-button-edit-title="Edit">
+                                            <input type="file" name="slim[]">
+                                       </div>
+                                
                             </div>
-                    </div>
-               
-                    <div class="uploadImageController">
-                        <div class="xx container-btns">
-                            
-                             <input id="upload-image-profile-pic" style="" type="file" />
-                            <div class="fill-progress-ppic text-center">
-                                <b>Chose your image then wait while progress complete</b><div class="progress-filler"><div class="color-fill"></div></div>
+
+
+                             <div class="uploadImageController">
+                                <div class="xx container-btns">
+                                     <div class="fill-progress-ppicx text-center">
+                                        <div class="fill-progress-ppic">
+                                            <b>Chose your image then wait while progress complete</b><div class="progress-filler"><div class="color-fill"></div></div>
+                                         </div>
+                                     </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                  
-    </div>
-   
+            <input type="hidden" name="proccessType" value="ADD_ALBUM_PROFILE_PICTURE" />
+                <div class="next-save text-right">
+                    <a class="savebtn btnskip">Skip this step</a>
+                    <button type="submit" class="savebtn">Save & Next</button>
+                 </div> 
+            </form>
+         </div>
    
 </div>

@@ -31,7 +31,7 @@ if($userExist->is_activated != 1 )
      header("location: ../activation");
     exit(1);
 }
-if($user_exist->is_deleted == 1 )
+if($userExist->is_deleted == 1 )
     {
         header("location: ../undefine");
         exit(1);

@@ -12,29 +12,31 @@
  */
 
 class server_setting {
-    private static $SERVER_NAME = 'vps.juryofpeers.tv'; 
-        private static $DATABASE_NAME = 'juryofpe_ers2016' ;
-        private static $PASSWORD = 'rV_#G.$Jtqo#';
-        private static $USER_NAME ='juryofpe_pro';
-    /* 
-     
         private static $SERVER_NAME = 'vps.juryofpeers.tv'; 
         private static $DATABASE_NAME = 'juryofpe_ers2016' ;
         private static $PASSWORD = 'rV_#G.$Jtqo#';
         private static $USER_NAME ='juryofpe_pro';
      
-     */
     protected function getServerName(){
+          if(($_SERVER['SERVER_NAME'] != 'localhost') )
         return server_setting::$SERVER_NAME;
+          else 
+              return 'localhost' ;
     }
     protected function getDatabaseName(){
         return server_setting::$DATABASE_NAME;
     }
     protected function getPassword(){
+        if(($_SERVER['SERVER_NAME'] != 'localhost') )
         return server_setting::$PASSWORD ;
+        else 
+            return '';
     }
     protected function getUserName(){
+        if(($_SERVER['SERVER_NAME'] != 'localhost') )
         return server_setting::$USER_NAME;
+        else 
+            return 'root';
     }
 }
 class connections_db extends server_setting {

@@ -1,6 +1,23 @@
- $(document).ready(function(){
-      // upload image 
-        $('.uploadimage').click(function (){
+  $(document).ready(function(){
+     
+  });
+  /*
+   $('form.AjaxForm').on('submit',  function() {    
+         $.ajax({
+            url     : $(this).attr('action'),
+            type    : $(this).attr('method'),
+             data    : $(this).serialize(),
+            success : function( data ) {
+                         console.log(data);
+              },
+            error   : function( xhr, err ) {
+             }
+        });    
+        return false;
+    });
+    */
+ // upload image 
+       /* $('.uploadimage').click(function (){
             $("#upload-image-profile-pic").trigger('click');
         });
         $("#upload-image-profile-pic").change(function (){
@@ -27,10 +44,15 @@
                    if($.trim(event.target.responseText) == 1 )
                       { 
                           
+                            $('.is_enabled').css({
+                                height : $('#thmb-image').height()+'px',
+                                 width : $('#thmb-image').width()+'px'
+                            });
+                          $('.windows8').css('margin-top','25%');
                           $('.fill-progress-ppic').html("<b style='color:green'>Profile Picture Saved</b>");
                           $('.img-profile-pic-change').css('opacity','1');
                           
-                          // crop image 
+                          // cropping this image 
                             
                         }else {
                            $('.fill-progress-ppic').html("<span class='errorDisplayed'>There are an errors in uploading , please try again</span>");
@@ -49,18 +71,65 @@
            reader.readAsDataURL(input.files[0]);
                 }
             }
-            
-            
-            
-        // cropping this image 
-         $('#profile-image').imgAreaSelect({  aspectRatio: '1:1', handles: true , onSelectChange:function (img , selection ){
-                var x1 =  selection.x1 ;  
-                var y1 = selection.y1 ;
-                var x2 = selection.x2 ;
-                var y2 = selection.y2 ;
-                var width_new = selection.width ;
-                var height_new = selection.height ;
-          }});
-            
- });
+          // value to crop image or prifle picture 
+           function savePosition (img , selection ){
+                 $("#x1").val(selection.x1);
+                $("#y1").val(selection.y1);
+                $("#x2").val(selection.x2);
+                $("#y2").val(selection.y2);
+                $("#w").val(selection.width);
+                $("#h").val(selection.height);
+               $('#img-height').val(img.height);
+               $('#img-width').val(img.width);
+          }
+       $('.is_enabled').css({
+           height : $('#thmb-image').height()+'px',
+            width : $('#thmb-image').width()+'px'
+       });
+        $('.windows8').css('margin-top','25%');
+        $('#profile-image').imgAreaSelect({   x1: 120, y1: 90, x2: 280, y2: 210 , aspectRatio: '1:1' , handles: true , onSelectChange:savePosition });
+          //crop_and_saveimage 
+          window.crop_and_saveimage = function (_this){
+              var x1 =   $("#x1").val();
+              var y1 =   $("#y1").val();
+              var x2 =   $("#x2").val();
+              var y2 =  $("#y2").val();
+              var width_ =   $("#w").val();
+              var height_ =   $("#h").val();
+              var imgHeight  =   $("#img-height").val();
+              var imgWidth  =   $("#img-width").val();
+             // alert(' x1 :- '+ x1 +' y1 :- ' +y1+ ' x2 :- '+ x2 +' y2 :- ' +y2+ ' width :- '+ width_+' imgWidth = '+imgWidth+ ' height :- '+ height_+ ' imgHeight =  '+imgHeight)
+              if(x1 == '' || imgHeight =='' || imgWidth =='' || y1 == '' || x2 == '' || y2 == '' || width_  == '' || height_ == ''  ||width_ == 0 || height_ == 0 )
+                    {
+                      // save image as uploaded and transfeer user 
+                    }else 
+                       { 
+                           var dataImageString = {
+                                  'x1' :x1 ,
+                                  'y1' :y1 ,
+                                  'x2': x2 , 
+                                  'y2':  y2 ,
+                                  'width_':width_ ,
+                                  'height_': height_  ,
+                                  'imgHeight' :imgHeight,
+                                  'imgWidth':imgWidth,
+                                  'proccessType':'croping_image'
+                           }
+                            $.ajax({
+                               url : 'controller/controller_profile_picture.php' ,
+                               type : 'post' , 
+                               data : dataImageString ,
+                               beforeSend : function (){
+                                   $('.is_enabled').fadeIn();
+                               },
+                               success :function (respons){ //photo_albums/profile_picture
+                                    $('.is_enabled').fadeOut();
+                                    $('#thmb-image').attr('src','photo_albums/profile_picture/'+$.trim(respons));
+                               }
+                           });
+                       }
+                   
+               //  window.location.href = "home" ;
+          }*/
+ 
 
