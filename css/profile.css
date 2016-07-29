@@ -585,13 +585,7 @@ background: #fff;
     
     position: relative;
 }
-.fixed {
-    position: fixed;
-       top:30px;
-      bottom: 0px;
-      padding-right: 10px;
-     
-}
+
 .side-menu {
     padding: 50px 0px 0px 0px;
 }
@@ -1686,3 +1680,17 @@ ul.commentContainer {
     width: 100% ;
     overflow: hidden;
 }
+.profile_pics {
+    width: 100%;
+    display: block ;
+    background: red;
+}
+
+.fixed {
+    position: fixed;
+       bottom: 0px;
+     
+ }
+ .side-menu {
+     
+ }

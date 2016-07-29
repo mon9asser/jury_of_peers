@@ -14,11 +14,10 @@
                          JURY <span style="background: #e52826; color: #fff; padding: 0px 5px;   display: inline-block;">OF</span> PEERS
                      </a>
                 </div>
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav navbar-right">
+                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                     <ul class="nav navbar-nav navbar-right">
                         
-                        
-                        <li>
+                          <li>
                             <a data-toggle="tooltip" data-placement="bottom" title="Visit profile">
                                 <i class="fa fa-eye" aria-hidden="true"></i>
                                 <span class="counts"></span>

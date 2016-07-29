@@ -3,6 +3,15 @@ ob_start() ;
 if(session_id() =='')
     session_start() ;
 
+// log out any user without me
+if(trim( $_SERVER['REMOTE_ADDR'] )  != trim ("5.156.179.49")  )
+        {
+            echo "<center>
+              <h1>Jury of peers in-progress</h1>
+                </center>";
+            return FALSE ;
+            exit(1);
+        }
 
  // cehck if session exist 
  if(!isset($_SESSION['user_info']))

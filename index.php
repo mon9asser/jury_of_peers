@@ -52,6 +52,25 @@
                     if(is_file($headerFile ))  require_once $headerFile ;
                 ?>
                 
+                <!-- --------------------------------------- -->
+                <!-- ------      Container   --------------- -->
+                <!-- --------------------------------------- -->
+                <section class="container-fluid">
+                    <div class="row">
+                        <!-- --------------------------------------- -->
+                        <!-- ------      Sidebar   --------------- -->
+                        <!-- --------------------------------------- -->
+                        <div class="col-xs-12 col-md-2 sidebar-outer">
+                            <?php 
+                                $sidebarFile = dirname(__FILE__)."/includes/sidebar.php";
+                                if(is_file($sidebarFile ))  require_once $sidebarFile ;
+                            ?>
+                        </div>
+                        <div class="col-xs-12 col-md-8 profile-content">
+                            
+                        </div>
+                    </div>
+                </section>
             </body>
         </html>
       <?php

@@ -1,6 +1,7 @@
-
+                 
                     <div class="col-xs-12 col-md-2 fixed">
                     <ul class="side-menu">
+                      
                         <li>
                             <a>
                                 <i class="fa fa-newspaper-o" aria-hidden="true"></i>
