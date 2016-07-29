@@ -11,15 +11,11 @@ class user_get_more_pagination_package_pst extends jury_of_peers_tbls {
     private function loadTable (){
         return $this->user_posts_get() ;
     }
-    
-    
-    
-    
-    private function user_post_tbl (){
+   private function user_post_tbl (){
         return $this->user_posts_get() ;
     }
-     private function friend_sys_tbl (){
-        return $this->friend_system_get() ;
+    private function friend_sys_tbl (){
+       return $this->friend_system_get() ;
     }
     
     
@@ -109,6 +105,96 @@ class user_get_more_pagination_package_pst extends jury_of_peers_tbls {
         $conx ->close_connection() ;
         mysqli_free_result($query);
         return $listAll ;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //is_accepted
+    
+    // load posts according to args
+    public function load_posts_according_to_args ( $last_id ,$limit , $me_or_asAvisitor  ) {
+        // 0-> for friends 
+        // 1-> for public 
+        // 2-> only me
+         $friend_system_applications_file = dirname(__FILE__)."/../applications/friend_system_applications.php";
+        if(is_file($friend_system_applications_file)) require_once $friend_system_applications_file ;
+         $frd_apis = new friend_system_applications() ;
+          $me = $_SESSION['user_info']['user_id'] ;
+        $visitor = $me_or_asAvisitor ; 
+        $isFriend = "";
+        // if this user is a visitor
+        if($visitor != $me ) {
+            $check_1 = $frd_apis->friend_system_check_exist(
+                [
+                    'id_sender' =>trim(mysqli_real_escape_string($this->open_connection(), $me) ),
+                    'id_receiver'=>trim(mysqli_real_escape_string($this->open_connection(), $visitor ))
+                 ] , 'and'
+            );
+              $check_2 = $frd_apis->friend_system_check_exist(
+                [
+                    'id_sender' => trim(mysqli_real_escape_string($this->open_connection(),$visitor )),
+                    'id_receiver'=>trim(mysqli_real_escape_string($this->open_connection(),$me) )
+                 ]  , 'and'
+            );
+            if( $check_1 != NULL )
+            $checkUserFrd = $check_1 ;
+            else if( $check_2 != NULL )
+                $checkUserFrd = $check_2 ;
+             $frd_tbl ="";
+            $frd_tbl ="";
+             if($checkUserFrd != NULL )
+            {    
+                 if(trim($checkUserFrd[0]->is_accepted) == 1 )
+                 $isFriend  =  " AND ( (friends.`id_sender`= {$me} AND  friends.id_receiver = {$visitor} ) OR (friends.`id_sender`={$visitor} AND  friends.id_receiver = {$me}) AND friends.is_accepted = 1 )"  ." AND ( posts.`access_permission` = 0 OR posts.`access_permission` = 1  )" ;
+                 else 
+                  $isFriend =  "AND ( posts.`access_permission` = 1  )" ;   
+                  
+                 $frd_tbl_v = ", friends . id_receiver , friends . is_accepted , friends . id_sender ";
+                 $frd_tbl = ", `friend_system` friends ";
+            }  else 
+                $isFriend = "  AND ( posts.`access_permission` = 1 )"     ;
+         } 
+          // user info   
+         $user_data_pics = " , users.f_name , users.s_name , users.u_name , users.e_mail  , ppics.photo_src , ppics.photo_name , music.music_name , music.music_discribtion , music.music_src , music.singer_name , music.music_cover ";
+        $user_data_pics .= " , img.album_id , img.img_dscription , img.app_serial , img.img_src ";
+        $user_data_pics .= " , vid.video_name , vid.video_description , vid.video_src  ";
+        $user_data_pics .= " , links.url_links ,  links.content_blob ,  links.app_serial  ";
+        $user_data_pics .= " , txt.post_text ";
+         // profile picture 
+      //   $profilePic = ", ppics.photo_name ,ppics.photo_src ,ppics.cropped_src ,ppics.photo_type ,ppics.is_current ,ppics.post_serial_id ";
+       
+         $queryString  =  "SELECT posts . * {$frd_tbl_v} {$user_data_pics} FROM `user_posts` posts {$frd_tbl}  "  ;
+        $queryString .= "
+                 LEFT OUTER JOIN user_apps users ON posts.posted_by_id = users.id 
+                 LEFT OUTER JOIN profile_picture ppics ON users.id=ppics.user_id
+                 LEFT OUTER JOIN music_posts music ON posts.post_serial_id=music.post_serial_id
+                 LEFT OUTER JOIN images img ON posts.post_serial_id=img.post_serial_id
+                 LEFT OUTER JOIN video_posts vid ON posts.post_serial_id=vid.post_serial_id
+                 LEFT OUTER JOIN user_links links ON posts.post_serial_id=links.post_serial_id
+                 LEFT OUTER JOIN text_posts txt ON posts.post_serial_id=txt.post_serial_id
+            " ;// posts.posted_by_id = users.id
+      //  $queryString .= "LEFT JOIN profile_picture ppics ON posts.posted_by_id = ppics.user_id"; //
+        $queryString .= " WHERE " ;
+        // show all to me if me in my profile  
+         $queryString  .= " ( posts.`posted_by_id` != {$me_or_asAvisitor} OR posts.`posted_by_id` = {$me_or_asAvisitor} ) AND posts.`user_id`= {$me_or_asAvisitor} {$isFriend}"  ;
+         $queryString  .= " AND posts.`id` > {$last_id} GROUP BY posts.`id` ORDER BY posts.`id` DESC LIMIT {$limit} " ;
+         $result = mysqli_query($this->open_connection() , $queryString  ) or die(mysqli_errno($this->open_connection()));
+        if(!$result) return NULL ;
+        if(mysqli_num_rows($result) == 0 )  return false ;
+        $listAll = [] ; 
+        for ($i=mysqli_num_rows($result) -1 ; $i >= 0 ;$i--) 
+        $listAll[count ($listAll)] = mysqli_fetch_object ($result) ;
+        mysqli_free_result($result);
+        return $listAll ;   
     }
 }
 
