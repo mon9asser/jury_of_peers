@@ -125,12 +125,16 @@ class user_get_more_pagination_package_pst extends jury_of_peers_tbls {
         // 0-> for friends 
         // 1-> for public 
         // 2-> only me
+        
+        
          $friend_system_applications_file = dirname(__FILE__)."/../applications/friend_system_applications.php";
         if(is_file($friend_system_applications_file)) require_once $friend_system_applications_file ;
          $frd_apis = new friend_system_applications() ;
           $me = $_SESSION['user_info']['user_id'] ;
         $visitor = $me_or_asAvisitor ; 
         $isFriend = "";
+         $frd_tbl = '' ;
+         $frd_tbl_v = '' ;
         // if this user is a visitor
         if($visitor != $me ) {
             $check_1 = $frd_apis->friend_system_check_exist(
@@ -145,15 +149,17 @@ class user_get_more_pagination_package_pst extends jury_of_peers_tbls {
                     'id_receiver'=>trim(mysqli_real_escape_string($this->open_connection(),$me) )
                  ]  , 'and'
             );
+             
+               $checkUserFrd  = NULL ; 
             if( $check_1 != NULL )
-            $checkUserFrd = $check_1 ;
+            $checkUserFrd = $check_1[0];
             else if( $check_2 != NULL )
-                $checkUserFrd = $check_2 ;
-             $frd_tbl ="";
-            $frd_tbl ="";
+                $checkUserFrd = $check_2[0] ;
+            
+             
              if($checkUserFrd != NULL )
             {    
-                 if(trim($checkUserFrd[0]->is_accepted) == 1 )
+                 if(trim($checkUserFrd->is_accepted) == 1 )
                  $isFriend  =  " AND ( (friends.`id_sender`= {$me} AND  friends.id_receiver = {$visitor} ) OR (friends.`id_sender`={$visitor} AND  friends.id_receiver = {$me}) AND friends.is_accepted = 1 )"  ." AND ( posts.`access_permission` = 0 OR posts.`access_permission` = 1  )" ;
                  else 
                   $isFriend =  "AND ( posts.`access_permission` = 1  )" ;   
@@ -163,8 +169,10 @@ class user_get_more_pagination_package_pst extends jury_of_peers_tbls {
             }  else 
                 $isFriend = "  AND ( posts.`access_permission` = 1 )"     ;
          } 
+         
+         
           // user info   
-         $user_data_pics = " , users.f_name , users.s_name , users.u_name , users.e_mail  , ppics.photo_src , ppics.photo_name , music.music_name , music.music_discribtion , music.music_src , music.singer_name , music.music_cover ";
+         $user_data_pics = " , users.f_name , users.s_name , users.gender , users.u_name , users.e_mail  , ppics.photo_src , ppics.photo_name , music.music_name , music.music_discribtion , music.music_src , music.singer_name , music.music_cover ";
         $user_data_pics .= " , img.album_id , img.img_dscription , img.app_serial , img.img_src ";
         $user_data_pics .= " , vid.video_name , vid.video_description , vid.video_src  ";
         $user_data_pics .= " , links.url_links ,  links.content_blob ,  links.app_serial  ";
@@ -186,13 +194,18 @@ class user_get_more_pagination_package_pst extends jury_of_peers_tbls {
         $queryString .= " WHERE " ;
         // show all to me if me in my profile  
          $queryString  .= " ( posts.`posted_by_id` != {$me_or_asAvisitor} OR posts.`posted_by_id` = {$me_or_asAvisitor} ) AND posts.`user_id`= {$me_or_asAvisitor} {$isFriend}"  ;
-         $queryString  .= " AND posts.`id` > {$last_id} GROUP BY posts.`id` ORDER BY posts.`id` DESC LIMIT {$limit} " ;
-         $result = mysqli_query($this->open_connection() , $queryString  ) or die(mysqli_errno($this->open_connection()));
-        if(!$result) return NULL ;
-        if(mysqli_num_rows($result) == 0 )  return false ;
+          $queryString  .= " AND posts.`id` > {$last_id} GROUP BY posts.`id` ORDER BY posts.`id` DESC LIMIT {$limit} " ;
+        
+          
+          $result = mysqli_query($this->open_connection() , $queryString  );
+           if(!$result) return NULL  ;
+       
+        if(mysqli_num_rows($result) == 0 )  return 0 ;
         $listAll = [] ; 
-        for ($i=mysqli_num_rows($result) -1 ; $i >= 0 ;$i--) 
+        
+        for ($i= 0 ; $i < mysqli_num_rows($result) ;$i++) 
         $listAll[count ($listAll)] = mysqli_fetch_object ($result) ;
+       
         mysqli_free_result($result);
         return $listAll ;   
     }

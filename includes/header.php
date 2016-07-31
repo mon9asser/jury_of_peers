@@ -1,6 +1,11 @@
  <!-- --------------------------------------------------------------- -->
         <!-- ---------------------      Header      ------------------------ -->
         <!-- --------------------------------------------------------------- -->
+        
+        <?php
+          $file = dirname(__FILE__)."/../access_modifiers/protected_access.php";
+            if(is_file($file)) require_once $file  ; 
+        ?>
         <nav id="header" class="navbar navbar-default ">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -44,14 +49,14 @@
                         </li>
                         <li>
                             <a data-toggle="tooltip" data-placement="bottom" title="Notifications">
-                                <i class="fa fa-globe" aria-hidden="true"></i>
+                                <i class="fa fa-globe" aria-hidden="true"></i> 
                                 <span class="counts"></span>
                             </a>
                         </li>
                         <li>
                             <a style="padding: 6px;" class="user-names">
-                                <div class="profile-pics" style="background-image: url(profile_pics/user_profile_pic.jpg)" ></div>
-                                <span> Username </span>
+                                <div class="profile-pics" style="background-position: 72% -20%; background-image:url(photo_albums/profile_picture/<?php echo checkProfileExists($_SESSION['user_info']['user_id']);?>)" ></div>
+                                <span> <?php echo $_SESSION['user_info']['user_name'] ; ?> </span>
                             </a>
                         </li>
                         <li>

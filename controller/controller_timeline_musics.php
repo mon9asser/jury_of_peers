@@ -13,20 +13,20 @@ if(isset($_POST))
                     // image settings to set dir and store in databases ...
                     $fileName = $_FILES["posted_image"]["name"]; // The file name
                     $fileTmpLoc = $_FILES["posted_image"]["tmp_name"]; // File in the PHP tmp folder
-                    $fileType = $_FILES["posted_image"]["type"]; // The type of file it is
+                    $fileType =$_POST['file_type']; // The type of file it is
                     $fileSize = $_FILES["posted_image"]["size"]; // File size in bytes
                     $fileErrorMsg = $_FILES["posted_image"]["error"]; // 0 for false... and 1 for true
                       $userid_curr = trim($_POST['currentProfileId']) ; 
                     $type_of_images = [
-                        strtolower(trim('audio/mpeg')) ,
-                        strtolower(trim('audio/x-mpeg')) ,
-                        strtolower(trim('audio/mp3')) ,
-                        strtolower(trim('audio/x-mp3')) ,
-                        strtolower(trim('audio/mpeg3')) ,
-                        strtolower(trim('audio/mpg')) ,
-                        strtolower(trim('audio/x-mpg')) ,
-                        strtolower(trim('audio/x-mpegaudio')) ,
-                        strtolower(trim('audio/x-mpeg3')) 
+                        'audio/mpeg'  ,
+                        'audio/x-mpeg'  ,
+                        'audio/mp3'  ,
+                        'audio/x-mp3'  ,
+                        'audio/mpeg3'  ,
+                        'audio/mpg'  ,
+                        'audio/x-mpg'  ,
+                        'audio/x-mpegaudio'   ,
+                        'audio/x-mpeg3'  
                      ];
                     /** here **/
                    
@@ -35,14 +35,14 @@ if(isset($_POST))
                     if($userExist  == NULL )
                         return false ; 
                    /** here **/
-                    if(!in_array(  strtolower(trim($fileType)) , $type_of_images )){
+                    if(!in_array( strtolower(trim($fileType)) , $type_of_images )){
                          echo "This is not audio file , please upload audio with mp3 extension ";
                          return false ;
                       } 
                     
                     $userName_folder = $userExist->u_name;  
                      $image_rename = rand(2000 , 1000000) . "_" .time() . "_".rand(2000 , 1000000) . "_juryofpeers_".$userName_folder.$fileName; 
-                    $fileRoot = dirname (__FILE__) . "/../$userName_folder/music_albums/timeline/$image_rename";
+                    $fileRoot = dirname (__FILE__) . "/../music_albums/timeline/$image_rename";
 
                     // upload file to server 
                     move_uploaded_file($fileTmpLoc , $fileRoot) ;
@@ -122,7 +122,7 @@ if(isset($_POST))
                         $userName_folder = $_SESSION['user_info']['user_name'] ;
                         
                         // unlink image from user folder
-                               $imageDir = dirname(__FILE__)."/../$userName_folder/music_albums/timeline/".$lastRecorded->music_src ;
+                               $imageDir = dirname(__FILE__)."/../music_albums/timeline/".$lastRecorded->music_src ;
                              if(@is_file($imageDir ))
                                 @unlink($imageDir);
                             

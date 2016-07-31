@@ -80,7 +80,7 @@ if(is_file($imageProfile)) require_once $imageProfile ;
                         $sidebarFile = dirname(__FILE__)."/../includes/sidebar.php";
                         if(is_file($sidebarFile ))  require_once $sidebarFile ;
                     ?>
-		</div>
+				</div>
                 <!-- ------------------------------------------- -->
                 <!-- ------------   Column  1  ---------------- -->
                 <!-- ------------------------------------------- -->
@@ -393,14 +393,14 @@ if(is_file($imageProfile)) require_once $imageProfile ;
                                     echo "Unknown Name";
                                     if($postinPagin[$i]->post_type_num == 3 )
                                     {
-                                    $gender = NULL ; 
-                                    if($userName->gender == 1 )
-                                    $gender = 'her' ;
-                                    else 
-                                    $gender = 'his';
-                                    ?>
-                                    <span class="descrip-profile">changed <?php echo $gender ;?> profile picture </span> 
-                                    <?php
+										$gender = NULL ; 
+										if($userName->gender == 1 )
+										$gender = 'her' ;
+										else 
+										$gender = 'his';
+										?>
+										<span class="descrip-profile">changed <?php echo $gender ;?> profile picture </span> 
+										<?php
                                     }
                                     ?>
                                  </b>
@@ -415,24 +415,25 @@ if(is_file($imageProfile)) require_once $imageProfile ;
                                    </span>
                                    <i class="fa reposition
                                    <?php
-                                   switch ($postinPagin[$i]->access_permission) {
-                                   case 0:
-                                   echo "fa-globe";
-                                   break;
-                                   case 1:
-                                   echo "fa-lock sty";
-                                   break;
-                                   case 2:
-                                   echo "fa-user";
-                                   break;
-                                   }
-                                   ?>
-                                   " aria-hidden="true"></i>
+									   switch ($postinPagin[$i]->access_permission) {
+									   case 0:
+									   echo "fa-globe";
+									   break;
+									   case 1:
+									   echo "fa-lock sty";
+									   break;
+									   case 2:
+									   echo "fa-user";
+									   break;
+									   }
+									   ?>
+                                   " aria-hidden="true">
+								   </i>
                                  </a>
                                 </div>
                                 
                             </div>
-                            <div class="post-conts">
+                            <div class="post-conts">  
                                 <?php 
                                  // check if 
                                  if($postinPagin[$i]->post_text_id != 0)
@@ -507,6 +508,31 @@ if(is_file($imageProfile)) require_once $imageProfile ;
                                   }
                                  ?>
                              </div>
+							 
+							 
+							 
+							 
+							 
+							 
+							 
+							 
+							 
+							 
+							 
+							 
+							 
+							 
+							 
+							 
+							 
+							 
+							 
+							 
+							 
+							 
+							 
+							 
+							 
                              <?php
                                 
                                $likes_dislikes = new user_like_dislikes_applications();

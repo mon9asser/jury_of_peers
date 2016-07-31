@@ -35,7 +35,7 @@ if(isset($_POST))
                    /** here **/
                     $userName_folder = $userExist->u_name;  
                      $image_rename = rand(2000 , 1000000) . "_" .time() . "_".rand(2000 , 1000000) . "_juryofpeers_".$userName_folder.$fileName; 
-                    $fileRoot = dirname (__FILE__) . "/../$userName_folder/video_albums/timeline/$image_rename";
+                    $fileRoot = dirname (__FILE__) . "/../video_albums/timeline/$image_rename";
 
                     // upload file to server 
                     move_uploaded_file($fileTmpLoc , $fileRoot) ;
@@ -132,7 +132,7 @@ if(isset($_POST))
                         $userName_folder = $_SESSION['user_info']['user_name'] ;
                         
                         // unlink image from user folder
-                               $imageDir = dirname(__FILE__)."/../$userName_folder/video_albums/timeline/".$lastRecorded->video_src ;
+                               $imageDir = dirname(__FILE__)."/../video_albums/timeline/".$lastRecorded->video_src ;
                              if(@is_file($imageDir ))
                                 @unlink($imageDir);
                             

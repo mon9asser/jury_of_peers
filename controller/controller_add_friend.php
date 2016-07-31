@@ -50,7 +50,14 @@ if(!isset($_POST['userId']))
                        }
                 }else echo "2";
                 
-           }  
+           }else if ($_POST['proccessType']=="delete_from_mylist"){
+               $frd_apis = new friend_system_applications() ;
+               $remove = $frd_apis->friend_system_delete_fields([
+                   'id'=>  trim($_POST['userId'])
+               ]);
+               
+               if($remove) echo "1";
+           }
         
         session_write_close() ;
          

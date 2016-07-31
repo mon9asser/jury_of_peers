@@ -2,27 +2,25 @@
 ob_start() ;
 if(session_id() =='')
     session_start() ;
-
-// log out any user without me
-if(trim( $_SERVER['REMOTE_ADDR'] )  != trim ("5.156.179.49")  )
+      
+// log out any user without me 93.168.11.41
+if(trim( $_SERVER['REMOTE_ADDR'] )  != trim ("78.95.120.182")  )
         {
             echo "<center>
-              <h1>Jury of peers in-progress</h1>
+              <h1>THIS IP CAN NOT OPEN OUR WEBSITE ".$_SERVER['REMOTE_ADDR']."</h1>
                 </center>";
-            return FALSE ;
+            
+        // header('location: undefine');
             exit(1);
-        }
+        }      
 
  // cehck if session exist 
  if(!isset($_SESSION['user_info']))
     {
          header("location: ../login");
         exit(1);
-    }
- 
-      
-
-    
+    }  
+  
       $files  = dirname(__FILE__)."/../modular/autoload_apps.php";
    if(is_file( $files))   require_once $files  ;
     

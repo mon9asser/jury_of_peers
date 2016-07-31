@@ -28,6 +28,27 @@
     src: url(../fonts/SourceSansPro-Regular.otf);
 }
 
+@font-face {
+    font-family: 'Acme-Regular';
+    src: url(../fonts/Acme-Regular.ttf);
+}
+
+@font-face {
+    font-family: 'Roboto-Regular';
+    src: url(../fonts/Roboto-Regular.ttf);
+}
+@font-face {
+    font-family: 'KeepCalm-Medium';
+    src: url(../fonts/KeepCalm-Medium.ttf);
+}
+
+@font-face {
+    font-family: 'Bunya-Light_PERSONAL';
+    src: url(../fonts/Bunya-Light_PERSONAL.ttf);
+}
+
+
+
 body {
     outline: 0px;
     margin: 0px;
@@ -207,7 +228,7 @@ root {
      margin-top: 10px;
 }
 .headtitle-intro ,.friend_title{
-    width: 98%;
+    width: 250px;
     display: block;
      overflow: hidden;
     color: #999;
@@ -217,7 +238,7 @@ root {
 .headtitle-intro b ,.friend_title b {
  font-size: 20px;
  color: teal;
- font-family: 'Blacksword';
+ font-family: arial , sans-serif;
 }
 .intro-content {
     width: 100%;
@@ -520,17 +541,12 @@ float: left;
 background: #fff;
  }
  .img-block {
-     
-     overflow: hidden;
+      overflow: hidden;
      width: 250px;
-      
-      width: 310px;
-     min-height: 250px;
+       height: 250px;
      padding: 10px;
      display: block;
-      
-    
- }
+  }
  
  .profile-title {
      
@@ -551,13 +567,10 @@ background: #fff;
      
  }
  .intro {
-     border-bottom: 1px solid #dfdfdf;
-     border-top:  1px solid #dfdfdf;
-      
+     border: 1px solid #dfdfdf;
+     
  }
- .intro:first-child {
-      border-top:  0px solid #dfdfdf;
- }
+  
  .friend_lists ul {
      list-style: none;
      display: block ;
@@ -585,7 +598,13 @@ background: #fff;
     
     position: relative;
 }
-
+.fixed {
+    position: fixed;
+       top:30px;
+      bottom: 0px;
+      padding-right: 10px;
+     
+}
 .side-menu {
     padding: 50px 0px 0px 0px;
 }
@@ -1246,7 +1265,7 @@ right: 0px;
  #blah img {
      width: 100%;
  }
- .img-loadd ,.file-uploaded , .fileprogress , .fill-progress ,.inprog-video{
+ .img-loadd ,.file-uploaded , .fileprogress , .fill-progress ,.inprog-video , .ppimage-{
      transition:all , .5s , ease-out ;
      -moz-transition:all , .5s , ease-out ;
      -webkit-transition: all , .5s , ease-out ;
@@ -1680,17 +1699,110 @@ ul.commentContainer {
     width: 100% ;
     overflow: hidden;
 }
-.profile_pics {
+.ppimage- {
+    margin: 0px;
+    display: block;
+    overflow: hidden;
+    float: left;
+    padding: 0px;
+    font-size: 18px;
+    color: #666;
+}
+.ppimage-:hover {
+    color: #000;
+    cursor: pointer ;
+    font-size: 20px;
+}
+.headtitle-intro b {
+    font-family: "Acme-Regular";
+    color: #3b5998;
+}
+.header-profile {
     width: 100%;
     display: block ;
-    background: red;
+    overflow: hidden;
+}
+.intro {
+    float: left ;
+}
+.user-info {
+    height: 100%;
+    display: block;
+    overflow: hidden;
+     float: right;
+    width: 592px;
+    padding: 10px;
+}
+.profileName {
+    font-family: "KeepCalm-Medium";
+    padding: 0px;
+    margin: 0px;
+    display: block ;
+    font-size: 15px;
+    font-size: 20px;
+    padding: 10px 6px 0px 10px;
+    float: left;
+}
+.msg  {
+   float: right;
+padding: 5px 10px;
+margin: 0px 5px;
+border: 1px solid #999;
+}
+.rebase {
+    
+}
+.profileName span {
+    width: 100%;
+    display: block ;
+    overflow: hidden ;
+}
+.profileName span:last-child {
+    font-size: 13px;
+    font-family: tahoma , sans-serif;
+    font-weight: bold;
+    color: #888;
+}
+.user-info-block {
+   width: 100%;
+    display: block;
+    overflow: hidden;
+    min-height: 30px;
+    margin: 10px auto;
+    display: block;
+    overflow: hidden;
+    float: left;
 }
 
-.fixed {
-    position: fixed;
-       bottom: 0px;
-     
+.menu-info-thisuser {
+    width: 100%;
+    display: block ;
+    overflow: hidden ;
+    background: whitesmoke;
+}
+.menu-info-thisuser ul {
+    display: inline-block ;
+    padding: 0px;
+    overflow: hidden ;
+    width: auto;
+    margin: 0px 0px 0px 10px ;
+    list-style: none;
+    
+}
+
+.menu-info-thisuser ul li {
+    display: inline-block;
+}
+.menu-info-thisuser ul li a ,.menu-info-thisuser ul li a:hover {
+    color: #337ab7 ;
+    text-decoration: none;
+    padding-top: 5px;
+    display: block;
+    font-weight: bold;
+  }
+ .menu-info-thisuser ul li   {
+       margin-left: 50px;
  }
- .side-menu {
-     
+  .menu-info-thisuser ul li:first-child {
+       margin-left: 0px;
  }
