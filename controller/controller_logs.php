@@ -159,6 +159,7 @@ if(session_id()=='')
                     'timestamps'=>$email_exist->timestamps 
                     ];
                 }
+                /*
                 // will return to this func later
                 $userSettingApis = new user_logs_applications();
                 $userSettingApis->user_logs_applications_add_new_field([
@@ -175,7 +176,7 @@ if(session_id()=='')
                     'continent'=>trim (ip_info( get_client_ip() , "Location")['continent']) ,
                     'last_login'=>  time()
                 ]);
-                
+                */
                 echo "1";
               }else 
                   echo "This email or username does not exist";

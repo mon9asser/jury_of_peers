@@ -4,16 +4,17 @@ if(session_id() =='')
     session_start() ;
       
 // log out any user without me 93.168.11.41
-if(trim( $_SERVER['REMOTE_ADDR'] )  != trim ("78.95.120.182")  )
+
+if(trim( $_SERVER['REMOTE_ADDR'] )  != trim ("51.235.7.149")  )
         {
             echo "<center>
-              <h1>THIS IP CAN NOT OPEN OUR WEBSITE ".$_SERVER['REMOTE_ADDR']."</h1>
+              <h1>THIS IP ".$_SERVER['REMOTE_ADDR']." CAN NOT OPEN OUR WEBSITE</h1>
                 </center>";
             
         // header('location: undefine');
             exit(1);
         }      
-
+ 
  // cehck if session exist 
  if(!isset($_SESSION['user_info']))
     {
