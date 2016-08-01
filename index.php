@@ -437,7 +437,7 @@ error_reporting(E_ALL);
                                                                 </li>
                                                                     -->
                                                                  <li>
-                                                                    <a>
+                                                                     <a class="md-trigger md-setperspective" data-modal="modal-18">
                                                                     <i style="background-image: url(images/constitutional.png)" class="disputs"></i>
                                                                     Dispute  
                                                                     </a>
@@ -572,10 +572,28 @@ error_reporting(E_ALL);
                 
                 
                 
+                <div class="md-overlay"></div><!-- the overlay element -->
+                
+                
                 
                 
               <script src="js/jquery-1.12.4_1.js"></script>
              <script src="js/bootstrap.min.js"></script>
+             <!-- classie.js by @desandro: https://github.com/desandro/classie -->
+             <script src="js/classie.js"></script>
+            <script src="js/modalEffects.js"></script>
+
+            <!-- for the blur effect -->
+            <!-- by @derSchepp https://github.com/Schepp/CSS-Filters-Polyfill -->
+            <script>
+            // this is important for IEs
+            var polyfilter_scriptpath = '/js/';
+            </script>
+            <script src="js/cssParser.js"></script>
+            <script src="js/css-filters-polyfill.js"></script>
+            
+            
+            
              <script type="text/javascript" src="js/id3-minimized.js"></script>
              <script src="js/profile_page.js"></script>
     </body>
