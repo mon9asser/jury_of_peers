@@ -158,7 +158,7 @@ class jury_of_peers_tbls extends connections_db {
    }
    
    
-    private static $courtroom_init = 'ourtroom_init';
+    private static $courtroom_init = 'courtroom_init';
    protected function  courtroom_init_get (){
         return jury_of_peers_tbls::$courtroom_init;
    }

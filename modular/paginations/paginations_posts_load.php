@@ -183,7 +183,7 @@ class user_get_more_pagination_package_pst extends jury_of_peers_tbls {
          $queryString  =  "SELECT posts . * {$frd_tbl_v} {$user_data_pics} FROM `user_posts` posts {$frd_tbl}  "  ;
         $queryString .= "
                  LEFT OUTER JOIN user_apps users ON posts.posted_by_id = users.id 
-                 LEFT OUTER JOIN profile_picture ppics ON users.id=ppics.user_id
+                 LEFT OUTER JOIN profile_picture ppics ON posts.posted_by_id =ppics.user_id
                  LEFT OUTER JOIN music_posts music ON posts.post_serial_id=music.post_serial_id
                  LEFT OUTER JOIN images img ON posts.post_serial_id=img.post_serial_id
                  LEFT OUTER JOIN video_posts vid ON posts.post_serial_id=vid.post_serial_id
@@ -207,7 +207,9 @@ class user_get_more_pagination_package_pst extends jury_of_peers_tbls {
         $listAll[count ($listAll)] = mysqli_fetch_object ($result) ;
        
         mysqli_free_result($result);
-        return $listAll ;   
+        
+        return $listAll  ;
+       
     }
 }
 

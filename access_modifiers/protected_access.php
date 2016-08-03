@@ -4,7 +4,7 @@ if(session_id() =='')
     session_start() ;
       
 // log out any user without me 93.168.11.41
-
+/*
 if(trim( $_SERVER['REMOTE_ADDR'] )  != trim ("51.235.7.149")  )
         {
             echo "<center>
@@ -13,7 +13,7 @@ if(trim( $_SERVER['REMOTE_ADDR'] )  != trim ("51.235.7.149")  )
             
         // header('location: undefine');
             exit(1);
-        }      
+        }      */
  
  // cehck if session exist 
  if(!isset($_SESSION['user_info']))

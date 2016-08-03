@@ -89,3 +89,98 @@ body{
     overflow: hidden;
     border: 1px solid #fff;
 }
+.accPanel {
+    width: 70%;
+    margin: 20px auto;
+    height: auto;
+    background: transparent;
+    z-index: 2000;
+    position: relative;
+    overflow: hidden;
+}
+.courPersons {
+    width: 48.3%;
+    height: 100%;
+    display: inline-block ;
+    background: rgba(255,255,255,.5) ;
+}
+.courPersons:first-child{
+    float: left ;
+}
+.courPersons:last-child{
+    float: left ;
+    
+}
+.mainTitle {
+    width: 96.5%;
+    height: auto;
+     margin-bottom: 0px;
+     margin-bottom: 0px;
+    display: inline-block ;
+    background: rgba(255,255,255,.5);
+    padding: 8px 10px;
+    font-weight: bold ;
+    color: #333;
+     background-image: url(../img_sliders/constitutional.png);
+padding-left: 30px;
+background-repeat: no-repeat;
+background-position: 5px 4px;
+background-size: 20px 20px;
+background-position: 1% 47%;
+ }
+ 
+ .mainTitle  .span {
+     margin-left: 5px;
+     float: left;
+     padding-top: 6px;
+ }
+ .mainTitle .btntt {
+     font-weight: normal ;
+    float: right ;
+    
+    padding: 5px 12px;
+    cursor: pointer ;
+    margin-right: 5px;
+ }
+ 
+   .btn2{
+       border: 1px solid #999;
+     background-color: #fff;;
+ }
+ .btn1 {
+     background-color: tomato;
+     color: #fff;
+      border: 1px solid #dfdfdf;
+ }
+ .title-court {
+     width: 100%;
+     display: block ;
+     overflow: hidden ;
+     background: #222;
+     height: auto;
+     color: #fff;
+ }
+ .title-court b {
+     padding: 5px 15px;
+     display: block;
+ }
+ .contents {
+     width: 100%;
+     display: block ;
+     overflow: hidden ;
+ }
+ .courPersons {
+     border: 1px solid #222;
+ }
+ .dfsdde {
+     float: left ;
+     width: 200px;
+     height: 20px;
+     font-weight: bold;
+     margin: 29px 2px;
+     color: lightyellow;
+ }
+ .vvvv {
+     padding: 10px;
+     border-top: 1px solid #333;
+ }

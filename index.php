@@ -22,17 +22,18 @@ error_reporting(E_ALL);
   $usrInfo = $user_apis ->user_application_check_exist(['u_name'=>$user_name]);
   if($usrInfo != NULL )
   {     
-      
+      /*
       $genral_setting_apis = new general_settings_applications() ;
      $work_info =  $genral_setting_apis ->general_settings_check_exist(['user_id'=>$usrInfo->id],'and');
-      // 4 - 8 => only me 
-      /*
+       
       $app_apis = new user_get_more_pagination_package_pst() ;
       $last_id  = 0 ;
       $limit  = 100 ;
       $me_or_asAvisitor = 8 ;
       $appss = $app_apis->load_posts_according_to_args( $last_id ,$limit , $me_or_asAvisitor );
-       */
+       
+      
+      return false ;*/
       ?>
 <!DOCTYPE html> 
 <html>
@@ -47,6 +48,9 @@ error_reporting(E_ALL);
         <link rel="stylesheet" href="css/font-awesome.css">
         <link href="css/profile.css" rel="stylesheet">
         <script type="text/javascript" src="js/id3-minimized.js"></script>    
+       
+	<link rel="stylesheet" type="text/css" href="css/component.css" />
+	<script src="js/modernizr.custom.js"></script>
         <!--[if IE 7]><link rel="stylesheet" href="css/fontello-ie7.css"><![endif]-->
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -61,6 +65,13 @@ error_reporting(E_ALL);
         </style>
     </head>
     <body>
+        
+            
+        
+        
+        
+         
+         
                 <!-- --------------------------------------- -->
                 <!-- ------      Header      --------------- -->
                 <!-- --------------------------------------- -->
@@ -283,9 +294,10 @@ error_reporting(E_ALL);
                                              'user_id'=>$userId
                                          ]);   
                                          
+                                          
                                          if( count($user_exist) != 0   )
-                                         {
-                                               for ($i=0; $i<count($postinPagin); $i++){ 
+                                         { 
+                                           for ($i=0; $i < count($postinPagin); $i++){ 
                                              ?>
                                                 <div class="posts-get">
                                                     <div class="profilePics">
@@ -559,9 +571,12 @@ error_reporting(E_ALL);
                                         
                                     ?>
                                    
-                                    
-                                    
-                                    
+                                                                
+                                                                    <!-- Init -->
+                                                                    <a class="md-trigger md-setperspective" data-modal="modal-18">
+                                                                    <i style="background-image: url(images/constitutional.png)" class="disputs"></i>
+                                                                    Dispute  
+                                                                    </a>   
                                     
                                     
                                 </div>
@@ -572,9 +587,66 @@ error_reporting(E_ALL);
                 
                 
                 
-                <div class="md-overlay"></div><!-- the overlay element -->
                 
-                
+               
+                 <!-- Dispute object -->
+                <div class="md-modal md-effect-18" id="modal-18">
+                    <div class="md-content">
+                         <h3>Create Dispute  <i class="icon-cancel-2 md-close"></i> </h3>
+			<div>
+                            <p>Each dispute must be accepted from defendant :</p>
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                         <strong>Courtroom Title:</strong> 
+                                    </td>
+                                    <td>
+                                        <strong><input id="title-courtroom" class="crtcss" type="text" /></strong> 
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                         <strong>Courtroom Cause:</strong>       
+                                    </td>
+                                    <td>
+                                        <strong><textarea id="cause-courtroom" class="crtcss" placeholder="Why do you like to create Dispute with my status ? " type="text"></textarea></strong> 
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                         <strong>Time Estimated:</strong>       
+                                    </td>
+                                     <td>
+                                        <strong>
+                                            <select id="time-courtroom">
+                                                <option value="3">3 days</option>
+                                                <option value="5">5 days</option>
+                                                <option value="8">8 days</option>
+                                                <option value="10">10 days</option>
+                                                <option value="12">12 days</option>
+                                                <option value="15">15 days</option>
+                                            </select>
+                                        </strong> 
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                         <strong>Courtroom settlement :</strong>
+                                    </td>
+                                    <td>
+                                         <strong><input id="settlement-courtroom" class="crtcss"  type="text" /></strong> 
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="btn-group">
+                                <button onclick="courtroomInit(10/*post id */ , 8 /*user id*/ ,this)" class="send-req">Send Request</button>
+                            </div>
+			</div>
+                    </div>
+		</div>
+         
+                 <!-- Dispute object overlay -->
+                <div class="md-overlay"></div><!-- the overlay element -->  
                 
                 
               <script src="js/jquery-1.12.4_1.js"></script>
@@ -591,9 +663,7 @@ error_reporting(E_ALL);
             </script>
             <script src="js/cssParser.js"></script>
             <script src="js/css-filters-polyfill.js"></script>
-            
-            
-            
+             
              <script type="text/javascript" src="js/id3-minimized.js"></script>
              <script src="js/profile_page.js"></script>
     </body>

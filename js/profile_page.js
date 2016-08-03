@@ -1,5 +1,67 @@
 $(document).ready(function (){
     
+    window.courtroomInit = function (postId , userId , elem){
+        var titleCourtroom = $('#title-courtroom') ;
+        var causeCourtroom = $('#cause-courtroom') ;
+        var settlementCourtroom = $('#settlement-courtroom') ;
+        var time_estimated = $('#time-courtroom');
+        
+        if(titleCourtroom.val() == '')
+            { 
+                titleCourtroom.css('border-color','red');
+                return false ;
+            }else {
+                titleCourtroom.css('border-color','#dfdfdf');
+            }
+            
+         if(causeCourtroom.val() == '')
+            {
+                causeCourtroom.css('border-color','red');
+                return false ;
+            }else {
+                 causeCourtroom.css('border-color','#dfdfdf');
+            }
+            
+            
+             if(settlementCourtroom.val() == '')
+                {
+                   settlementCourtroom.css('border-color','red');
+                   return false ;
+                }else {
+                     settlementCourtroom.css('border-color','#dfdfdf');
+                }
+            
+            
+          if(time_estimated.val() == '')
+                {
+                   time_estimated.css('border-color','red');
+                   return false ;
+                }else {
+                     time_estimated.css('border-color','#dfdfdf');
+                }
+            
+             
+            $.ajax({
+                url : 'controller/controller_initcourtroom.php',
+                type : "post" ,
+                data : {
+                    'user-id':userId,
+                    'post-id':postId,
+                    'title-courtroom':titleCourtroom.val(),
+                    'cause-courtroom':causeCourtroom.val(),
+                    'settlement-courtroom':settlementCourtroom.val(), 
+                    'time-courtroom':time_estimated.val()
+                } ,
+                beforeSend : function (){ 
+                      $(elem).html ('<div id="floatingCirclesG"><div class="f_circleG" id="frotateG_01"></div><div class="f_circleG" id="frotateG_02"></div><div class="f_circleG" id="frotateG_03"></div><div class="f_circleG" id="frotateG_04"></div><div class="f_circleG" id="frotateG_05"></div><div class="f_circleG" id="frotateG_06"></div><div class="f_circleG" id="frotateG_07"></div><div class="f_circleG" id="frotateG_08"></div></div>Sending request');
+               },
+               success : function (da){
+                    $(elem).html ('Send Request');
+                    window.location.href = "courtroom?code="+$.trim(da);
+                  }
+             });
+             
+     }
     // add new user ... 
     window.add_friend = function (id,elem ,returnd){
          var userId = id  ;
