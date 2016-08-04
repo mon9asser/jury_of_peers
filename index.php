@@ -35,7 +35,7 @@ error_reporting(E_ALL);
       
       return false ;*/
       ?>
-<!DOCTYPE html> 
+      <!DOCTYPE html> 
 <html>
     <head>
         <title><?php echo $usrInfo->f_name ." ".$usrInfo->s_name;?></title>
@@ -66,13 +66,7 @@ error_reporting(E_ALL);
     </head>
     <body>
         
-            
-        
-        
-        
-         
-         
-                <!-- --------------------------------------- -->
+        <!-- --------------------------------------- -->
                 <!-- ------      Header      --------------- -->
                 <!-- --------------------------------------- -->
                  
@@ -562,34 +556,14 @@ error_reporting(E_ALL);
                                                         </div>
                                                     </div>
                                                 </div>
-                                            <?php
-                                            
-                                            
-                                        }
-                                         
-                                         }
-                                        
-                                    ?>
-                                   
-                                                                
-                                                                    <!-- Init -->
-                                                                    <a class="md-trigger md-setperspective" data-modal="modal-18">
-                                                                    <i style="background-image: url(images/constitutional.png)" class="disputs"></i>
-                                                                    Dispute  
-                                                                    </a>   
                                     
                                     
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                
-                
-                
-                
-               
-                 <!-- Dispute object -->
+                                    
+                                    
+                                    
+                                 <!-- Dispute object overlay -->
+                <div class="md-overlay"></div><!-- the overlay element -->            
+                                    <!-- Dispute object -->
                 <div class="md-modal md-effect-18" id="modal-18">
                     <div class="md-content">
                          <h3>Create Dispute  <i class="icon-cancel-2 md-close"></i> </h3>
@@ -638,15 +612,45 @@ error_reporting(E_ALL);
                                     </td>
                                 </tr>
                             </table>
+                          
                             <div class="btn-group">
-                                <button onclick="courtroomInit(10/*post id */ , 8 /*user id*/ ,this)" class="send-req">Send Request</button>
+                                <button onclick="return courtroomInit(<?php echo $postinPagin[$i]->id ;?> , <?php echo $usrInfo->id ;?>  ,this);" class="send-req">Send Request</button>
                             </div>
+                            
 			</div>
                     </div>
 		</div>
-         
-                 <!-- Dispute object overlay -->
-                <div class="md-overlay"></div><!-- the overlay element -->  
+                                
+                                            <?php
+                                            
+                                            
+                                        }
+                                         
+                                         }
+                                        
+                                    ?> 
+                                   
+                                                                
+                                                                    <!-- Init -->
+                                                                  <!-- 
+                                                                    <a onclick="" class="md-trigger md-setperspective" data-modal="modal-18">
+                                                                    <i style="background-image: url(images/constitutional.png)" class="disputs"></i>
+                                                                    Dispute  
+                                                                    </a>   
+                                                                  --> 
+                                                                   
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                
+                
+                
+                
                 
                 
               <script src="js/jquery-1.12.4_1.js"></script>
@@ -654,21 +658,16 @@ error_reporting(E_ALL);
              <!-- classie.js by @desandro: https://github.com/desandro/classie -->
              <script src="js/classie.js"></script>
             <script src="js/modalEffects.js"></script>
-
-            <!-- for the blur effect -->
-            <!-- by @derSchepp https://github.com/Schepp/CSS-Filters-Polyfill -->
             <script>
             // this is important for IEs
             var polyfilter_scriptpath = '/js/';
             </script>
             <script src="js/cssParser.js"></script>
             <script src="js/css-filters-polyfill.js"></script>
-             
-             <script type="text/javascript" src="js/id3-minimized.js"></script>
+            <script type="text/javascript" src="js/id3-minimized.js"></script>
              <script src="js/profile_page.js"></script>
     </body>
+    
 </html>
 
-<?php
-  }
-?>
+  <?php } ?>

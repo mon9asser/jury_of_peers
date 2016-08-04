@@ -184,3 +184,94 @@ background-position: 1% 47%;
      padding: 10px;
      border-top: 1px solid #333;
  }
+ .modal-content {
+margin: 90px auto;
+width: 50%;
+padding: 20px;
+border-radius: 0px;
+ }
+ .all {
+     width: 100%;
+     display: inline-block;
+     border-bottom: 1px solid beige ;
+ }
+ .stc {
+    border: 1px solid #eee;
+padding: 5px 10px;
+margin: -5px 10px 13px 10px;
+display: inline-block;
+cursor: pointer; 
+ }
+ 
+ .modal-content {
+     height: 450px ;
+     overflow: hidden ;
+ }
+ .mediaIc {
+     width: 100%;
+     display: block ;
+     overflow: hidden ;
+     height: 90%;
+      
+ }
+ .socialNET {
+     float: left ;
+     height: 100%;
+     width: 28%;
+     overflow: hidden ;
+    border-right: 1px solid beige;
+   
+ }
+  
+ .icons {
+    margin: 0px;
+    margin: 10px auto;
+    width: 90%;
+    border: 1px solid #eee;
+    padding: 9px 10px;
+    cursor: pointer;
+ }
+ .icons:hover {
+     border-color: rgb(57, 190, 185);
+     color: rgb(57, 190, 185);
+ }
+ .frdfrd {
+     width: 70%;
+     float: left;
+     height: 100%;
+    overflow-y: auto;
+     margin-left: 2px;
+ }
+ .name {
+     float: left;
+overflow: hidden;
+display: inline-block;
+float: left;
+line-height: 3;
+padding: 5px 10px;
+ }
+ .btns {
+     float: right;
+background: teal;
+padding: 1px 10px;
+line-height: 2;
+margin: 12px;
+color: #fff;
+border-radius: 35px;
+ }
+ .btns:hover {
+     background: rgb(57, 190, 185);
+     cursor: pointer;
+ }
+ .frd-inv-container {
+    height: 330px;
+    overflow-y: auto ;
+    display: block ;
+ }
+ .loadBtn {
+     border: 0px;
+     padding: 0px;
+    display: block;
+    background: ghostwhite;
+    cursor: pointer;
+ }

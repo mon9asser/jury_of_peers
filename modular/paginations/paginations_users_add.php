@@ -29,6 +29,25 @@ class user_get_more_pagination_package extends jury_of_peers_tbls {
         $getAll = $get_apis->get_all_rows($this->loadTable() , $loadMore) ; 
         return $getAll  ;
     }
+    
+    
+    
+    public function user_friend_invite ( $lastId , $limit , $userId){
+        /*
+        $extractedArr = NULL ;
+        if($acordingTo != NULL and $accorType != NULL )
+            {
+                
+            } // $extractedArr .= ......
+            */
+         
+        
+        $valuse = "(`id_sender`={$userId} OR `id_receiver`={$userId}) AND is_accepted=1" ;
+         $loadMore = "WHERE `id` > {$lastId} AND {$valuse} GROUP BY id LIMIT {$limit}";
+        $get_apis = new main_get_app() ;
+        $getAll = $get_apis->get_all_rows($this->friend_system_get() , $loadMore) ; 
+        return $getAll  ;
+    }
 }
 
  /*
