@@ -126,6 +126,7 @@ padding-left: 30px;
 background-repeat: no-repeat;
 background-position: 5px 4px;
 background-size: 20px 20px;
+
 background-position: 1% 47%;
  }
  
@@ -163,6 +164,7 @@ background-position: 1% 47%;
  .title-court b {
      padding: 5px 15px;
      display: block;
+     font-size: 20px;
  }
  .contents {
      width: 100%;
@@ -178,7 +180,7 @@ background-position: 1% 47%;
      height: 20px;
      font-weight: bold;
      margin: 29px 2px;
-     color: lightyellow;
+     color: black;
  }
  .vvvv {
      padding: 10px;
@@ -197,14 +199,14 @@ border-radius: 0px;
  }
  .stc {
     border: 1px solid #eee;
-padding: 5px 10px;
+padding: 5px 10px; 
 margin: -5px 10px 13px 10px;
 display: inline-block;
 cursor: pointer; 
  }
  
  .modal-content {
-     height: 450px ;
+     height: auto ;  
      overflow: hidden ;
  }
  .mediaIc {
@@ -274,4 +276,300 @@ border-radius: 35px;
     display: block;
     background: ghostwhite;
     cursor: pointer;
+ }
+ .error-list-invt {
+     width: 100%;
+     display: none  ;
+     padding: 10px;
+    overflow: hidden;
+    margin-top: 10px;
+ }
+ .mmk {
+line-height: 1;
+padding-left: 8px;
+margin-top: 6px;
+display: inline-block;
+width: 100%;
+display: block;
+text-align: left;
+overflow: hidden;
+ }
+ .invitPersons:last-child {
+     border: 0px solid #dfdfdf;
+ }
+ .addjop {
+     font-weight: normal;
+    font-size: 12px;
+    cursor: pointer;
+ }
+ .statusInvite {
+     color: #dfdfdf;
+     font-size: 12px;
+ }
+
+ .statusInvite {
+    color: #b1b1b1;
+    font-size: 9px;
+}
+.ldinv {
+    width: 100%;
+    padding: 5px 10px;
+    display: block ;
+    overflow: hidden ;
+    text-align: center ;
+    cursor: pointer ;
+    font-weight: bold ;
+}
+
+
+.courtroom-setting {
+    background: #e7e7e7;
+    min-height: 95px;
+    margin-top: 10px;
+    max-height: 439px;
+    overflow-y: auto;
+}
+.infoR {
+    padding-left: 5px;
+    display: inline-block;
+    font-size: 12px;
+}
+.addjop {
+    font-weight: normal;
+    font-size: 12px;
+    cursor: pointer;
+    padding-top: 4px;
+    display: block;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.cssload-jumping{
+	position:relative;
+	display:block;
+	margin: 97px auto;
+	width:107px;
+}
+	
+.cssload-jumping, .cssload-jumping * {
+	box-sizing: border-box;
+}
+
+.cssload-jumping span {
+	display: inline-block;
+	height: 15px;
+	width: 15px;
+	background: rgb(47,172,155);
+	border-radius: 487px;
+	background-clip: padding-box;
+		-o-background-clip: padding-box;
+		-ms-background-clip: padding-box;
+		-webkit-background-clip: padding-box;
+		-moz-background-clip: padding-box;
+}
+
+.cssload-jumping span:nth-child(1) {
+	animation: scale 1.15s 0.12s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
+		-o-animation: scale 1.15s 0.12s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
+		-ms-animation: scale 1.15s 0.12s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
+		-webkit-animation: scale 1.15s 0.12s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
+		-moz-animation: scale 1.15s 0.12s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
+.cssload-jumping span:nth-child(2) {
+	animation: scale 1.15s 0.23s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
+		-o-animation: scale 1.15s 0.23s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
+		-ms-animation: scale 1.15s 0.23s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
+		-webkit-animation: scale 1.15s 0.23s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
+		-moz-animation: scale 1.15s 0.23s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
+.cssload-jumping span:nth-child(3) {
+	animation: scale 1.15s 0.35s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
+		-o-animation: scale 1.15s 0.35s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
+		-ms-animation: scale 1.15s 0.35s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
+		-webkit-animation: scale 1.15s 0.35s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
+		-moz-animation: scale 1.15s 0.35s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
+.cssload-jumping span:nth-child(4) {
+	animation: scale 1.15s 0.46s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
+		-o-animation: scale 1.15s 0.46s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
+		-ms-animation: scale 1.15s 0.46s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
+		-webkit-animation: scale 1.15s 0.46s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
+		-moz-animation: scale 1.15s 0.46s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
+.cssload-jumping span:nth-child(5) {
+	animation: scale 1.15s 0.58s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
+		-o-animation: scale 1.15s 0.58s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
+		-ms-animation: scale 1.15s 0.58s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
+		-webkit-animation: scale 1.15s 0.58s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
+		-moz-animation: scale 1.15s 0.58s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
+
+
+
+@keyframes scale {
+	0% {
+		transform: scale(0);
+	}
+	25% {
+		transform: scale(0.9, 0.9);
+		background: rgb(147,225,215);
+	}
+	50% {
+		transform: scale(1, 1);
+		margin: 0 3px;
+		background: rgb(47,172,155);
+	}
+	100% {
+		transform: scale(0);
+	}
+}
+
+@-o-keyframes scale {
+	0% {
+		-o-transform: scale(0);
+	}
+	25% {
+		-o-transform: scale(0.9, 0.9);
+		background: rgb(147,225,215);
+	}
+	50% {
+		-o-transform: scale(1, 1);
+		margin: 0 3px;
+		background: rgb(47,172,155);
+	}
+	100% {
+		-o-transform: scale(0);
+	}
+}
+
+@-ms-keyframes scale {
+	0% {
+		-ms-transform: scale(0);
+	}
+	25% {
+		-ms-transform: scale(0.9, 0.9);
+		background: rgb(147,225,215);
+	}
+	50% {
+		-ms-transform: scale(1, 1);
+		margin: 0 3px;
+		background: rgb(47,172,155);
+	}
+	100% {
+		-ms-transform: scale(0);
+	}
+}
+
+@-webkit-keyframes scale {
+	0% {
+		-webkit-transform: scale(0);
+	}
+	25% {
+		-webkit-transform: scale(0.9, 0.9);
+		background: rgb(147,225,215);
+	}
+	50% {
+		-webkit-transform: scale(1, 1);
+		margin: 0 3px;
+		background: rgb(47,172,155);
+	}
+	100% {
+		-webkit-transform: scale(0);
+	}
+}
+
+@-moz-keyframes scale {
+	0% {
+		-moz-transform: scale(0);
+	}
+	25% {
+		-moz-transform: scale(0.9, 0.9);
+		background: rgb(147,225,215);
+	}
+	50% {
+		-moz-transform: scale(1, 1);
+		margin: 0 3px;
+		background: rgb(47,172,155);
+	}
+	100% {
+		-moz-transform: scale(0);
+	}
+}
+
+
+
+
+
+.jopContainer {
+    background: rgba(250,250,250,0.7);
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute ;
+    z-index: 200;
+}
+.jusCon {
+    position: relative ;
+    display: block ;
+    overflow: hidden ;
+    height: auto ;
+    width: auto ;
+}
+
+.cssload-jumping {
+    position: relative;
+    display: block;
+    margin: 16% auto;
+    width: 107px;
+}
+.jopContainer {
+    display: none ;
+}
+.mask-jp {
+    background-color: rgba(0,0,0,.2);
+}
+
+.img-invi {
+       background-color: #eee;
+    border: 1px solid mintcream;
+    margin: 10px auto;
+    display: block;
+    float: none ;
+}
+
+
+ .infoR {
+    font-size: 12px;
+    width: 100%;
+    display: block;
+     padding: 10px 5px;
+    text-align: center;
  }

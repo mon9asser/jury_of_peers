@@ -20,16 +20,25 @@ if(!isset($_SESSION['user_info']))
              
              $courtInitInfo = $courtInitApis->courtroom_init_check_exist(['courtroom_code'=>$courtCode]);
              if($courtInitInfo != NULL){
+                   
                  
-                $invitation =  $courtroomInvitApis->courtroom_invitations_add_new_field([
-                     'court_id'=>$courtInitInfo->id         ,
-                     'courtroom_code'=>$courtCode           ,
-                     'post_id' => $courtInitInfo->post_id   ,
-                     'user_id' => $userId                   ,
-                     'timestmps' => time()
-                 ]);
-                if($invitation) 
-                 echo "1";
+                 $inv = $courtroomInvitApis->courtroom_invitations_check_exist([
+                    'user_id' => $userId ,
+                    'court_id'=>$courtInitInfo->id 
+                 ],'and');    
+                 if($inv == NULL ){
+                     $invitation =  $courtroomInvitApis->courtroom_invitations_add_new_field([
+                            'court_id'=>$courtInitInfo->id         ,
+                            'courtroom_code'=>$courtCode           ,
+                            'post_id' => $courtInitInfo->post_id   ,
+                            'user_id' => $userId                   ,
+                           'sender_id'=>$_SESSION['user_info']['user_id'] ,
+                            'timestmps' => time()                  
+                        ]);
+                       if($invitation) 
+                        echo "1";
+                 }else echo "2";
+                
                 
                  /******************************************************************/
                  /*************************  Notification  *************************/
@@ -87,6 +96,90 @@ if(!isset($_SESSION['user_info']))
                  }  
               if(count($invitFromMyFrd) == 0 )
               echo count($invitFromMyFrd ) ;
-       }
+       }else if($_POST['accType'] == 'loadMorePlnDfn'){
+            
+           $courtCode = trim ($_POST['courtCode']); 
+            $userI =$_SESSION['user_info']['user_id'] ;
+           
+            $lastId = trim ($_POST['lastId']); 
+            $param =  " `sender_id` = {$userI} AND  `courtroom_code` = {$courtCode}" ; 
+            $userApps = new user_applications();
+            $plnInvitation = new user_get_more_pagination_invitation_package() ;
+            $plaintiffInv = $plnInvitation->load_more_invitation_list($lastId  , 3 , $param );
+           // print_r($plaintiffInv);
+            $lstid = 0;
+            for($i=0;$i < count($plaintiffInv) ; $i++){
+            $userInfos = $userApps->user_application_check_exist(['id'=>$plaintiffInv[$i]->user_id]);
+            
+             if(count($userInfos) != 0 ){
+             ?>
+            <!-- Load all names -->
+               <div class="invitPersons ">
+                <b class="mmk"><div style="background-image: url(photo_albums/profile_picture/<?php echo get_profile_picture($plaintiffInv[$i]->user_id) ?>);" class="img-invi"></div>
+                <span class="infoR">
+                <?php echo $userInfos->f_name . ' ' . $userInfos->s_name ; ?>
+                <br />
+                <?php if($plaintiffInv[$i]->is_accept == 0 ) {  //is_accept ?>
+                <span style="" class="statusInvite"> <i class=" icon-right-open-2"></i> Pending Request </span>  
+                <br>
+                <?php }  ?>
+                <a  onclick="send_to_jury_of_peers('<?php echo $courtCode ; ?>' , <?php echo $userInfos->id ; ?> , this)" class="addjop">Add to jury of peers</a>
+                </span> 
+                </b>
+                
+               </div> 
+                <?php
+                $lstid =  $plaintiffInv[$i]->id  ;
+                ?> <input class="lastIdCourt" value="<?php echo $lstid ; ?>" type="hidden" /><?php
+                }else {
+                    echo "0";
+                }
+            }
+            ?>
+               
+            <?php
+            }else if($_POST['accType'] == 'loadMorePlnPln'){
+            
+           $courtCode = trim ($_POST['courtCode']); 
+            $userI =$_SESSION['user_info']['user_id'] ;
+           
+            $lastId = trim ($_POST['lastId']); 
+            $param =  " `sender_id` = {$userI} AND  `courtroom_code` = {$courtCode}" ; 
+            $userApps = new user_applications();
+            $plnInvitation = new user_get_more_pagination_invitation_package() ;
+            $plaintiffInv = $plnInvitation->load_more_invitation_list($lastId  , 3 , $param );
+           // print_r($plaintiffInv);
+            $lstid = 0;
+            for($i=0;$i < count($plaintiffInv) ; $i++){
+            $userInfos = $userApps->user_application_check_exist(['id'=>$plaintiffInv[$i]->user_id]);
+            
+             if(count($userInfos) != 0 ){
+             ?>
+            <!-- Load all names -->
+               <div class="invitPersons ">
+                <b class="mmk"><div style="background-image: url(photo_albums/profile_picture/<?php echo get_profile_picture($plaintiffInv[$i]->user_id) ?>);" class="img-invi"></div>
+                <span class="infoR">
+                <?php echo $userInfos->f_name . ' ' . $userInfos->s_name ; ?>
+                <br />
+                <?php if($plaintiffInv[$i]->is_accept == 0 ) {  //is_accept ?>
+                <span style="" class="statusInvite"> <i class=" icon-right-open-2"></i> Pending Request </span>  
+                <br>
+                <?php }  ?>
+                <a  onclick="send_to_jury_of_peers('<?php echo $courtCode ; ?>' , <?php echo $userInfos->id ; ?> , this)" class="addjop">Add to jury of peers</a>
+                </span> 
+                </b>
+                
+               </div> 
+                <?php
+                $lstid =  $plaintiffInv[$i]->id  ;
+                ?> <input class="lastIdCourt" value="<?php echo $lstid ; ?>" type="hidden" /><?php
+                }else {
+                    echo "0";
+                }
+            }
+            ?>
+               
+            <?php
+            }
     }
 ?>

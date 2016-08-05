@@ -50,19 +50,19 @@ class main_get_app extends connections_db  {
             {
                 echo "This table does not exist ... ";
                 return FALSE ;
-            }
-         $qString = sprintf("SELECT * FROM `{$tableName}` %s",$data);
+            }  
+          $qString = sprintf("SELECT * FROM `{$tableName}` %s",$data);
         $query = mysqli_query($this->open_connection(), $qString );
         $this->close_connection();
         if(!$query)
             return NULL ;
         
         if(mysqli_num_rows($query) == 0)
-            return NULL  ; 
+            return 0   ; 
         
        $arrList = [];
-       for ($i=mysqli_num_rows($query) -1 ; $i >= 0 ;$i--)
-        $arrList[@count($arrList)] = mysqli_fetch_object ($query);
+      for ($i=mysqli_num_rows($query) -1 ; $i >= 0 ;$i--)
+         $arrList[@count($arrList)] = mysqli_fetch_object ($query);
        $this->close_connection();
        return $arrList ;
      }

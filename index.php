@@ -93,7 +93,7 @@ error_reporting(E_ALL);
                             <div class="post-controls">
                                 <div class="left-part">
                                     <div class="intro profile-pic-con">
-                                         <div class="img-block" style="float: left;background-image:  url(photo_albums/profile_picture/<?php echo checkProfileExists($usrInfo->id);?>);background-size:cover; background-position:100% 100%;border: 5px solid #fff;margin: 0px auto; ">
+                                         <div class="img-block" style="float: none;background-image:  url(photo_albums/profile_picture/<?php echo checkProfileExists($usrInfo->id);?>);background-size:cover; background-position:100% 100%;border: 5px solid #fff;margin: 0px auto; ">
                                              <i class="fa fa-camera ppimage-"></i>
                                          </div>
                                     </div>
@@ -261,9 +261,9 @@ error_reporting(E_ALL);
                                             -->
                                             <div id="butn-add-post" class="btn btn-primary post-btn">Post</div>
                                             <select id="accessPrem" class="btn post-btn">
-                                                <option value="0">Public</option>
-                                                <option value="1">Only me</option>
-                                                <option value="2">Friends</option>
+                                                <option value="0">Friends</option>
+                                                <option value="1">Public</option>
+                                                <option value="2">Only me</option>
                                             </select>
                                         </div>
 
@@ -614,7 +614,7 @@ error_reporting(E_ALL);
                             </table>
                           
                             <div class="btn-group">
-                                <button onclick="return courtroomInit(<?php echo $postinPagin[$i]->id ;?> , <?php echo $usrInfo->id ;?>  ,this);" class="send-req">Send Request</button>
+                                <button onclick="return courtroomInit(<?php echo $postinPagin[$i]->id ;?> , <?php echo $postinPagin[$i]->posted_by_id ;?>  ,this);" class="send-req">Send Request</button>
                             </div>
                             
 			</div>

@@ -5,8 +5,8 @@ if(session_id() =='')
       
 // log out any user without me 93.168.11.41
  
-if(trim( $_SERVER['REMOTE_ADDR'] )  != trim ("46.152.70.28")  )
-        {
+if(trim( $_SERVER['REMOTE_ADDR'] )    != "178.81.96.245"   )
+        { 
             echo "<center>
               <h1>THIS IP ". $_SERVER['REMOTE_ADDR'] ." CAN NOT OPEN OUR WEBSITE</h1>
                 </center>";
