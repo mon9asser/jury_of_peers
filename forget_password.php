@@ -19,6 +19,7 @@ if(session_id()=='')
         <link href="css/animate.css" rel="stylesheet">
         <link href="css/main.css" rel="stylesheet">
         <link href="css/logs.css" rel="stylesheet">
+        <link href="css/emu.css" rel="stylesheet">
     </head>
     <body>
         <!-- ------------------------------------------------- -->

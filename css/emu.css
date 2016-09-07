@@ -1,0 +1,68 @@
+img.emoticons {
+    display: inline-block ;
+    overflow: hidden;
+    height: 20px;
+    height: 20px;
+}
+img.emoticonsx {
+    display: inline-block ;
+    overflow: hidden;
+    height: 50px;
+    height: 50px; 
+}
+
+.mainAppContainer {
+    display: block ;
+    overflow: hidden ;
+    position: relative ;
+    width: 95%;
+     margin: 0px auto 20px auto ;
+}
+.mainAppContainer  h3 {
+    padding: 0px;
+    margin: 0px;
+    display: block ;
+    width: 100%;
+ } 
+ .AppStore {
+     display: inline-block ;
+     overflow: hidden ;
+     width: 125px;
+     height: 125px;
+      margin: 5px;
+     float: left;
+     margin-top: 15px;
+     border: 1px solid #dfdfdf;
+     position: relative ;
+     cursor: pointer ;
+ }
+ .imagAppContainer {
+     width: 100%;
+     display: block ;
+     overflow: hidden ;
+ }
+ .imagAppContainer {
+     position: absolute;
+     bottom: 0px;
+     left: 0px;
+     right: 0px;
+     padding: 3px;
+     text-align: center ;
+     padding-bottom: 10px;
+ }
+ .imagAppContainers {
+     position: relative;
+     bottom: 0px;
+     left: 0px;
+     right: 0px;
+     padding: 3px;
+     text-align: center ;
+ }
+ .imagAppContainer b {
+     color: #555
+ }
+ 
+.imgs {
+    width: 50%;
+    margin-top: 22px;
+}

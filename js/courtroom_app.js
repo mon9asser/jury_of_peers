@@ -1,5 +1,119 @@
 $(document).ready(function(){
    
+   
+   
+    window.like_dislike_pln= function( courtCode ,isLike ,type , thisElem    ){
+        
+            $.ajax({
+                  url : "controller/controller_vote_for_courtroom.php" , 
+                  type : "post" , 
+                  data : {
+                      'is_like' : isLike , 
+                      'courtCode' : courtCode ,
+                      'type' : type 
+                  } ,
+                  dataType: 'json',
+                  cache: false,
+                  beforeSend : function (){
+                      //class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"
+                       $(thisElem).children('i.iconstilsh').removeClass('fa-thumbs-o-up');
+                       $(thisElem).children('i.iconstilsh').addClass('fa-spinner fa-pulse fa-3x fa-fw margin-bottom');
+                  } ,
+                  success : function (respond){
+                      
+                          if($.trim(respond) == 1 ){
+                         $(thisElem).children('i.iconstilsh').addClass('fa-thumbs-o-up');
+                       $(thisElem).children('i.iconstilsh').removeClass('fa-spinner fa-pulse fa-3x fa-fw margin-bottom');
+                       
+                        $(thisElem).children('i.iconstilsh').css({
+                            background: 'floralwhite',
+                            border: '1px solid #dcdcdc',
+                            color: 'tomato'
+                        });
+                         $(thisElem).parent('li').next('li').children('a').children('.fa-thumbs-o-down').css({
+                            background: '#dcdcdc',
+                            border: '1px solid #dcdcdc',
+                            color: 'darkcyan'
+                        });
+                        }else {
+                            if(isLike == 1){
+                                $(thisElem).children('i.iconstilsh').addClass('fa-thumbs-o-up');
+                            $(thisElem).children('i.iconstilsh').removeClass('fa-spinner fa-pulse fa-3x fa-fw margin-bottom');
+                            }else {
+                                $(thisElem).children('i.iconstilsh').addClass('fa-thumbs-o-down');
+                                $(thisElem).children('i.iconstilsh').removeClass('fa-spinner fa-pulse fa-3x fa-fw margin-bottom');
+                            }
+                            
+                       
+                           $(thisElem).children('.fa-thumbs-o-down').css({
+                                background: '#dcdcdc',
+                                border: '1px solid #dcdcdc',
+                                color: 'darkcyan'
+                            }); 
+                        }
+                      
+             
+                  }
+          });  
+    }
+    
+    
+    
+     window.resizeComment = function (elem){
+                 var el = elem;
+              setTimeout(function(){
+                el.style.cssText = 'height:auto; padding:0';
+                // for box-sizing other than "content-box" use:
+                // el.style.cssText = '-moz-box-sizing:content-box';
+                el.style.cssText = 'height:' + el.scrollHeight + 'px';
+                el.style.lineHeight = "15px";
+              },0);
+            }
+     $('#judgeComment').keydown(function(e){
+         if(e.keyCode == 13 )
+            {
+                var note = $(this).val();
+                {
+                    var courtCode = $(this).attr('court-code');
+                    var evedenc = $(this).val();
+                   // alert(evedenc + courtCode);
+                     $.ajax({
+                        url : 'controller/controller_evidence_load_all.php' ,
+                        type : 'post' , 
+                        data : {'courtCode':courtCode ,'evedenc': evedenc , 'type' : 'cmt_add'} ,
+                        beforeSend : function (){
+                            //$().html ('<div id="floatingCirclesG"><div class="f_circleG" id="frotateG_01"></div><div class="f_circleG" id="frotateG_02"></div><div class="f_circleG" id="frotateG_03"></div><div class="f_circleG" id="frotateG_04"></div><div class="f_circleG" id="frotateG_05"></div><div class="f_circleG" id="frotateG_06"></div><div class="f_circleG" id="frotateG_07"></div><div class="f_circleG" id="frotateG_08"></div></div> Deleting');
+                        },
+                        success : function (response){
+                          var response =  $.trim(response) ;
+                           if(response == 1) 
+                           $('#judgeComment').val(null);
+                            
+                        }
+                        
+                    });
+                   return false ;
+                }
+            }
+     });    
+     
+     $('.evedSee').click(function(){
+         // alert(evedenc + courtCode);
+         var courtCode = $(this).attr('court-code');
+                     $.ajax({
+                        url : 'controller/controller_evidence_load_all.php' ,
+                        type : 'post' , 
+                        data : {'courtCode':courtCode,'type' : 'load'} ,
+                        beforeSend : function (){
+                             $('.evedSee').html ('<div id="floatingCirclesG"><div class="f_circleG" id="frotateG_01"></div><div class="f_circleG" id="frotateG_02"></div><div class="f_circleG" id="frotateG_03"></div><div class="f_circleG" id="frotateG_04"></div><div class="f_circleG" id="frotateG_05"></div><div class="f_circleG" id="frotateG_06"></div><div class="f_circleG" id="frotateG_07"></div><div class="f_circleG" id="frotateG_08"></div></div> Loading all comments');
+                        },
+                        success : function (response){
+                          $('.cmtOfjop').html(response);
+                        }
+                        
+                    });
+     }); 
+     
      $("#demo01").animatedModal();
      $('[data-toggle="tooltip"]').tooltip();
            
@@ -40,7 +154,8 @@ $(document).ready(function(){
           beforeSend : function (){
               $(_this).html ('<div id="floatingCirclesG"><div class="f_circleG" id="frotateG_01"></div><div class="f_circleG" id="frotateG_02"></div><div class="f_circleG" id="frotateG_03"></div><div class="f_circleG" id="frotateG_04"></div><div class="f_circleG" id="frotateG_05"></div><div class="f_circleG" id="frotateG_06"></div><div class="f_circleG" id="frotateG_07"></div><div class="f_circleG" id="frotateG_08"></div></div> Sending Request');
           },
-          success : function (){
+          success : function (dd){
+              console.log(dd)
               window.location.href ='courtroom' ;
           }
       });

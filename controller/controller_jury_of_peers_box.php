@@ -50,8 +50,8 @@ if(!isset($_POST['accType']))
                    return false ;
                }
                $type = 0 ; // PLN 
-               $pln= $courtInitApis->courtroom_init_check_exist(['plaintiff_id'=> $_SESSION['user_info']['user_id'] ,'courtroom_code'=>$courtCode ]);
-               $dfn= $courtInitApis->courtroom_init_check_exist(['defedant_id'=> $_SESSION['user_info']['user_id'] ,'courtroom_code'=>$courtCode ]);
+               $pln= $courtInitApis->courtroom_init_check_exist(['plaintiff_id'=> $_SESSION['user_info']['user_id'] ,'courtroom_code'=>$court_code ]);
+               $dfn= $courtInitApis->courtroom_init_check_exist(['defedant_id'=> $_SESSION['user_info']['user_id'] ,'courtroom_code'=>$court_code ]);
                if($pln != NULL )
                    $type = 0 ; 
                else if($dfn != NULL )

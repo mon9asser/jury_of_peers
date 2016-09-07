@@ -31,6 +31,15 @@ class user_get_more_pagination_package extends jury_of_peers_tbls {
     }
     
     
+     
+    public function search_about_friend ($text){
+       $loadMore = "WHERE u_name = '%".$text."%' OR f_name='%".$text."%' OR s_name='%".$text."%'";  
+       $get_apis = new main_get_app() ;
+        $getAll = $get_apis->get_all_rows($this->friend_system_get() , $loadMore) ; 
+        return $getAll  ;
+    }
+    
+    
     
     public function user_friend_invite ( $lastId , $limit , $userId){
         /*
@@ -41,13 +50,14 @@ class user_get_more_pagination_package extends jury_of_peers_tbls {
             } // $extractedArr .= ......
             */
          
-        
         $valuse = "(`id_sender`={$userId} OR `id_receiver`={$userId}) AND is_accepted=1" ;
          $loadMore = "WHERE `id` > {$lastId} AND {$valuse} GROUP BY id LIMIT {$limit}";
         $get_apis = new main_get_app() ;
         $getAll = $get_apis->get_all_rows($this->friend_system_get() , $loadMore) ; 
         return $getAll  ;
     }
+    
+   
 }
 
  /*

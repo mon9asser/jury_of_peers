@@ -1,0 +1,27 @@
+id_sender
+id_receiver
+app_type
+app_con_id
+is_seen
+timestamps
+
+				// php add done -- php count get -- js time check -- php update to have seen it-- php see all 
+view=>0					DONE	       DONE		 DONE
+friend_confirmed_request => 1			       DONE		 DONE
+comment_posts=>2				       DONE		 DONE
+
+post_in_my_profile=>4
+courtroom_init(request)=>5				       DONE		 DONE
+messages=>6					       DONE		 DONE
+like_dislike=>3					       DONE		 DONE
+courtroom_init(Accept)=>7				       DONE		 DONE
+friend_confirmed => 8
+
+judge_image = 9 
+judge_music = 10 
+judge_video = 11
+
+ $Content = "Accepted your judgement request";
+
+decline_friend(<?php echo $friendItem[$i]->id ; ?>,this);
+confirm_friend(<?php echo $friendItem[$i]->id ; ?>,this);

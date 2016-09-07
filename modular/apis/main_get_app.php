@@ -40,6 +40,41 @@ class main_get_app extends connections_db  {
      }
      
      
+      private function get_apps_sum ($tableName , $data = NULL){
+         // check if table exists in databases
+       $tbl_query = mysqli_query($this->open_connection(), "SHOW TABLES LIKE '{$tableName}'")   ;
+       $this->close_connection();
+         if(mysqli_num_rows($tbl_query  )  == 0)
+            {
+                echo "This table does not exist ... ";
+                return FALSE ;  
+            }
+          $qString = sprintf("SELECT SUM(review_number) AS rows_sum , COUNT(*) AS rows_count   FROM `{$tableName}` %s " , $data);
+        $query = mysqli_query($this->open_connection(), $qString );
+        $this->close_connection();
+         
+         $arrList = [];
+         $arrList[@count($arrList)] = mysqli_fetch_object ($query);
+       $this->close_connection();
+       return $arrList[0] ;
+     }
+     
+     
+     
+     
+     public function get_apps_sum_desc_reviews ($program_id , $groupType){
+       
+          $qString =  "SELECT *,COUNT(*) AS review_counter , SUM(review_number) AS sum_reviews FROM `reviews_rating` WHERE video_type= {$groupType} AND `program_type`={$program_id} group by `post_id` DESC ";
+        $query = mysqli_query($this->open_connection(), $qString );
+         
+         $arrList = [];
+         for($i=0; $i < mysqli_num_rows($query); $i++)
+         $arrList[@count($arrList)] = mysqli_fetch_object ($query);
+       $this->close_connection();
+       return $arrList ;
+     }
+     
+     
      
      
      private function get_apps_desc ($tableName , $data = NULL){
@@ -150,9 +185,19 @@ class main_get_app extends connections_db  {
          return $this->get_apps($tableName, $data);
      }
      
+      public function get_all_rows_sum ($tableName , $data = NULL){
+         return $this->get_apps_sum($tableName, $data);
+     }
+     
      public function get_all_rows_desc ($tableName , $data = NULL){
          return $this->get_apps_desc($tableName, $data);
      } 
 }
 
+/*
+$vv = new main_get_app();
+$pp = $vv->get_apps_sum_desc_reviews(1);
+echo "<pre>";
+print_r($pp);
+echo "</pre>";*/
 ?>

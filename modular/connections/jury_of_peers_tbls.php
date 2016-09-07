@@ -16,9 +16,14 @@ if(is_file($conx_file ))    require_once $conx_file  ;
 
 class jury_of_peers_tbls extends connections_db {
     
-    private static $text_posts_app = 'text_posts';
+   private static $text_posts_app = 'text_posts';
    protected function text_posts_get (){
         return jury_of_peers_tbls::$text_posts_app;
+   }
+   
+   private static $application_data_app = 'app_files';
+   protected function apps_posts_get (){
+        return jury_of_peers_tbls::$application_data_app;
    }
    
    private static $user_app = 'user_apps';
@@ -166,7 +171,7 @@ class jury_of_peers_tbls extends connections_db {
    
     private static $courtroom_winned = 'courtroom_winned';
    protected function  courtroom_winned_get (){
-        return jury_of_peers_tbls::$courtroom_winnedt;
+        return jury_of_peers_tbls::$courtroom_winned;
    }
    
    

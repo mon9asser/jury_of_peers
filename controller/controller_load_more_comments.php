@@ -44,7 +44,8 @@ if(session_id()=='')
    <b><?php echo $fullName;?></b>
    <div class="clearFix"></div>
    <span>
-   <?php echo $commentInPosts[$cmt]->comment_contents;  ?>
+        <?php $app = new apps(); ?>
+                      <?php echo $app->emoticonsProvider($commentInPosts[$cmt]->comment_contents) ; ?>
    <font class="text-right">
    <?php
    $GeneralApis = new apps();

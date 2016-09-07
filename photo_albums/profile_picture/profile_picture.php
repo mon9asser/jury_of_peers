@@ -1,12 +1,12 @@
 <?php
-$profilPicFile = dirname(__FILE__)."/../../../modular/applications/profile_picture_applications.php";
+$profilPicFile = dirname(__FILE__)."/../../modular/autoload_apps.php";
 if(is_file($profilPicFile)) require_once $profilPicFile ;
+ 
+  
+  ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-$userAppFile = dirname(__FILE__)."/../../../modular/applications/user_applications.php";
-if(is_file($userAppFile)) require_once $userAppFile ;
-
-
-    
 
 
 function checkProfileExists ($userId) {
@@ -42,6 +42,36 @@ function checkProfileExists ($userId) {
 
 
 
+
+function home_profile_pics ($userId) {
+    
+    $profile_pic_apis = new profile_picture_applications();  
+    $profilePicture = $profile_pic_apis->profile_pictureg_get_by_values([
+        'user_id'=>$userId  
+        ],'and');
+
+    if(count($profilePicture) != 0 )
+   {
+       $profilePict = $profile_pic_apis->profile_pictureg_get_by_values([
+        'user_id'=>$userId  
+        ],'and');
+       
+        echo $profilePict[count($profilePict)-1]->photo_src ;
+   } else {
+       // check this user female or man
+       $userAPp = new user_applications() ;
+       $userGender = $userAPp->user_application_check_exist([
+           'id'=>$userId
+       ]) ;
+       
+       if ($userGender->gender == 0 )
+           return  "man_avatar.jpg" ;
+           else 
+               return  "female_avatar.jpg" ;
+   }
+}
+
+
 function get_profile_picture ($userId) {
     
     $profile_pic_apis = new profile_picture_applications();  
@@ -72,6 +102,6 @@ function get_profile_picture ($userId) {
 }
   
 
- 
+//home_profile_pics(1);
 
 ?>

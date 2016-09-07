@@ -35,6 +35,7 @@ class video_posts_applications extends jury_of_peers_tbls {
                $getApps = new main_get_app();
        return $getApps->get_data_according_to_array($this->table(), $value_args, $type, $operatorType= NULL); 
     }
+    //SELECT * , SUM(review_number) AS SUMING FROM `reviews_rating` WHERE `program_type`=1 group by `post_id` DESC
     
     /******************************************************************************************/
     /******************************** Add Functions *******************************************/

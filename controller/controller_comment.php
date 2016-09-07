@@ -5,9 +5,9 @@ if(session_id()=='')
 
 if(!isset($_POST['postId']) and !isset($_POST['comment-text']))
     return false ;
+   
 
-
-$comment_system_file = dirname(__FILE__)."/../modular/applications/comments_application.php";
+$comment_system_file = dirname(__FILE__)."/../modular/autoload_apps.php";
   if(is_file($comment_system_file)) require_once $comment_system_file ;  
   
   $comment_apis = new comments_applications();
@@ -16,6 +16,13 @@ $comment_system_file = dirname(__FILE__)."/../modular/applications/comments_appl
       'post_id'=>$_POST['postId'],
       'comment_contents'=>$_POST['comment-text'] ,
       'timestamps'=>time()
+  ]);
+  
+  $postApis = new user_posts_applications();
+  $postApis->user_posts_update_fields([
+      'id'=>$_POST['postId']
+  ], [
+      'timeupdates'=>  time()
   ]);
 ?>
 

@@ -47,9 +47,20 @@ if (session_id()=='')
        'time_estimated'=>  trim($time_courtroom) ,
        'courtroom_code' => trim($code)
     ]); 
+   
+   
+   $notifiCationApis = new notification_system_applications() ;
+   $ff = $notifiCationApis->notification_system_add_new_field([
+       'id_sender'=>trim($_SESSION['user_info']['user_id']) ,
+       'id_receiver'=>trim($user_id) ,
+       'app_type'=> 5 ,
+       'app_con_id'=> $code ,
+       'timestamps'=> time()
+    ]);
+   if($ff)
    echo trim($code );
    
-   
+    
    session_write_close() ;
    ob_end_flush() ;
 ?>

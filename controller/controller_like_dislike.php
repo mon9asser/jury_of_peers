@@ -3,7 +3,7 @@ ob_start();
 if(session_id()=='')
 session_start() ;
  
- $file_like = dirname(__FILE__)."/../modular/applications/user_like_dislikes.php";
+ $file_like = dirname(__FILE__)."/../modular/autoload_apps.php";
  if(is_file($file_like )) require_once  $file_like ;
 
  

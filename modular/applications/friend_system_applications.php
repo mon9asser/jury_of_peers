@@ -67,7 +67,8 @@ class friend_system_applications extends jury_of_peers_tbls {
     }
      
 }   
-   
- 
-
+/* 
+ $app = new friend_system_applications() ;
+ $app ->friend_system_update_fields(['id'=>3],['is_seen'=>1]);
+*/
 ?>

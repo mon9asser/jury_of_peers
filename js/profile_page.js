@@ -1,68 +1,9 @@
 $(document).ready(function (){
     
-    window.courtroomInit = function (postId , userId , elem){
-        var titleCourtroom = $('#title-courtroom') ;
-        var causeCourtroom = $('#cause-courtroom') ;
-        var settlementCourtroom = $('#settlement-courtroom') ;
-        var time_estimated = $('#time-courtroom');
-        
-        if(titleCourtroom.val() == '')
-            { 
-                titleCourtroom.css('border-color','red');
-                return false ;
-            }else {
-                titleCourtroom.css('border-color','#dfdfdf');
-            }
-            
-         if(causeCourtroom.val() == '')
-            {
-                causeCourtroom.css('border-color','red');
-                return false ;
-            }else {
-                 causeCourtroom.css('border-color','#dfdfdf');
-            }
-            
-            
-             if(settlementCourtroom.val() == '')
-                {
-                   settlementCourtroom.css('border-color','red');
-                   return false ;
-                }else {
-                     settlementCourtroom.css('border-color','#dfdfdf');
-                }
-            
-            
-          if(time_estimated.val() == '')
-                {
-                   time_estimated.css('border-color','red');
-                   return false ;
-                }else {
-                     time_estimated.css('border-color','#dfdfdf');
-                }
-            
-             
-            $.ajax({
-                url : 'controller/controller_initcourtroom.php',
-                type : "post" ,
-                data : {
-                    'user-id':userId,
-                    'post-id':postId,
-                    'title-courtroom':titleCourtroom.val(),
-                    'cause-courtroom':causeCourtroom.val(),
-                    'settlement-courtroom':settlementCourtroom.val(), 
-                    'time-courtroom':time_estimated.val()
-                } ,
-                beforeSend : function (){ 
-                      $(elem).html ('<div id="floatingCirclesG"><div class="f_circleG" id="frotateG_01"></div><div class="f_circleG" id="frotateG_02"></div><div class="f_circleG" id="frotateG_03"></div><div class="f_circleG" id="frotateG_04"></div><div class="f_circleG" id="frotateG_05"></div><div class="f_circleG" id="frotateG_06"></div><div class="f_circleG" id="frotateG_07"></div><div class="f_circleG" id="frotateG_08"></div></div>Sending request');
-               },
-               success : function (da){
-                    $(elem).html ('Send Request');
-                    window.location.href = "courtroom?code="+$.trim(da);
-                  }
-             });
-             
-     }
+    
     // add new user ... 
+    
+    /*
     window.add_friend = function (id,elem ,returnd){
          var userId = id  ;
                   var parentOfcurrElement = $(elem);
@@ -129,7 +70,7 @@ $(document).ready(function (){
                     });
     }
     
-    
+    */
     
     window.commentIn = function (ev , thisdata , postId){
              if(ev.keyCode == 13 )
@@ -220,20 +161,20 @@ $(document).ready(function (){
           
           
           
-          /****************************************************************/
-          /****************  Auto height the textarea   *******************/
-          /****************************************************************/
-              var textarea = document.querySelector('textarea');
-             textarea.addEventListener('keydown', autosize);
-             function autosize(){
-              var el = this;
-              setTimeout(function(){
-                el.style.cssText = 'height:auto; padding:0';
-                // for box-sizing other than "content-box" use:
-                // el.style.cssText = '-moz-box-sizing:content-box';
-                el.style.cssText = 'height:' + el.scrollHeight + 'px';
-              },0);
-            }
+			  /****************************************************************/
+			  /****************  Auto height the textarea   *******************/
+			  /****************************************************************/
+				  var textarea = document.querySelector('textarea');
+				 textarea.addEventListener('keydown', autosize);
+				 function autosize(){
+				  var el = this;
+				  setTimeout(function(){
+					el.style.cssText = 'height:auto; padding:0';
+					// for box-sizing other than "content-box" use:
+					// el.style.cssText = '-moz-box-sizing:content-box';
+					el.style.cssText = 'height:' + el.scrollHeight + 'px';
+				  },0);
+				}
             
             
             window.resizeComment = function (elem){
@@ -313,7 +254,8 @@ $(document).ready(function (){
               ajax.addEventListener("load", function (event){ 
                  // alert($.trim(event.target.responseText));
                     if($.trim(event.target.responseText) == 1 )
-                      { 
+                      { $('.sharPost').attr('id', 'butn-add-post');
+                       $('.sharPost').attr('onclick', 'share_status()');
                           // show image transparent after uploaded
                           $('.img-loadd').css({
                               'opacity' : '0.8'
@@ -352,7 +294,7 @@ $(document).ready(function (){
                          var  url = file.urn || file.name;
                           ID3.loadTags(url, function() {
                             var tags = ID3.getAllTags(url);
-                                                              
+                                                          
                                                               /* 
                                                                document.getElementById('title').textContent = tags.title || "";
                                                                document.getElementById('artist').textContent = tags.artist || "";
@@ -397,7 +339,7 @@ $(document).ready(function (){
                                                            formdata.append("artisName",artisName );
                                                            formdata.append("songTitle",songTitle);
                                                              formdata.append("base64",base64);
-
+ 
                                                            var ajax = new XMLHttpRequest();
                                                             // inprogress bar 
                                                          ajax.upload.addEventListener("progress", function (event){
@@ -408,6 +350,8 @@ $(document).ready(function (){
                                                           } , false);
                                                           // image upload completed 
                                                         ajax.addEventListener("load", function (event){ 
+                                                            $('.sharPost').attr('id', 'butn-add-post');
+                       $('.sharPost').attr('onclick', 'share_status()');
                                                              console.log(event.target.responseText);
                                                            // alert($.trim(event.target.responseText));
                                                               if($.trim(event.target.responseText) == 1 )
@@ -416,12 +360,12 @@ $(document).ready(function (){
                                                                     $('.fileprogress').attr('isCompleted','1')
                                                                     // allow post button active 
                                                                      $('#butn-add-post').removeClass('disabled');
-                                                                }else {
+                                                                }/*else {
                                                                     $('.file-included').html("<span style='color:red;'>"+$.trim(event.target.responseText)+"</span>")  ;
                                                                     $('.file-img-upload').val(null);
                                                                     $('.file-music-upload').val(null);
                                                                     $('.file-video-upload').val(null);
-                                                                 }
+                                                                 }*/
 
 
 
@@ -480,6 +424,9 @@ $(document).ready(function (){
                         } , false);
                         // image upload completed 
                         ajax.addEventListener("load", function (event){ 
+                            $('.sharPost').attr('id', 'butn-add-post');
+                       $('.sharPost').attr('onclick', 'share_status()');
+                        
                         // alert($.trim(event.target.responseText));
                         if($.trim(event.target.responseText) == 1 )
                         { 
@@ -588,21 +535,78 @@ $(document).ready(function (){
                if(postedWith == '' )
                    {
                        if(paragraph != '' )
-                           {    
-                               $.ajax({
-                                   url : 'controller/controller_timeline_status.php' ,
-                                   type : 'post' ,
-                                   data : {
+                           {
+                               
+                            
+                            
+                            // case texts only with links 
+                            
+                            
+                            
+                                var url = '';
+                                var data ;
+                               // links
+                             if(new RegExp("([a-zA-Z0-9]+://)?([a-zA-Z0-9_]+:[a-zA-Z0-9_]+@)?([a-zA-Z0-9.-]+\\.[A-Za-z]{2,4})(:[0-9]+)?(/.*)?").test(paragraph)) {
+                                url =    'controller/controller_extract_links_todb.php' ;
+                                data = {
+                                    'accessPremission' :accessPremission  , 
+                                   'status' : paragraph  ,
+                                   'accessType' : 'share_atachments' , 
+                                   'attachmentType' : postedWith ,
+                                    'currentProfileId': id_user  ,
+                                    'url-links' : paragraph
+                                   } 
+                                }else { // text only 
+                                     url = 'controller/controller_timeline_status.php'
+                                    data =  {
                                        'is_shared' : '1' ,
                                        'accessPremission' :accessPremission  , 
                                        'status' : paragraph  ,
                                        'accessType' : 'share_status',
                                        'currentProfileId': id_user
-                                   } ,
+                                   }
+                                }
+                                    
+                                    
+                                    
+                                    
+                               
+                                
+                                
+                               $.ajax({
+                                   url : url,
+                                   type : 'post' ,
+                                   data : data ,
                                    success : function (responsed){
-                                      
+                                       console.log(responsed);
+                                      $('#loadPosts').fadeOut();
+                                             $.ajax({
+                                                url : 'controller/controller_last_post.php' ,
+                                                type : 'post' ,
+                                                data : {
+                                                    'userId':id_user
+                                                } ,
+                                                 success : function (responsed){
+                                                   $('#loadPosts').fadeOut();
+                                                   $('.sharPost').children('i.iconstilshss').addClass('fa-share-alt');
+                                                    $('.sharPost').children('i.iconstilshss').removeClass('fa-spinner fa-pulse fa-3x fa-fw margin-bottom');
+
+                                                   $(responsed).insertAfter('#loadPosts');
+                                                    $('.asas').addClass('animated fadeIn');
+                                                }
+                                            });
+                               
                                    }
                                });
+                               
+                               
+                               
+                               
+                               
+                               
+                               
+                               
+                               
                            }
                            
                            
@@ -624,7 +628,12 @@ $(document).ready(function (){
                     if(paragraph != '' )
                          statusParagraph = paragraph ;
                     
-                    $.ajax({
+                    
+                    
+                    
+                    
+                    
+                     $.ajax({
                          url : 'controller/controller_timeline_status.php' ,
                          type : 'post' ,
                          data : {
@@ -633,13 +642,34 @@ $(document).ready(function (){
                          'status' : statusParagraph  ,
                          'accessType' : 'share_atachments' , 
                          'attachmentType' : postedWith ,
-                          'currentProfileId': id_user
+                          'currentProfileId': id_user  
                          } ,
                          success : function (responsed){
-                         
+                             $('#loadPosts').fadeOut();
+                                             $.ajax({
+                                                url : 'controller/controller_last_post.php' ,
+                                                type : 'post' ,
+                                                data : {
+                                                    'userId':id_user
+                                                } ,
+                                                 success : function (responsed){
+                                                   $('#loadPosts').fadeOut();
+                                                   $('.sharPost').children('i.iconstilshss').addClass('fa-share-alt');
+                                                    $('.sharPost').children('i.iconstilshss').removeClass('fa-spinner fa-pulse fa-3x fa-fw margin-bottom');
+
+                                                   $(responsed).insertAfter('#loadPosts');
+                                                  
+                                                }
+                                            });  
                          } 
                     });
+                       
                     
+                    
+                    
+                    
+                    
+                   // $('.file-link-responsed').html(null);
                     $('#text-area').val(null);    
                     $('.file-img-upload').val(null);
                     $('.file-music-upload').val(null);
@@ -653,9 +683,15 @@ $(document).ready(function (){
            
            
            
-            $('#butn-add-post').click(function(){
+           window.share_status = function(){
+               
+               $('#loadPosts').fadeIn();
+                $('.sharPost').children('i.iconstilshss').removeClass('fa-share-alt');
+                $('.sharPost').children('i.iconstilshss').addClass('fa-spinner fa-pulse fa-3x fa-fw margin-bottom');
+               
                 var texts = $('#text-area').val() ;
                 var accessPremissions = $('#accessPrem').val() ;
+                $('.file-link-responsed').html(null);
                  // check if is there an image 
                  if($('.file-img-upload').val() != '' ){
                           postStatus(texts,accessPremissions,'img',$('#file-img-upload').attr('user-id'));
@@ -666,7 +702,9 @@ $(document).ready(function (){
                      }else if ($('.file-video-upload').val() != ''){
                           postStatus(texts,accessPremissions,'vid',$('#file-img-upload').attr('user-id'));
                         return false ;
-                     } 
+                     }/*else if ($.trim($('.file-link-responsed').html().length) != 0 ){
+                         postStatus(texts,accessPremissions,'link',$('#file-img-upload').attr('user-id'));
+                     } */
                      postStatus(texts,accessPremissions,'',$('#file-img-upload').attr('user-id'));  
-                  });
+                  } 
 });

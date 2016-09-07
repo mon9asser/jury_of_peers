@@ -20,7 +20,7 @@
            
          <link href="slim/slim.min.css" rel="stylesheet"> 
          <link href="css/complete.css" rel="stylesheet"> 
-         
+         <link href="css/emu.css" rel="stylesheet">
           <style>
                 .slim {
                   width: 400px;
@@ -59,7 +59,7 @@
          <![endif]-->
          
     </head>
-    <body>
+    <body onload="notifications();">
         <!-- --------------------------------------- -->
         <!-- ------      Header      --------------- -->
         <!-- --------------------------------------- -->

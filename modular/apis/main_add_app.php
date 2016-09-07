@@ -33,11 +33,11 @@ class main_add_app extends connections_db  {
                  $index_fields .= "".$key."";
                 if($i != (count($fields)-1))
                 $index_fields  .= " , ";
-           $i++;
+           $i++; 
       }
        ini_set('mysql.connect_timeout', 300);
         ini_set('default_socket_timeout', 300); 
-     $queryString = "INSERT INTO `{$tableName}` ({$index_fields}) VALUE({$value_fields})";
+      $queryString = "INSERT INTO `{$tableName}` ({$index_fields}) VALUE({$value_fields})";
      $Qresult = mysqli_query($this->open_connection() , $queryString );
      $this->close_connection();
      return $Qresult ;

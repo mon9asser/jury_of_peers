@@ -1,8 +1,6 @@
-<?php   
-  $file = dirname(__FILE__)."/access_modifiers/protected_access.php";
+<?php
+   $file = dirname(__FILE__)."/access_modifiers/protected_access.php";
   if(is_file($file)) require_once $file  ;
- 
-  
   
    $filed = dirname(__FILE__)."/modular/autoload_apps.php";
   if(is_file($filed)) require_once $filed  ;
@@ -20,8 +18,22 @@ error_reporting(E_ALL);
   
   $user_apis = new user_applications() ;
   $usrInfo = $user_apis ->user_application_check_exist(['u_name'=>$user_name]);
-  if($usrInfo != NULL )
-  {     
+  if($usrInfo == NULL )
+  {
+      header('location: undefine');
+      exit(1);
+  }
+      
+      if($user_name != $_SESSION['user_info']['user_name'] ) {
+          // visit my profile 
+          $notificaiton_apis = new notification_system_applications();
+         $ntfs = $notificaiton_apis->notification_system_add_new_field([
+              'id_sender'=>$_SESSION['user_info']['user_id'],
+              'id_receiver'=>$usrInfo->id ,
+               'app_type'=>0,
+               'timestamps'=>  time()
+          ]);
+       }
       /*
       $genral_setting_apis = new general_settings_applications() ;
      $work_info =  $genral_setting_apis ->general_settings_check_exist(['user_id'=>$usrInfo->id],'and');
@@ -33,641 +45,911 @@ error_reporting(E_ALL);
       $appss = $app_apis->load_posts_according_to_args( $last_id ,$limit , $me_or_asAvisitor );
        
       
-      return false ;*/
+      return false ;*/  
       ?>
       <!DOCTYPE html> 
 <html>
     <head>
-        <title><?php echo $usrInfo->f_name ." ".$usrInfo->s_name;?></title>
+        <title>User profile</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href='https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700,700italic&subset=latin-ext' rel='stylesheet' type='text/css'>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/animate.css" rel="stylesheet">
-        <link href="css/header.css" rel="stylesheet">
-        <link rel="stylesheet" href="css/fontello.css"> 
-        <link rel="stylesheet" href="css/font-awesome.css">
-        <link href="css/profile.css" rel="stylesheet">
-        <script type="text/javascript" src="js/id3-minimized.js"></script>    
-       
-	<link rel="stylesheet" type="text/css" href="css/component.css" />
-	<script src="js/modernizr.custom.js"></script>
-        <!--[if IE 7]><link rel="stylesheet" href="css/fontello-ie7.css"><![endif]-->
-        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
-        <style>
-        .frt.fa {
-        margin-right: 5px;
-        }
-        </style>
-    </head>
-    <body>
+         <!-- Fonts -->
+         <link href='https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700,700italic&subset=latin-ext' rel='stylesheet' type='text/css'>
+         <!-- Bootstrap -->
+         <link href="css/bootstrap.min.css" rel="stylesheet">
+         <link href="css/s_music.css"rel="stylesheet" type="text/css" />
         
-        <!-- --------------------------------------- -->
-                <!-- ------      Header      --------------- -->
-                <!-- --------------------------------------- -->
-                 
-                 <?php 
-                    $headerFile = dirname(__FILE__)."/includes/header.php";
-                    if(is_file($headerFile ))  require_once $headerFile ;
-                ?>
-                
-                <!-- --------------------------------------- -->
-                <!-- ------      Container   --------------- -->
-                <!-- --------------------------------------- -->
-                <section class="container-fluid">
-                    <div class="row">
-                        <!-- --------------------------------------- -->
-                        <!-- ------      Sidebar   --------------- -->
-                        <!-- --------------------------------------- -->
-                        <div class="col-xs-12 col-md-2 sidebar-outer">
-                            <?php 
-                                $sidebarFile = dirname(__FILE__)."/includes/sidebar.php";
-                                if(is_file($sidebarFile ))  require_once $sidebarFile ;
-                            ?>
-                        </div>
-                        <div class="col-xs-12 col-md-8 profile-content">
-                            <div class="post-controls">
-                                <div class="left-part">
-                                    <div class="intro profile-pic-con">
-                                         <div class="img-block" style="float: none;background-image:  url(photo_albums/profile_picture/<?php echo checkProfileExists($usrInfo->id);?>);background-size:cover; background-position:100% 100%;border: 5px solid #fff;margin: 0px auto; ">
-                                             <i class="fa fa-camera ppimage-"></i>
-                                         </div>
-                                    </div>
-                                </div>
-                                <div class="right-part">
-                                    <div class="profile-title">
-                                        <ul class="men-frds">
-                                            <li style="float: left ;">
-                                                <h3>
-                                                   <?php echo $usrInfo->f_name . " " . $usrInfo->s_name ; ?> 
-                                                </h3>
-                                            </li>
-                                            <?php
-                                                if($user_name != $_SESSION['user_info']['user_name'])
-                                                {
-                                                    
-                                                    $friends_apis = new friend_system_applications() ;
-                                                   $u_1 = $friends_apis ->friend_system_check_exist([
-                                                        'id_receiver'=>$usrInfo->id,
-                                                        'id_sender'=>$_SESSION['user_info']['user_id']
-                                                    ]);
-                                                    
-                                                   $u_2 = $friends_apis ->friend_system_check_exist([
-                                                        'id_sender'=>$usrInfo->id,
-                                                        'id_receiver'=>$_SESSION['user_info']['user_id']
-                                                    ]) ;
-                                                        
-                                                        $user_adds = NULL ;
-                                                       if($u_2 != NULL )
-                                                        $user_adds = $u_2  ;
-                                                       else if ($u_1 != NULL )
-                                                           $user_adds = $u_1 ;
-                                                       else 
-                                                           $user_adds = NULL ;
-                                                     if($user_adds != NULL ){
-                                                         $frd_id = $user_adds->id ;
-                                                       switch ($user_adds->is_accepted )
-                                                        {
-                                                           case 1 : //friend
-                                                                 ?>
-                                                        <li><span onclick="return delete_friend(<?php echo $frd_id ?>,this , '<?php echo $user_name?>');" style="background: white;color: #222; border:1px solid #999;" class="frdadds rebase"><i class="fontello icon-user-delete fa-frds"></i>Delete Friend</span> </li>
+         <link href="css/simple-slider.css" rel="stylesheet" type="text/css" />
+         <link href="css/simple-slider-volume.css" rel="stylesheet" type="text/css" />  
+         
+         
+         <!--Stylesheets-->
+	<link href="css/jquery.filer.css" type="text/css" rel="stylesheet" />
+	<link href="css/themes/jquery.filer-dragdropbox-theme.css" type="text/css" rel="stylesheet" />
 
-                                                                 <?php
-                                                                break; 
-                                                            case 0 : // pending
-                                                                 ?>
-                                                        <li><span onclick="return delete_friend(<?php echo $frd_id ?>,this , '<?php echo $user_name?>');" style="background: white;color: #222; border:1px solid #999;" class="frdadds rebase"><i class="fontello icon-user-delete-outline fa-frds"></i>Decline Friend Request</span> </li>
-                                                                  <?php
-                                                                break;   
-                                                          }}else {
-                                                              ?>
-                                                        <li><span onclick="return add_friend(<?php echo $usrInfo->id ; ?>,this, '<?php echo $user_name ?>');"class="frdadds rebase"><i class="fontello icon-user-6 fa-frds"></i>Add Friend</span></li>
-                                                              <?php
-                                                          } 
-                                                   ?>
-                                                        <li><span class="btns msg rebase"><i class="fa fa-comments-o fa-frds"></i>Message</span></li>
-                                                   <?php
+	
+	<!--[if IE]>
+          <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        
+         <link href="css/animate.css" rel="stylesheet">
+         <link href="css/header.css" rel="stylesheet">
+         <link rel="stylesheet" href="css/font-awesome.css">
+         <link rel="stylesheet" href="css/jquery.raty.css">
+         <link href="css/profile.css" rel="stylesheet">
+         <link rel="stylesheet" href="css/fontello.css"> 
+          <link href="css/music.css" rel="stylesheet">
+         <link href="scss/loadincss.css" rel="stylesheet">
+         <link rel="stylesheet" href="scss/dfddfdf.css"> 
+         <link href="css/emu.css" rel="stylesheet">
+         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+         <script src="assets/js/jquery-1.11.0.min.js"></script>
+        
+         
+         
+         
+         
+ 	
+
+	<!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
+        
+          <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+         <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+         <![endif]-->
+    </head>
+    <body onload="notifications();">
+         <!-- --------------------------------------------------------------- -->
+        <!-- ---------------------      Header      ------------------------ -->
+        <!-- --------------------------------------------------------------- -->
+         <?php 
+            $headerFile = dirname(__FILE__)."/includes/header.php";
+            if(is_file($headerFile ))  require_once $headerFile ;
+        ?>
+        
+        
+        
+        
+        <!-- End header banner here -->
+        <section style="min-height: 800px;" class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12 col-md-2 sidebar-outer">
+                    <?php 
+                        $sidebarFile = dirname(__FILE__)."/includes/sidebar.php";
+                        if(is_file($sidebarFile ))  require_once $sidebarFile ;
+                    ?>
+                </div>
+                <div id="mortPostAndStories" class="col-xs-12 col-md-5 profile-content">
+                    <div id="mainRecentlyStoriess" class="homePostContainer ldMore">
+                        <center>
+                            <b>
+                               Recent Stories
+                            </b>                        </center>
+                    </div>
+                    <!-- Comments here -->
+                     <?php
+
+                     $lastTime = 0 ;
+                       $pagination_Apis = new user_get_more_pagination_package_pst();
+                       $apps = new apps();
+                       $profilePageContents = $pagination_Apis->load_posts_according_to_args(0, 3 ,$usrInfo->id);
+                     ?>
+                    <?php  
+                                          //  print_r($profilePageContents);
+                        ?>
+                    <?php
+                   
+                      //  echo "<pre>";
+                       // print count($profilePageContents);
+                       //  echo "</pre>";
+                    ?>
+                    
+                    <div id="loadPosts" style="display: none ;" class="homePostContainer">
+                        <center>
+                               <div class="cssload-jumping"><span></span><span></span><span></span><span></span><span></span></div>
+                         </center>
+                    </div>
+                    <?php
+                                     
+                        if(is_array($profilePageContents)){
+                            
+                    ?>
+                   
+                    <div class="mstories">
+                        
+                        <?php for($i=0; $i<count($profilePageContents);$i++){ ?>
+                        
+                         
+                        
+                        <div style="" class="postContainer">
+                        
+                            <ul style="top: 3%;" class="acc">
+                            
+                             <?php
+                            $judgeType = 'txtOnly' ;
+                                switch ($profilePageContents[$i]->post_type_num){
+                                    case  '' :  // TEXTS
+                                         $judgeType = 808;
+                                        break ;
+                                    case  0 :   // IMAGES - PHOTOS
+                                         $judgeType = 22;
+                                        break ;
+                                    case  1 : // Music
+                                         $judgeType = 1;
+                                        break ;
+                                    case  2 : // Video
+                                         $judgeType =2 ;
+                                        break ;
+                                    case  3 :
+                                         $judgeType = 3;
+                                        break ;
+                                   case  4:
+                                         $judgeType = 4;
+                                        break ;
+                                   case  5 :
+                                         $judgeType = 5;
+                                        break ;
+                                  case  6 :
+                                         $judgeType = 6;
+                                        break ;
+                                  case  7 :
+                                         $judgeType = 7;
+                                        break ;
+                                }
+                            ?>
+                             
+                            <?php
+                                if($profilePageContents[$i]->posted_by_id == $_SESSION['user_info']['user_id']){
+                                 ?>
+                                        <li data-toggle="tooltip" data-placement="left" title="Delete">
+                                            <a onclick="delete_post(<?php echo $profilePageContents[$i]->id;?> , this);">
+                                               <i style=" " class="fa fa-remove iconstilsh"></i>
+                                           </a>
+                                       </li>
+                                  <?php   
+                                }
+                            ?>
+                            
+                            <li data-toggle="tooltip" data-placement="left" title="Comments">
+                                <a onclick="return loadComments('comment_no_<?php echo $profilePageContents[$i]->id;?>',<?php echo $profilePageContents[$i]->id;?>,this);" class="commentIcon_<?php echo $profilePageContents[$i]->id;?>">
+                                    <i class="fa fa-comment iconstilsh"></i>
+                                </a>
+                            </li>
+                            <li data-toggle="tooltip" data-placement="left" title="Like">
+                                <?php
+                                $likes_dislikes= new user_like_dislikes_applications();
+                                $islikeSys = $likes_dislikes->user_like_dislikes_check_exist(['liked_by_userid'=>$_SESSION['user_info']['user_id'],'post_id'=>$profilePageContents[$i]->id]);
+                                ?>
+                                <a onclick="like_dislike1(<?php echo $profilePageContents[$i]->id;?> , 1 , this);">
+                                    <i style="
+                                        <?php
+                                        if($islikeSys != NULL ){
+                                            if($islikeSys->is_liked == 1){
+                                                echo "
+                                                background: floralwhite ;
+                                                border: 1px solid #dcdcdc ;
+                                                color: tomato ;
+                                                " ;
+                                            }
+                                        }
+                                       ?>
+                                       " class="fa fa-thumbs-o-up iconstilsh"></i>
+                                </a>
+                            </li>
+                            <li data-toggle="tooltip" data-placement="left" title="Dislike">
+                                <a onclick="like_dislike2(<?php echo $profilePageContents[$i]->id;?> , 0 , this);">
+                                    <i style="
+                                       <?php
+                                        if($islikeSys != NULL ){
+                                            if($islikeSys->is_liked == 0){
+                                                echo "
+                                                background: floralwhite ;
+                                                border: 1px solid #dcdcdc ;
+                                                color: tomato ;
+                                                " ;
+                                            }
+                                        }
+                                       ?>
+                                       " class="fa fa-thumbs-o-down iconstilsh"></i>
+                                </a>
+                            </li>
+                           <?php if ($_SESSION['user_info']['user_id'] != $profilePageContents[$i]->posted_by_id){ ?>
+                            <li data-toggle="tooltip" data-placement="left" title="Judge">
+                                 <a
+                                     is_isset='0' onclick="<?php
+                                        if ($judgeType == 808){
+                                             echo "judge_this_story(".$profilePageContents[$i]->id.",'homePostContainer".$profilePageContents[$i]->id."',".$judgeType.",this)";
+                                        }else if($judgeType == 1 ){ // music
+                                            echo "window.location.href='album_music?code=".$profilePageContents[$i]->post_serial_id ."'";
+                                        }else if ($judgeType == 2 ) { // video
+                                             echo "window.location.href='video_judge?id=".$profilePageContents[$i]->video_id ."'";
+                                        }else if ($judgeType == 22){
+                                               echo "judge_this_story(".$profilePageContents[$i]->id.",'homePostContainer".$profilePageContents[$i]->id."',".$judgeType.",this)";
+                                        }
+                                             
+                                    ?>" class="">
+                                    <i style="background-image: url(images/hconstitutional.png);" class="iconstilsh disputs dyt"></i>
+                                </a>
+                            </li>
+                            <?php } ?>
+                        </ul>
+                        
+                         
+                            <div style="position: relative;" id="homePostContainer<?php echo $profilePageContents[$i]->id;?>" class="homePostContainer">
+                               
+        
+                            
+                            
+                            
+                                
+                                    
+                            
+                            
+                            
+                                
+                        
+                        
+                        
+                            
+                        
+                        
+                            
+                                    <!-- Start POST -->
+                                <div class="userProfileInfo">
+                                    <a class="gootoProfil" href="http://www.juryofpeers.tv/?user=<?php echo $profilePageContents[$i]->u_name ;?>">
+                                    <div class="user-image headerimage" style="background-image: url(photo_albums/profile_picture/<?php echo get_profile_picture($profilePageContents[$i]->posted_by_id); ?>);"></div>
+                                    <div class="user-posts-name">
+                                        <b> 
+
+                                            <?php echo $profilePageContents[$i]->u_name    ; ?>
+
+                                            <?php
+                                                if($profilePageContents[$i]->post_type_num == 3 )
+                                                    {   
+                                                        $gender = NULL ; 
+                                                        if($profilePageContents[$i]->gender == 1 )
+                                                        $gender = 'her' ;
+                                                        else 
+                                                        $gender = 'his';
+                                                        echo '<span class="descrip-profile">changed '.$gender.' profile picture </span> ';
+                                                    }
+                                            ?>
+
+                                        </b>
+
+                                        <div class="clearFix"></div>
+                                        <a>
+                                            <span class="time-shared">
+                                                <?php
+                                                    $GeneralApis = new apps();
+                                                    echo 'From '. $GeneralApis->time_elapsed_string($profilePageContents[$i]->timestamps);
+                                                ?> 
+                                            </span>
+                                            <i class="fa reposition
+                                                <?php
+                                                switch ($profilePageContents[$i]->access_permission) {
+                                                case 1:
+                                                echo "fa-globe";
+                                                break;
+                                                case 2:
+                                                echo "fa-lock sty";
+                                                break;
+                                                case 0:
+                                                echo "fontello icon-user-6";
+                                                break;
+                                                }
+                                                ?>
+                                                " title="
+                                                <?php
+                                                switch ($profilePageContents[$i]->access_permission) {
+                                                case 0:
+                                                echo "Shared with Friends Only";
+                                                break;
+                                                case 1:
+                                                echo "Shared with Public";
+                                                break;
+                                                case 2:
+                                                echo "Shared with Only me";
+                                                break;
+                                                }
+                                                ?>
+                                                " data-toggle="tooltip" data-placement="right" aria-hidden="true">
+                                             </i> 
+                                        </a>
+                                     </div>
+                                    </a>
+                                </div>
+                                <div class="post-conts">
+                                    <!-- Text Only timeline -->
+                                    <?php
+                                        if($profilePageContents[$i]->post_text_id != 0)
+                                        {
+                                            ?>
+                                            <div class="get-text-post">
+                                               <?php $app = new apps(); ?>
+                                                <?php echo $app->emoticonsProvider($profilePageContents[$i]->post_text) ; ?>
+                                            </div>
+                                            <?php
+                                        }
+                                    ?>
+
+                                    <!-- Image timeline -->
+                                    <?php if($profilePageContents[$i]->post_type_num == 0 ){ ?>
+                                        <?php if($profilePageContents[$i]->img_src != NULL ) { ?>
+                                            <img class="img-responsive img-posts" src="photo_albums/timeline/<?php echo $profilePageContents[$i]->img_src ; ?>" />
+                                        <?php } ?>
+                                    <?php } ?>
+                                            
+                                   <!-- Image timeline -->
+                                    <?php if($profilePageContents[$i]->post_type_num == 3 ){ ?>
+                                        <?php if($profilePageContents[$i]->photo_src != NULL ) { ?>
+                                           <img class="img-responsive img-posts" src="photo_albums/profile_picture/<?php echo $profilePageContents[$i]->photo_src;?>" />
+                                        <?php } ?>
+                                    <?php } ?>  
+                                           
+                                           
+                                           
+                                   <!-- Links timeline -->
+                                    <?php if($profilePageContents[$i]->post_type_num == 121 ){ ?>
+                                        <?php if($profilePageContents[$i]->url_links != NULL ) { ?>
+                                            <?php
+                                                // Read youtube Or Vimeo
+                                                if(strpos($profilePageContents[$i]->url_links, 'youtube.com') > 0  OR strpos($profilePageContents[$i]->url_links, 'vimeo.com') > 0){
+                                                    $apps = new apps() ;
+                                                    $apps->embed_vimeo_youtube_video($profilePageContents[$i]->url_links);
+                                                }else { // Read another Links  
+                                                    ?>
+                                                    <div style="cursor: pointer;" onclick="window.location.href='<?php echo $profilePageContents[$i]->url_links  ;?>'">
+                                                           <div style="background-image: url(<?php echo $profilePageContents[$i]->image_src ;?>)" class="thumbnails-image">
+                                                        <div class="mask-image"></div>
+                                                         <a class="url-links"><?php echo substr($profilePageContents[$i]->url_links , 0, 53);  ?>   </a>
+                                                        </div>
+                                                        <div class="thumbnails-text-links">
+                                                            <h3> <?php echo  $profilePageContents[$i]->title ;  ?></h3>
+                                                            <p>
+                                                               <?php 
+                                                                 echo substr( $profilePageContents[$i]->description, 0, 152 );
+
+                                                               ?>
+                                                           </p>
+                                                        </div>
+                                                    </div>
+                                                        <?php
                                                 }
                                             ?>
+                                         <?php } ?>
+                                    <?php } ?>  
+                                           
+                                           
+                                           
+                                  <!-- Video timeline -->
+                                    <?php if($profilePageContents[$i]->post_type_num == 2 ){ ?>
+                                        <?php if($profilePageContents[$i]->video_src != NULL ) { ?>
+                                        <?php
+                                            $videoSrcWMp3 =   $profilePageContents[$i]->video_src ;  
+                                            $output = rtrim($videoSrcWMp3, '.mp3');
+                                        ?>
+                                            <!-- $variable = substr(strrchr($path, "."), 1); -->
+                                             <div class="videoContainerDisplay">
+                                                 <video width="100%" height="100%" controls>
+                                                    <source src="video_albums/timeline/<?php echo $videoSrcWMp3 ?>" type="video/mp4">
+                                                    <source src="video_albums/timeline/<?php echo $output ;?>.ogg" type="video/ogg">
+                                                    Your browser does not support the video tag.
+                                                  </video>
+                                             </div>
+                                         <?php } ?>
+                                    <?php } ?>               
+
+                                    <!-- Music timeline -->
+                                    <?php if($profilePageContents[$i]->post_type_num == 1 ){ ?>
+                                        <?php if($profilePageContents[$i]->music_src != NULL ){ ?>
+                                            <div class="musicTimeline">
+                                                 <div class="musicController">
+                                                     <?php
+                                                        $bg = NULL ;
+                                                        $musicCoverFile =  dirname(__FILE__)."/music_albums/music_covers/".$profilePageContents[$i]->music_cover;  
+                                                      ?>
+                                                     <div style="background-image: url(<?php echo "music_albums/music_covers/".$profilePageContents[$i]->music_cover ;?>);" class="imgThumnails">
+                                                        <i class='fa fa-music mmudisc' style='font-size: 47px;display: block;margin: 0px auto;display: inline;width: 100%;margin-top: 17px;display: inline-block;margin-left: -5px;color: tomato;opacity: 0.5;'></i> 
+                                                      </div>
+                                                     <div class="songInfo">
+                                                         <!-- 
+                                                            <font class="icon-googleplay font-music-icon"></font>
+                                                         -->
+                                                            <b class="sonName">
+                                                                <?php
+                                                                   if($profilePageContents[$i]->music_name != NULL )
+                                                                       echo $profilePageContents[$i]->music_name ;
+                                                                   else 
+                                                                       echo "Unknown Name";
+                                                                 ?>
+                                                                <span class="singerName">
+                                                                    <?php
+                                                                    if($profilePageContents[$i]->singer_name != NULL )
+                                                                       echo $profilePageContents[$i]->singer_name ;
+                                                                   else 
+                                                                       echo "Unknown Singer";
+                                                                     ?>
+                                                                </span>
+                                                            </b>
+                                                      </div>  
+                                                     <!-- icon-googleplay Play/Pause icon-pause-5 -->
+                                                     <div id-attr="song<?php echo $profilePageContents[$i]->id ;?>" id="song<?php echo $profilePageContents[$i]->id ;?>" audio-source='<?php echo $profilePageContents[$i]->music_src ;?>' class="musicOp playthis">
+                                                            <font class="icon-googleplay font-music-icon"></font>
+                                                      </div>
+                                                       <div style='display:none;' id-attr="song<?php echo $profilePageContents[$i]->id ;?>" id="song<?php echo $profilePageContents[$i]->id ;?>" audio-source='<?php echo $profilePageContents[$i]->music_src ;?>' class="musicOp playthispaus">
+                                                            <font class="icon-pause-5 font-music-icon"></font>
+                                                      </div>
+                                                  </div>
+                                                <!-- 
+                                                <input max="100" min="0" value="0" step="1" class="wholeTrack" type="range">
+                                                --> 
+                                             </div>
+                                        <?php } ?>
+                                    <?php } ?>
+
+
+
+
+                                </div>
+                                
+                                
+                                
+                                <!-- add new comment -->
+                                <div class="add-com-hp"> 
+                                  <div class="user-image" style="background-image:  url(photo_albums/profile_picture/<?php echo get_profile_picture($_SESSION['user_info']['user_id']); ?>);"></div>
+                                  <textarea id="writeComment" onkeypress="return commentOn(event , this , <?php echo $profilePageContents[$i]->id ;?>,'comment_no_<?php echo $profilePageContents[$i]->id ;?>');" onkeydown="return resizeComment(this);" class="writeComment textareas" placeholder="Write Comment"></textarea>
+                                </div>
+                                <!-- Comment -->
+                                <div class="loadComments comment_no_<?php echo $profilePageContents[$i]->id ;?>"></div>
+                            <!-- End Post -->
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                        
+                        
+                                </div>
+                         </div>
+                    <?php
+                        $lastTime = $profilePageContents[$i]->id ;
+                    ?>
+                    <?php } ?>
+                     
+                        <input type="hidden" class="lastTimess" value="<?php echo $lastTime ;?>" />
+                    </div>
+                    <!-- Load more -->
+                    <div onclick="return loadMorePosts(this , 0 , <?php echo $usrInfo->id ; ?> );" class="homePostContainer ldMore">
+                        <center>
+                            <b class="loadMore">
+                               Load more stories 
+                            </b>
+                        </center>
+                    </div>
+                    <?php }else  {
+                        
+                    ?>
+                    <div id="mainRecentlyStoriess" class="homePostContainer ldMore">
+                        <center>
+                            <b class="loadMore">
+                              There are no stories
+                            </b>                        </center>
+                    </div>
+                    <?php
+                    }
+                          // music timeline => 1 * 
+                          
+                          // image timeline => 0 * 
+                           
+                          // video timeline => 2
+                          
+                          // texts only => 0 for his column
+           
+            //------------------------------------------------
+           
+                          // profile picture => 3
+                            
+                          // image albums => 4
+                            
+                          // video albums  => 5
+                            
+                          // music album  =>  6
+                           
+                          // links timeline=> 7
+                           
+                         
+                          
+                             
+                            
+                       /*
+                            echo "<pre>";
+                           print_r($profilePageContents);
+                            for ($i=0; $i <count($profilePageContents);$i++){
+                              echo  $apps->time_elapsed_string($profilePageContents[$i]->timeupdates)."<br />";
+                              
+                        }
+                       echo "</pre>";
+                        * 
+                        */
+                    ?> 
+                </div>
+                
+                <div class="col-xs-12 col-md-5 sidebar-outer" style=" position: relative;z-index: 1; right:0px; top: 13%;">
+                    <div style="padding: 0px;margin: 0px;" class="homePostContainer ldMore">
+                         <div class="profilePictureP" style="background-image:  url(photo_albums/profile_picture/<?php echo checkProfileExists($usrInfo->id);?>);">
+                             <?php if($usrInfo->id == $_SESSION['user_info']['user_id']){ ?>
+                             <a href="profile_picture" class="fa fa-camera ppimage-"></a>
+                             <?php } ?>
+                         </div>
+                         <div class="maininfon">
+                             <h3>
+                                 <?php echo $usrInfo->u_name; ?> 
+                             </h3>
+                             <div class="mainAdd">
+                                 <?php
+                                     $friends_apis = new friend_system_applications() ;
+                                     $frdCounts = $friends_apis->friend_system_apis_get_all("WHERE ( id_receiver = ".$usrInfo->id ." OR id_sender = ".$usrInfo->id . " )  AND is_accepted = 1 ");
+                                      if(count($frdCounts ) != 0)
+                                     echo '<span class="frdInfo">'. count($frdCounts ) . ' Friends'.'</span>';
+                                 ?>
+                                 <?php
+                                    if($user_name != $_SESSION['user_info']['user_name']){
+                                       
+                                        $u_1 = $friends_apis ->friend_system_check_exist([
+                                                        'id_receiver'=>$usrInfo->id,
+                                                        'id_sender'=>$_SESSION['user_info']['user_id']
+                                        ]);
+                                                    
+                                        $u_2 = $friends_apis ->friend_system_check_exist([
+                                                        'id_sender'=>$usrInfo->id,
+                                                        'id_receiver'=>$_SESSION['user_info']['user_id']
+                                        ]) ;
+                                       
+                                        $user_adds = NULL ;
+                                         if($u_2 != NULL )
+                                         $user_adds = $u_2  ;
+                                         else if ($u_1 != NULL )
+                                          $user_adds = $u_1 ;
+                                          else 
+                                          $user_adds = NULL ;
+                                          if($user_adds != NULL ){
+                                              switch ($user_adds->is_accepted ){
+                                                  case 1 :
+                                                      ?>
+                                                       <span onclick="return decline_friend(<?php echo $user_adds->id ?>,this );" style="background: white;color: #222; border:1px solid #999;" class="frdadds rebase cdffr"><i class="fontello icon-user-delete fa-frds"></i>Delete Friend</span>   
+                                                       <?php
+                                                      break;
+                                                  case 0 :
+                                                      ?>
+                                                       <?php 
+                                                        if($user_adds->id_receiver == $_SESSION['user_info']['user_id']){
+                                                            ?>
+                                                        <span onclick="return confirm_friend(<?php echo $user_adds->id ;?>,this);" style="background: white;color: #222; border:1px solid #999;
+                                                                   background: #e92929;
+                                                                    color: #fff;
+                                                                    border: 1px solid tomato;
+                                                                 
+                                                                     width: 45%;
+                                                                    text-align: center;
+                                                                    margin: 10px;
+                                                                    line-height: 2;
+                                                                    margin: 25px auto;
+                                                                    margin-left: 10px;
+                                                                    display: inline-block;
+                                                                " class="frdadds rebase cdffr"><i class="fontello icon-users-1 fa-frds"></i>Confirm</span> 
+                                                         
+
+                                                          <span onclick="return decline_friend(<?php echo $user_adds->id ;?>,this); " style="background: white;color: #222; border:1px solid #999;
+                                                                    background: white;
+                                                                    color: #222;
+                                                                    border: 1px solid #999;
+                                                                    width: 45%;
+                                                                    text-align: center;
+                                                                    margin: 10px;
+                                                                    line-height: 2;
+                                                                    margin: 25px auto;
+                                                                    display: inline-block;
+                                                                " class="frdadds rebase cdffr"><i class="fontello icon-user-delete fa-frds"></i>Decline</span> 
+                                                         
+                                                               
+                                                         <?php
+                                                        }else {
+                                                           ?>
+                                                               
+                                                               <span onclick="return decline_friend(<?php echo $user_adds->id ;?> ,this); " style="background: white;color: #222; border:1px solid #999;
+                                                                    background: white;
+                                                                    color: #222;
+                                                                    border: 1px solid #999;
+                                                                    width: 100%;
+                                                                    text-align: center;
+                                                                    margin: 10px;
+                                                                    line-height: 2;
+                                                                    margin: 25px auto;
+                                                                    display: inline-block;
+                                                                " class="frdadds rebase cdffr"><i class="fontello icon-user-delete fa-frds"></i>Cancel Request</span> 
+                                                         
+                                                               <?php 
+                                                        }
+                                                       
+                                                      break;
+                                              }
+                                          }else {
+                                        
+                                                ?>
+                                                    <span onclick="return add_friend(<?php echo $usrInfo->id ;?> ,this);" style="background: white;color: #222; border:1px solid #999;
+
+                                                                            color: #fff;
+                                                                            border: 1px solid #999;
+                                                                            width: 100%;
+                                                                            text-align: center;
+                                                                            margin: 10px;
+                                                                            line-height: 2;
+                                                                            margin: 15px auto;
+                                                                            display: inline-block;
+                                                                            background: #e52826;
+                                                                            border: 1px solid tomato ;
+                                                                            " class="frdadds rebase"><i style="color: #fff;" class="fontello icon-user-6 fa-frds"></i>Add Friend</span> 
+                                                                            <?php
+                                            }
                                             
+                                            
+                                            ?>
+                                                        
+                                                       
+                                                       <span id="demo01"  data-toggle="modal" data-target="#myModal" style="background: white;color: #222; border:1px solid #999;
+                                                                              border: 1px solid #999;
+                                                                            width: 100%;
+                                                                            text-align: center;
+                                                                             line-height: 2;
+                                                                             display: inline-block;
+                                                                            background: #fff;
+                                                                            border: 1px solid #eee;
+                                                                            color: #999;
+                                                                            " onclick="loadMessage(<?php echo $usrInfo->id ;?>);" class="frdadds rebase"><i style="color: #999;" class="fontello icon-comment-alt-1 fa-frds"></i>Send Message</span> 
+                                                 
+                                                
+                                             <?php
+                                    }   
+                                 ?> 
+                             </div> 
+                          </div>
+                     </div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    <?php
+                        if($usrInfo->id == $_SESSION['user_info']['user_id'])
+                        {
+                            ?>
+                                
+                                <div style="padding: 0px;margin: 32px auto 0px auto;" class="homePostContainer arrow_box ">
+                                        <div class="postContainer-it">
+                                             <!-- post status -->
+                                             <textarea onkeydown="return resize_post_textarea(this);" onclick="slideDownIt();" placeholder="Start to Write new status" class="textareas" id="text-area" rows="2" cols="50"></textarea>
                                              
-                                        </ul>
-                                    </div>
-                                    <div class="postAdd">
-                                        <div class="post-titles">
-                                            <ul class="post-menu">
+                                             <!--
+                                             <div class="inserCOn" style="width: 100%; border-top: 1px solid #dfdfdf;padding-top: 7px;display: block;overflow: hidden; margin: 0px auto; height: auto; ">
+                                                 <i style="float: left;color: 888;  display: block; " class="icon-user-1"></i>
+                                                 <div class="divss" contenteditable="true" style="width: 50%;padding-left: 5px; float: left;display: inline-block;height: 20px;color: #999;">Tag your Friends</div>
+                                             </div>
+                                             -->
 
-                                                <li>
-                                                    <a class="status-only">
-                                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                                        <span>Status</span>
-                                                    </a>
-                                                </li>
-
-                                                <li>
-                                                    <a class="upload-event">
-                                                        <i class="fa fa-picture-o" aria-hidden="true"></i>
-                                                         <span>Images</span>
-                                                    </a>
-
-                                                </li>
-                                                <li>
-                                                    <a class="upload-event-video">
-                                                        <i class="fa fa-file-video-o" aria-hidden="true"></i>
-                                                         <span>Videos</span>
-                                                    </a>
-                                                 </li>
-                                                 <li>
-                                                     <a class="upload-event-music">
-                                                        <i class="fa fa-music" aria-hidden="true"></i>
-                                                         <span>Music</span>
-                                                    </a>
-                                                 </li>
-                                            </ul>
-                                        </div>
-                                        <div class="post-contents">
-                                            <!-- post status -->
-                                            <textarea placeholder="Start to Write new status" class="textareas" id="text-area" rows="2" cols="50"></textarea>
-                                            <!-- post images -->
-                                            <input type="file" user-id="<?php echo $usrInfo->id ; ?>" class="file-img-upload" id="file-img-upload" style="display: none ;" />
-                                           <!-- post music -->
-                                            <input type="file" user-id="<?php echo $usrInfo->id ; ?>" class="file-music-upload" id="file-music-upload" style="display: none ;" />
-                                            <!-- post music -->
-                                            <input type="file"  user-id="<?php echo $usrInfo->id ; ?>" class="file-video-upload" id="file-video-upload" style="display: none ;" />
-                                            <!-- include files -->
-                                            <div class="file-uploaded">
-                                                <!-- for images --> 
-                                                <div id="blah">
-                                                     <!-- 
-                                                    <img class="img-loadd" />
-                                                    <i onclick="return deleteThisImage();" class="fa fa-close fa-pos"></i>
-                                                    <div class="progressbar">
+                                             <div class="post-contents">
+                                                   <!-- post images -->
+                                                   <input type="file" user-id="<?php echo $usrInfo->id ; ?>" class="file-img-upload" id="file-img-upload" style="display: none ;" />
+                                                   <!-- post music -->
+                                                   <input type="file" user-id="<?php echo $usrInfo->id ; ?>" class="file-music-upload" id="file-music-upload" style="display: none ;" />
+                                                   <!-- post music -->
+                                                   <input type="file"  user-id="<?php echo $usrInfo->id ; ?>" class="file-video-upload" id="file-video-upload" style="display: none ;" />
+                                                   <!-- include files -->
+                                                   <div class="file-uploaded">
+                                                   <!-- for images --> 
+                                                   <div id="blah">
+                                                        <!-- 
+                                                        <img class="img-loadd" />
+                                                        <i onclick="return deleteThisImage();" class="fa fa-close fa-pos"></i>
+                                                        <div class="progressbar">
                                                         <div class="fill-progress"></div>
-                                                    </div>
-                                                    -->
-                                                </div>
-                                                <!-- music includer -->
-                                                <div class="file-included" style="background-image: url(music_albums/music_covers/default_music.jpg); " >
-                                                    <!--
-                                                    <div class="muisc-masks"></div>
+                                                        </div>
+                                                        -->
+                                                   </div>
+                                                   <!-- music includer -->
+                                                   <div class="file-included" style="background-image: url(music_albums/music_covers/default_music.jpg); " >
+                                                   <!--
+                                                   <div class="muisc-masks"></div>
                                                     <div class="music-info mdoo">
-                                                            <ul>
-                                                                <li style="background-image: url(music_albums/music_covers/default_music.jpg); " class="img-container img-artist"> </li>
-                                                                <li class="info-msc">
-                                                                     <h4 class="song-name">Undefine song</h4>
-                                                                     <span class="singer-name">
-                                                                         Unknown artist
-                                                                     </span>
-                                                                 </li>
-                                                            </ul>
+                                                    <ul>
+                                                    <li style="background-image: url(music_albums/music_covers/default_music.jpg); " class="img-container img-artist"> </li>
+                                                    <li class="info-msc">
+                                                    <h4 class="song-name">Undefine song</h4>
+                                                    <span class="singer-name">
+                                                    Unknown artist
+                                                    </span>
+                                                    </li>
+                                                    </ul>
                                                     </div>
                                                     <ul class="file-uploader-menu mdoo">
-                                                         <li><i class="fa fa-music"><span style="padding-left:3px;">-</span></i></i></li>
-                                                        <li>
-                                                            <div class="fileUpload">
-                                                                <div class="fileprogress"></div>
-                                                            </div>
-                                                        </li>
-                                                        <li><i onclick="return remover_musicfile();"  class="fa fa-remove faremove"></i></li>
+                                                    <li><i class="fa fa-music"><span style="padding-left:3px;">-</span></i></i></li>
+                                                    <li>
+                                                    <div class="fileUpload">
+                                                    <div class="fileprogress"></div>
+                                                    </div>
+                                                    </li>
+                                                    <li><i onclick="return remover_musicfile();"  class="fa fa-remove faremove"></i></li>
                                                     </ul>
                                                     -->
-                                               </div>
-                                                <!-- video includer -->
-                                                <div class='file-video-responsed'>
-                                                      <!-- 
+                                                    </div>
+                                                    <!-- video includer -->
+                                                    <div class='file-video-responsed'>
+                                                    <!-- 
                                                     <div class="video text-center">
-                                                        <i class="fa fa-file-video-o"></i>
+                                                    <i class="fa fa-file-video-o"></i>
                                                     </div>
                                                     <div class="scs">
-                                                        <b><i onclick="return remove_thisvideo();" class="fa fa-remove fa-deletevideo"></i> </b>
-                                                        <span></span>
-                                                        <div class="progrees-vid" disabled>
-                                                            <div class="inprog-video"></div>
-                                                        </div>
+                                                    <b><i onclick="return remove_thisvideo();" class="fa fa-remove fa-deletevideo"></i> </b>
+                                                    <span></span>
+                                                    <div class="progrees-vid" disabled>
+                                                    <div class="inprog-video"></div>
                                                     </div>
-                                                      -->
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="post-titles" style="background: #fff; border-top: 1px solid rgb(223, 223, 223);">
-                                            <!--
-                                            <div class="btn-smile"><i class="fa fa-smile-o" style="font-size: 18px;" aria-hidden="true"></i></div>
-                                            <div class="btn-smile"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
-                                            <div class="btn-smile"><i class="fa fa-user" aria-hidden="true"></i></div>
-                                            -->
-                                            <div id="butn-add-post" class="btn btn-primary post-btn">Post</div>
-                                            <select id="accessPrem" class="btn post-btn">
-                                                <option value="0">Friends</option>
-                                                <option value="1">Public</option>
-                                                <option value="2">Only me</option>
-                                            </select>
-                                        </div>
+                                                    </div>
+                                                    -->
+                                                    </div>
+                                                     <div class='file-link-responsed'> </div>
+                                                    </div>
+                                             </div>
+                                             <div class="freeIcons">
+                                                 <ul class="post-menu">
+                                                     <!--
+                                                     <li>
+                                                     <a class="status-only">
+                                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                     <span>Status</span>
+                                                     </a>
+                                                     </li>
+                                                     -->
+                                                     <li>
+                                                     <a class="upload-event">
+                                                     <i class="fa fa-picture-o" aria-hidden="true"></i>
+                                                     <span>Images</span>
+                                                     </a>
+                                                     </li>
+                                                     <li>
+                                                     <a class="upload-event-video">
+                                                     <i class="fa fa-file-video-o" aria-hidden="true"></i>
+                                                     <span>Videos</span>
+                                                     </a>
+                                                     </li>
+                                                     <li>
+                                                     <a class="upload-event-music">
+                                                     <i class="fa fa-music" aria-hidden="true"></i>
+                                                     <span>Music</span>
+                                                     </a>
+                                                     </li>
 
+
+
+                                                     <li id="postChild" style="float: right;">
+                                                         <a userId='<?php echo $usrInfo->id ; ?>' id="onsho" style="" class="sharPost">
+                                                             <i class="fa fa-share-alt iconstilshss"></i>
+                                                             Post
+                                                         </a> 
+                                                     </li>
+                                                     <?php if ($usrInfo->id == $_SESSION['user_info']['user_id'] ){ ?>
+
+                                                     <li style="float: right;">
+                                                         <a class="sharPosts">
+                                                             <select id="accessPrem" class="btn post-btn">
+                                                                <option value="0">Friends</option>
+                                                                <option value="1">Public</option>
+                                                                <option value="2">Only me</option>
+                                                            </select>
+                                                         </a> 
+                                                     </li>
+                                                     <?php
+                                                     }
+                                                     ?>
+                                                     </ul>
+                                             </div>                        
+                                        </div>
                                     </div>
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                      
-                                    <!-- Posts loped -->
-                                    <?php
-                                    
-                                        $userId  = trim ($_SESSION['user_info']['user_id'] );
-                                        if($usrInfo->id != $_SESSION['user_info']['user_id'])
-                                            $userId = $usrInfo->id ; 
-                                         $app_apis = new user_get_more_pagination_package_pst() ;
-                                         $postinPagin = $app_apis->load_posts_according_to_args( 0 , 2 , $userId );
-                                          $pos_apis = new user_posts_applications() ;
-                                          $user_exist = $pos_apis->user_posts_check_exist([
-                                             'user_id'=>$userId
-                                         ]);   
-                                         
-                                          
-                                         if( count($user_exist) != 0   )
-                                         { 
-                                           for ($i=0; $i < count($postinPagin); $i++){ 
-                                             ?>
-                                                <div class="posts-get">
-                                                    <div class="profilePics">
-                                                        <div class="postTitle">
-                                                            <div class="user-image headerimage" style="background-image: url(photo_albums/profile_picture/<?php echo checkProfileExists($postinPagin[$i]->posted_by_id);?>);"></div>
-                                                            <div class="user-posts-name">
-                                                                <b>
-                                                                     
-                                                                    <?php echo $postinPagin[$i]->f_name . " " .  $postinPagin[$i]->s_name ; ?>
-                                                                    <?php
-                                                                        if($postinPagin[$i]->post_type_num == 3 )
-                                                                        {   
-                                                                               $gender = NULL ; 
-                                                                               if($postinPagin[$i]->gender == 1 )
-                                                                                   $gender = 'her' ;
-										else 
-										$gender = 'his';
-                                                                                echo '<span class="descrip-profile">changed '.$gender.' profile picture </span> ';
-                                                                        }
-                                                                    ?>
-                                                                </b>
-                                                                <div class="clearFix"></div>
-                                                                <a>
-                                                                    <span class="time-shared">
-                                                                        <?php
-                                                                            $GeneralApis = new apps();
-                                                                            echo $GeneralApis->time_elapsed_string($postinPagin[$i]->timestamps);
-                                                                        ?> 
-                                                                    </span>
-                                                                    <i class="fa reposition
-                                                                       <?php
-									   switch ($postinPagin[$i]->access_permission) {
-									   case 0:
-									   echo "fa-globe";
-									   break;
-									   case 1:
-									   echo "fa-lock sty";
-									   break;
-									   case 2:
-									   echo "fa-user";
-									   break;
-									   }
-									   ?>
-                                                                          " aria-hidden="true">
-                                                                    </i>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="post-conts">
-                                                            <?php
-                                                                if($postinPagin[$i]->post_text_id != 0)
-                                                                    {
-                                                                        ?>.
-                                                                            <div class="get-text-post">
-                                                                            <?php
-                                                                                echo $postinPagin[$i]->post_text ;
-                                                                            ?>
-                                                                            </div>
-                                                                        <?php 
-                                                                    }
-                                                            ?>
-                                                            <?php
-                                                                switch ($postinPagin[$i]->post_type_num) {
-                                                                    case 0 : // Photo
-                                                                        ?>
-                                                                        <?php if($postinPagin[$i]->img_src != NULL ) { ?>
-                                                                        <img class="img-responsive img-posts" src="photo_albums/timeline/<?php echo $postinPagin[$i]->img_src ; ?>" />
-                                                                        <?php } ?>
-                                                                        <?php
-                                                                        break;
-                                                                    case 1 : // Music 
-                                                                        ?>
-                                                                        <?php if($postinPagin[$i]->music_src != NULL ) { ?>
-                                                                            <audio controls="controls">
-                                                                                <source src="music_albums/timeline/<?php echo substr($postinPagin[$i]->music_src, 0, strrpos( $postinPagin[$i]->music_src, '.'));?>.ogg" type="audio/ogg">
-                                                                                <source src="music_albums/timeline/<?php echo $postinPagin[$i]->music_src ; ?>" type="audio/mpeg">
-                                                                                Your browser does not support the audio element.
-                                                                            </audio>
-                                                                        <?php } ?>
-                                                                        <?php
-                                                                        break;
-                                                                    case 2 : // Video 
-                                                                        ?>
-                                                                        <?php if($postinPagin[$i]->video_src != NULL ) { ?>
-                                                                        <div class="videoCotroler">
-                                                                        <!-- 
-                                                                            <div class="playVideo">
-                                                                            <i class="fa fa-play "></i>
-                                                                            </div>
-                                                                            -->
-                                                                            <video width="100%" src="video_albums/timeline/<?php echo $postinPagin[$i]->video_src; ?>"></video>
-                                                                        </div>
-                                                                        <?php } ?>
-                                                                        <?php
-                                                                        break;
-                                                                       case 3: // Photo
-                                                                        ?>
-                                                                            <?php if($postinPagin[$i]->photo_src != NULL ) { ?>
-                                                                            <img class="img-responsive img-posts" src="photo_albums/profile_picture/<?php echo $postinPagin[$i]->photo_src;?>" />
-                                                                            <?php } ?>
-                                                                        <?php
-                                                                        break;
-                                                                }
-                                                            ?>
-                                                        </div>
-                                                        
-                                                        <!-- Likes or dislike -->
-                                                        <?php
                                 
-                                                            $likes_dislikes = new user_like_dislikes_applications();
-                                                            $liked_disliked = $likes_dislikes->user_like_dislikes_check_exist([
-                                                            'liked_by_userid'=> $_SESSION['user_info']['user_id'] ,
-                                                            'post_id'=>$postinPagin[$i]->id
-                                                            ]);                  
-                                                            ?>
-                                                        <div class="post-control-set">
-                                                            <ul class="menu-cont">
-                                                                <li>
-                                                                    <a class="likesItem" onclick="return likePost(<?php echo $postinPagin[$i]->id ; ?>);">
-                                                                    <?php
-                                                                    if( $liked_disliked != NULL   )
-                                                                    {
-                                                                    if(  $liked_disliked->is_liked == 1)
-                                                                    echo "<span style='color:teal;'><i class='fa fa-thumbs-o-up frt' aria-hidden='true'></i>Liked</span>" ;
-                                                                    else 
-                                                                    echo "<i class='fa fa-thumbs-o-up frt' aria-hidden='true'></i>Like" ;
-                                                                    }  
-                                                                    else 
-                                                                    echo "<i class='fa fa-thumbs-o-up frt' aria-hidden='true'></i>Like" ;
-                                                                    ?>
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a class="disliked_items" onclick="return disLikePost(<?php echo $postinPagin[$i]->id ; ?>);">
-                                                                    <?php
-                                                                    if( $liked_disliked != NULL and  $liked_disliked->is_liked != 1 )
-                                                                    echo "<span style='color:teal;'><i class='fa fa-thumbs-o-down frt' aria-hidden='true'></i>Disliked</span>" ;
-                                                                    else 
-                                                                    echo "<i class='fa fa-thumbs-o-down frt' aria-hidden='true'></i>Dislike" ;
-                                                                    ?>  
-                                                                    </a>
-                                                                </li>
-                                                                    <!-- 
-                                                                 <li>
-                                                                    <a>
-                                                                    <i class="fa fa-comment" aria-hidden="true"></i>
-                                                                    Comment  
-                                                                    </a>
-                                                                </li>
-                                                                    -->
-                                                                 <li>
-                                                                     <a class="md-trigger md-setperspective" data-modal="modal-18">
-                                                                    <i style="background-image: url(images/constitutional.png)" class="disputs"></i>
-                                                                    Dispute  
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                            <div class="clearFix"></div>
-                                                            <div class="get-com-dis-lke-dpt">
-                                                                <?php
-                                                                $likes =  $likes_dislikes->user_like_dislikes_get_by_values(['post_id'=>$postinPagin[$i]->id] ,'and');
-                                                                if(count($likes) != 0 ) {
-                                                                ?>
-                                                                <div class="contpost">
-                                                                    <ul class="menu-cont2">
-                                                                      <li>
-                                                                        <a>
-                                                                        <?php
-                                                                        $likes =  $likes_dislikes->user_like_dislikes_get_by_values(['post_id'=>$postinPagin[$i]->id , 'is_liked'=> 1] ,'and');
-                                                                        if(count($likes) != 0 ) echo  '<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>' ;
-                                                                        ?>
-
-                                                                        <span class="countlikes">
-                                                                        <?php
-                                                                        $likes =  $likes_dislikes->user_like_dislikes_get_by_values(['post_id'=>$postinPagin[$i]->id , 'is_liked'=> 1] ,'and');
-                                                                        if(count($likes) != 0 ) echo count($likes) ;
-                                                                        ?>
-                                                                        </span>
-                                                                        </a>
-                                                                      </li>
-                                                                      <li>
-                                                                        <a>
-                                                                        <?php
-                                                                        $dislikes =  $likes_dislikes->user_like_dislikes_get_by_values(['post_id'=>$postinPagin[$i]->id , 'is_liked'=> 0 ] ,'and');
-                                                                        if(count($dislikes) != 0  ) echo' <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>' ;
-                                                                        ?>
-                                                                        <span class="countDislikes">
-                                                                        <?php
-                                                                        $dislikes =  $likes_dislikes->user_like_dislikes_get_by_values(['post_id'=>$postinPagin[$i]->id , 'is_liked'=> 0 ] ,'and');
-                                                                        if(count($dislikes) != 0  ) echo count($dislikes) ;
-                                                                        ?>
-                                                                        </span>
-                                                                        </a>
-                                                                      </li>
-                                                                    </ul>
-                                                                 </div>
-                                                                <?php } ?>
-                                                                <div class="clearFix"></div> 
-                                                                <div class="add-com" >
-                                                                    <?php
-                                                                    $userAPPS = new user_applications();
-                                                                      $userInfo =  $userAPPS->user_application_check_exist(['id'=>$_SESSION['user_info']['user_id']]);
-                                                                      if($userInfo != NULL )
-                                                                      $userName = $userInfo->u_name 
-                                                                    ?>
-                                                                    <div class="user-image" style="background-image:  url(photo_albums/profile_picture/<?php echo checkProfileExists($usrInfo->id);?>);"></div>
-                                                                    <textarea id="writeComment" onkeypress="return commentIn(event , this , <?php echo $postinPagin[$i]->id?>);" onkeydown="return resizeComment(this);" class="writeComment textareas" placeholder="Write Comment"></textarea>
-                                                                </div>
-                                                                 <?php
-                                       
-                                                                $comment_api = new user_get_more_pagination_comment_package();
-                                                                $commentInPosts = $comment_api->load_more_comments_in_timeline_frd(0, 3 ,"(post_id=".$postinPagin[$i]->id.")");
-                                                               ?>
-                                                              <ul style="padding: 0px;" class="commentContainer this<?php echo $postinPagin[$i]->id ; ?>post">
-                                                                <?php
-                                                                for( $cmt =0 ; $cmt < count($commentInPosts ); $cmt++  ) { 
-                                                                $positionIt = "center center";
-                                                                $sizeIt = "100% 100%";
-                                                                $profileExixst = new profile_picture_applications();
-                                                                $checkProfi = $profileExixst->profile_pictureg_check_exist(['user_id'=>$commentInPosts[$cmt]->user_id]);
-                                                                if($checkProfi != NULL )
-                                                                {
-                                                                $positionIt = $checkProfi->position_y_x;
-                                                                $sizeIt = $checkProfi->photo_w_h;
-                                                                }else {
-                                                                $positionIt = "center center";
-                                                                $sizeIt = "100% 100%";
-                                                                } 
-                                                                $userInfo =  $userAPPS->user_application_check_exist(['id'=>$commentInPosts[$cmt]->user_id]);
-                                                                if($userInfo != NULL ){
-                                                                $userName = $userInfo->u_name ;
-                                                                $fullName = $userInfo->f_name .' '. $userInfo->s_name ;
-                                                                }else 
-                                                                {
-                                                                $fullName = "User of jury of peers" ;
-                                                                }
-                                                              ?>
-                                                                  <li>
-                                                                      <div class="add-com msComments" >
-                                                                             <div class="user-image sizerComm" style="background-image:  url(../<?php echo $userName ; ?>/photo_albums/profile_picture/<?php echo checkProfileExists($commentInPosts[$cmt]->user_id);?>);background-size:<?php echo $sizeIt ; ?>; background-position:<?php echo $positionIt ; ?>;"></div>
-                                                                             <div class="commentBlock">
-                                                                                 <b><?php echo $fullName;?></b>
-                                                                                 <div class="clearFix"></div>
-                                                                                 <span>
-                                                                                   <?php echo $commentInPosts[$cmt]->comment_contents;  ?>
-                                                                                   <font class="text-right">
-                                                                                   <?php
-                                                                                   $GeneralApis = new apps();
-                                                                                   echo $GeneralApis->time_elapsed_string($commentInPosts[$cmt]->timestamps);
-                                                                                   ?> 
-                                                                                   </font> 
-                                                                                 </span> 
-                                                                             </div>
-                                                                      </div>
-                                                                  </li>
-                                                              <?php } ?>
-                                                              </ul>
-                                                                <div onclick="return loadMoreComment(<?php echo $postinPagin[$i]->id ; ?>,'this<?php echo $postinPagin[$i]->id ; ?>post',<?php echo $commentInPosts[$cmt]->id ; ?>)" class="add-com msComments loadmorecomment" >
-                                                                    View more comments
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                    
-                                    
-                                    
-                                    
-                                    
-                                 <!-- Dispute object overlay -->
-                <div class="md-overlay"></div><!-- the overlay element -->            
-                                    <!-- Dispute object -->
-                <div class="md-modal md-effect-18" id="modal-18">
-                    <div class="md-content">
-                         <h3>Create Dispute  <i class="icon-cancel-2 md-close"></i> </h3>
-			<div>
-                            <p>Each dispute must be accepted from defendant :</p>
-                            <table class="table">
-                                <tr>
-                                    <td>
-                                         <strong>Courtroom Title:</strong> 
-                                    </td>
-                                    <td>
-                                        <strong><input id="title-courtroom" class="crtcss" type="text" /></strong> 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                         <strong>Courtroom Cause:</strong>       
-                                    </td>
-                                    <td>
-                                        <strong><textarea id="cause-courtroom" class="crtcss" placeholder="Why do you like to create Dispute with my status ? " type="text"></textarea></strong> 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                         <strong>Time Estimated:</strong>       
-                                    </td>
-                                     <td>
-                                        <strong>
-                                            <select id="time-courtroom">
-                                                <option value="3">3 days</option>
-                                                <option value="5">5 days</option>
-                                                <option value="8">8 days</option>
-                                                <option value="10">10 days</option>
-                                                <option value="12">12 days</option>
-                                                <option value="15">15 days</option>
-                                            </select>
-                                        </strong> 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                         <strong>Courtroom settlement :</strong>
-                                    </td>
-                                    <td>
-                                         <strong><input id="settlement-courtroom" class="crtcss"  type="text" /></strong> 
-                                    </td>
-                                </tr>
-                            </table>
-                          
-                            <div class="btn-group">
-                                <button onclick="return courtroomInit(<?php echo $postinPagin[$i]->id ;?> , <?php echo $postinPagin[$i]->posted_by_id ;?>  ,this);" class="send-req">Send Request</button>
-                            </div>
-                            
-			</div>
-                    </div>
-		</div>
-                                
-                                            <?php
-                                            
-                                            
-                                        }
-                                         
-                                         }
-                                        
-                                    ?> 
-                                   
-                                                                
-                                                                    <!-- Init -->
-                                                                  <!-- 
-                                                                    <a onclick="" class="md-trigger md-setperspective" data-modal="modal-18">
-                                                                    <i style="background-image: url(images/constitutional.png)" class="disputs"></i>
-                                                                    Dispute  
-                                                                    </a>   
-                                                                  --> 
-                                                                   
-                                    
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                
-                
-                
-                
-                
-                
-                
-              <script src="js/jquery-1.12.4_1.js"></script>
-             <script src="js/bootstrap.min.js"></script>
-             <!-- classie.js by @desandro: https://github.com/desandro/classie -->
-             <script src="js/classie.js"></script>
-            <script src="js/modalEffects.js"></script>
-            <script>
-            // this is important for IEs
-            var polyfilter_scriptpath = '/js/';
-            </script>
-            <script src="js/cssParser.js"></script>
-            <script src="js/css-filters-polyfill.js"></script>
-            <script type="text/javascript" src="js/id3-minimized.js"></script>
-             <script src="js/profile_page.js"></script>
+                            <?php
+                        }
+                    ?>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                </div>
+            </div>
+            
+            
+             
+            
+        </section>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+                       
+        
+        
+      <!--jQuery-->
+        
+        
+        <script src="assets/js/gsap/main-gsap.js"></script>
+	<script src="assets/js/bootstrap.js"></script>
+	<script src="assets/js/joinable.js"></script>
+	<script src="assets/js/resizeable.js"></script>
+	<script src="assets/js/neon-api.js"></script>
+	<script src="assets/js/neon-chat.js"></script>
+	<script src="assets/js/neon-custom.js"></script> 
+	<script src="assets/js/neon-demo.js"></script>
+        
+         
+       
+        
+           
+        
     </body>
-    
 </html>
 
-  <?php } ?>
+ 

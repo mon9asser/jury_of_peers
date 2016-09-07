@@ -1,0 +1,17 @@
+// music timeline => 0
+                          
+                          // image timeline => 1
+                           
+                          // video timeline => 2
+                          
+                          // texts only => NULL
+           
+            //------------------------------------------------
+           
+                          // links timeline => 3
+                            
+                          // image albums => 4
+                            
+                          // video albums  => 5
+                            
+                          // music album  =>  6

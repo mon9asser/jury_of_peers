@@ -345,12 +345,28 @@ overflow: hidden;
 
 
 
+.status-incourtroom {
+    width: 100%;
+    display: block ;
+    padding: 5px 5px;
+     height: auto;
+}
 
+.courtpersons {
+    width: 48%;
+    display: inline-table;
+    background: transparent;
+    overflow: hidden ;
+    height: auto;
+}
 
+.tbls tr {
+    width: 50%;
+}
 
-
-
-
+table , table tr , table tr td , .table > tbody > tr > td {
+    border: 0px;
+}
 
 
 
@@ -573,3 +589,208 @@ overflow: hidden;
      padding: 10px 5px;
     text-align: center;
  }
+ 
+ 
+ img.prof {
+     width: 60px;
+     height: 60px;
+     border-radius: 30px;
+     border: 1px solid #fff;
+ }
+.dfn-img {
+     float: right;
+ }
+ .pln-img , .pln-titles {
+     float:left   ;
+ }
+ .pln-titles {
+     padding: 10px;
+ }
+ .setType {
+     color: #999;
+      float: left ;
+     width: 100%;
+     display: block;
+ }
+ .dfn-titles {
+     float: right;
+      padding: 10px;
+ }
+ .containerStatus {
+     width: 100%;
+     overflow: hidden ;
+     display: block ;
+     width: 100%;
+     height: auto ;
+ }
+ .status-cause-pln {
+     
+ }
+ table tr td {
+     width: 50%;
+ }
+ .status-cause-pln {
+     padding: 5px;
+background: rgba(250,250,250,0.5);
+margin: 5px;
+ }
+ .juryCntr {
+     width: 96%;
+     overflow: hidden ;
+     height: auto ;
+     background: #fff;
+     margin: 0px auto;
+ }
+ .vote-pln {
+     width: 130px;
+    height: 50px;
+    float: left;
+    padding: 4px;
+    line-height: 0px;
+    overflow: hidden;
+    display: inline-block;
+    margin-top: 0px;
+ }
+ 
+  .vote-dfn {
+     width: 130px;
+     height:25px;
+      
+     float: right ;
+     padding: 16px ;
+     line-height: 0px;
+ }
+ 
+ .juryStatus {
+font-family: inherit;
+font-size: inherit;
+line-height: inherit;
+width: 100%;;
+padding: 5px;
+resize: none;
+height: 30px;
+border: 0px;
+text-align: center;
+ margin-top: 10px;
+ }
+ .menuu {
+     padding: 0px;
+     margin: 0px;
+     width: 100%;
+     display: block ;
+ }
+ 
+ .menuu li {
+     display: inline;
+     cursor: pointer;
+ }
+ .menuu li a {
+     font-family: arial , sans-serif ;
+     font-weight: bold;
+     font-size: 13px;
+ }
+ .menuu li:first-child a {
+     margin: 5px;
+ }
+ .main-comments {
+     height: auto;
+     min-height: 2px;
+ }
+ .commentCourtRoom {
+     margin-top: 5px;
+     padding: 5px;
+ }
+ .juryImage {
+     width: 50px;
+     height: 50px;
+  }
+  .setType {
+      color: #fff;
+  }
+ .acc{
+display: block;
+overflow: hidden;
+list-style: none;
+padding: 0px;
+margin: 0px;
+line-height: 3.3;
+}
+.acc li {
+    display: inline-block;
+    cursor: pointer ;
+}
+i.iconstilsh {
+    cursor: pointer ;
+    display: inline-block;
+    height: 25px;
+    width: 25px;
+    border-radius: 13px;
+    background: #dcdcdc;
+    text-align: center;
+    line-height: 1.8;
+    color: darkcyan;
+    box-shadow: 0px 0px 3px 0px transparent;
+    transition: all , ease-in-out , 0.3s;
+    -moz-transition: all , ease-in-out , 0.3s;
+    -webkit-transition: all , ease-in-out , 0.3s;
+}
+i.iconstilsh:hover{
+    box-shadow: 0px 0px 3px 0px #0d0d0d ;
+}
+.cmtOfjop {
+    width: 100%;
+    display: block ;
+    overflow: hidden ;
+    padding: 5px;
+    
+}
+.evedSee {
+    width: 100%;
+    display: block ;
+    overflow: hidden ;
+    color: #fff;
+    background: teal;
+    padding: 5px;
+    cursor: pointer ;
+}
+.fa-3x {
+    font-size: 15px;
+}
+table tr td {
+    width: 29%;
+}
+.winnerBlock {
+    width: 95% ;
+    margin: 10px auto;
+    overflow: hidden ;
+    background: whitesmoke ;
+    padding: 5px ;
+}
+.winnnnner {
+    width: 100%;
+    display: block ;
+    overflow: hidden ;
+    margin: 5px;
+    padding: 5px;
+}
+b.ccc {
+    padding : 0px;
+    padding-top: 10px;
+   margin: 0px;
+   color: #333;
+   font-size: 17px;
+}
+a.gotP {
+    padding: 0px;
+}
+b.mmm {
+    width: 100%;
+    display: block ;
+    overflow: hidden ;
+    padding: 0px ;
+    margin: 0px;
+}
+div.mnmnmn {
+    width: 80px;
+height: 80px;
+}

@@ -1,0 +1,48 @@
+<?php
+                                                                 $comment_api = new user_get_more_pagination_comment_package();
+                                                                $commentInPosts = $comment_api->load_more_comments_in_timeline_frd(0, 3 ,"(post_id=".$postinPagin[$i]->id.")");
+                                                               ?>
+                                                              <ul style="padding: 0px;" class="commentContainer this<?php echo $postinPagin[$i]->id ; ?>post">
+                                                                <?php
+                                                                for( $cmt =0 ; $cmt < count($commentInPosts ); $cmt++  ) { 
+                                                                $positionIt = "center center";
+                                                                $sizeIt = "100% 100%";
+                                                                $profileExixst = new profile_picture_applications();
+                                                                $checkProfi = $profileExixst->profile_pictureg_check_exist(['user_id'=>$commentInPosts[$cmt]->user_id]);
+                                                                if($checkProfi != NULL )
+                                                                {
+                                                                $positionIt = $checkProfi->position_y_x;
+                                                                $sizeIt = $checkProfi->photo_w_h;
+                                                                }else {
+                                                                $positionIt = "center center";
+                                                                $sizeIt = "100% 100%";
+                                                                } 
+                                                                $userInfo =  $userAPPS->user_application_check_exist(['id'=>$commentInPosts[$cmt]->user_id]);
+                                                                if($userInfo != NULL ){
+                                                                $userName = $userInfo->u_name ;
+                                                                $fullName = $userInfo->f_name .' '. $userInfo->s_name ;
+                                                                }else 
+                                                                {
+                                                                $fullName = "User of jury of peers" ;
+                                                                }
+                                                              ?>
+                                                                  <li>
+                                                                      <div class="add-com msComments" >
+                                                                             <div class="user-image sizerComm" style="background-image:  url(../<?php echo $userName ; ?>/photo_albums/profile_picture/<?php echo checkProfileExists($commentInPosts[$cmt]->user_id);?>);background-size:<?php echo $sizeIt ; ?>; background-position:<?php echo $positionIt ; ?>;"></div>
+                                                                             <div class="commentBlock">
+                                                                                 <b><?php echo $fullName;?></b>
+                                                                                 <div class="clearFix"></div>
+                                                                                 <span>
+                                                                                   <?php echo $commentInPosts[$cmt]->comment_contents;  ?>
+                                                                                   <font class="text-right">
+                                                                                   <?php
+                                                                                   $GeneralApis = new apps();
+                                                                                   echo $GeneralApis->time_elapsed_string($commentInPosts[$cmt]->timestamps);
+                                                                                   ?> 
+                                                                                   </font> 
+                                                                                 </span> 
+                                                                             </div>
+                                                                      </div>
+                                                                  </li>
+                                                              <?php } ?>
+                                                              </ul>

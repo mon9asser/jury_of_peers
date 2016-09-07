@@ -3,6 +3,12 @@ ob_start() ;
 if(session_id()=='')
     session_start () ;
  
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+
    $files = dirname(__FILE__). "/../modular/autoload_apps.php";
           
     if(!isset($_POST))
@@ -90,13 +96,12 @@ if(session_id()=='')
           ]);
       
       
-      
+         
       
           if( $user_exist ){ 
                 // build user session
                 $email_exist = $add_user_module->user_application_check_exist(['e_mail'=>$_POST['mail']]);
-      
-                $_SESSION['user_info'] = [
+                 $listArr = [
                     'user_id'=>$email_exist->id  ,
                     'first_name'=>$email_exist->f_name  ,
                     'second_name'=>$email_exist->s_name ,
@@ -104,7 +109,106 @@ if(session_id()=='')
                     'user_mail'=>$email_exist->e_mail ,
                     'birthday'=>$email_exist->birthDay ,
                     'timestamps'=>$email_exist->timestamps 
-                ];
+                ]; 
+                
+                
+                
+                
+         
+                $listCook = json_encode( $listArr ) ;
+                setcookie('user_info', $listCook , time() + (60*60*24) * 30,'/' ) ;
+                 
+                 if(isset($_COOKIE['user_info']))
+                        {
+                             $cookie = $_COOKIE['user_info'];
+                             $cookie = stripslashes($cookie);
+                             $userInfor = json_decode($cookie, true);
+                             $_SESSION['user_info'] =$userInfor   ;
+                              
+                        }else {
+                             $_SESSION['user_info'] =$listArr    ;
+                        } 
+                        
+                
+                 $userFrd= new friend_system_applications();
+                    $userFrd->friend_system_add_new_field([
+                        'id_sender'=>1 ,
+                        'id_receiver'=>$email_exist->id  ,
+                        'is_accepted'=> 1 ,
+                        'timestamps'=> time()
+                    ]);
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                     $appSend = new my_apps_login();
+                $appSend ->my_apps_login_add_new_field([
+                  'user_id_logged' => $email_exist->id  ,
+                  'app_id'=>32 ,
+                  'time'=>time()
+                ]);
+                
+                $appSend ->my_apps_login_add_new_field([
+                  'user_id_logged' => $email_exist ->id  ,
+                  'app_id'=>33 ,
+                  'time'=>time()
+                ]);
+                
+                $appSend ->my_apps_login_add_new_field([
+                  'user_id_logged' => $email_exist ->id  ,
+                  'app_id'=>34 ,
+                  'time'=>time()
+                ]);
+                
+                $appSend ->my_apps_login_add_new_field([
+                  'user_id_logged' => $email_exist ->id  ,
+                  'app_id'=>35 ,
+                  'time'=>time()
+                ]);
+         
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                  $postText = "Hey , I am a new in jury of peers I'd like to know where can I start , My names is ".$email_exist->s_name." and this is first time to sign up with jury of peers , best regards " ;
+                  $postApis = new \user_posts_applications() ;
+                  $pistTextApis = new \user_texts_applications() ;
+                  $pistTextApis->user_texts_applications_add_new_field([
+                      'post_text'=>$postText ,
+                      'user_id'=>$email_exist->id 
+                  ]);
+                  $postId = $pistTextApis->user_texts_applications_get_by_values(['user_id'=>$email_exist->id ], 'and');
+                 
+                  $postApis ->user_posts_add_new_field([
+                      'user_id'=>$email_exist->id  ,
+                        'post_text_id'=>$postId[count($postId)-1]->id  ,
+                       'timestamps'=>  time() ,
+                       'timeupdates'=>time() ,
+                        'posted_by_id'=>$email_exist->id ,
+                       'access_permission'=> 1, 
+                      'is_deleted'=>1
+                  ]);
+                  
+                  
+                  
+                  
                 echo "1";
               }
         }else if ($_POST['proccessType']=='login_user'){
@@ -138,7 +242,8 @@ if(session_id()=='')
                   
                 if(  $username_exist != NULL  ) 
                 {
-                    $_SESSION['user_info'] = [
+                    
+                    $listArr = [
                     'user_id'=>$username_exist->id  ,
                     'first_name'=>$username_exist->f_name  ,
                     'second_name'=>$username_exist->s_name ,
@@ -147,9 +252,34 @@ if(session_id()=='')
                     'birthday'=>$username_exist->birthDay ,
                     'timestamps'=>$username_exist->timestamps 
                     ];
+                     
                     
+                    
+                    
+                    
+                      $listCook = json_encode( $listArr ) ;
+                        setcookie('user_info', $listCook , time() + (60*60*24) * 30,'/' ) ;
+                        
+                         
+                         if(isset($_COOKIE['user_info']))
+                                {
+                                     $cookie = $_COOKIE['user_info'];
+                                     $cookie = stripslashes($cookie);
+                                     $userInfor = json_decode($cookie, true);
+                                     $_SESSION['user_info'] =$userInfor   ;
+                                     
+                                }else {
+                                     $_SESSION['user_info'] =$listArr    ;
+                                } 
+                        
+                        
+                        
+                        
+                        
                 }else {
-                    $_SESSION['user_info'] = [
+                    
+                    
+                    $listArr = [
                     'user_id'=>$email_exist->id  ,
                     'first_name'=>$email_exist->f_name  ,
                     'second_name'=>$email_exist->s_name ,
@@ -158,6 +288,22 @@ if(session_id()=='')
                     'birthday'=>$email_exist->birthDay ,
                     'timestamps'=>$email_exist->timestamps 
                     ];
+                    
+                     
+                    
+                    $listCook = json_encode( $listArr ) ;
+                        setcookie('user_info', $listCook , time() + (60*60*24) * 30,'/' ) ;
+
+                         if(isset($_COOKIE['user_info']))
+                                {
+                                     $cookie = $_COOKIE['user_info'];
+                                     $cookie = stripslashes($cookie);
+                                     $userInfor = json_decode($cookie, true);
+                                     $_SESSION['user_info'] =$userInfor   ;
+
+                                }else {
+                                     $_SESSION['user_info'] =$listArr    ;
+                                } 
                 }
                 /*
                 // will return to this func later

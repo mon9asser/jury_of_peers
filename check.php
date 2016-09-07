@@ -1,3 +1,4 @@
+
 <?php
   $file = dirname(__FILE__)."/access_modifiers/protected_access.php";
   if(is_file($file)) require_once $file  ;
@@ -19,6 +20,7 @@
          <link href="css/profile.css" rel="stylesheet">
          <link href="css/complete.css" rel="stylesheet"> 
          <script src="js/is_mobile.js"></script>
+         <link href="css/emu.css" rel="stylesheet">
          <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
          <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
          <!--[if lt IE 9]>
@@ -27,7 +29,7 @@
          <![endif]-->
          
     </head>
-    <body>
+    <body onload="notifications();">
         <!-- --------------------------------------- -->
         <!-- ------      Header      --------------- -->
         <!-- --------------------------------------- -->

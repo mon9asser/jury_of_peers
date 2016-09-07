@@ -324,4 +324,47 @@
       border-radius: 8px; 
     }
      
-      
+    .message-contents {
+        background: #fff;
+    }
+    .user-Sender {
+        width: 100%;
+        display: block ;
+        overflow: hidden ;
+        height: 20px;
+        background: red;
+     }
+     .texts {
+         width: 90%;
+         float: right ;
+         display: block ;
+         overflow: hidden;
+         height: auto ;
+         background: tan ;
+     }
+     .msgTx {
+         width: 98%;
+         float: right ;
+         display: block;
+    
+     }
+     .sender-user {
+          margin-top: 5px;
+     }
+     .id-sender {
+         
+     }
+     .id-receiver{
+         text-align: right;
+     }
+     .id-sender , .id-receiver {
+    width: 98%;
+    float: right;
+    display: block;
+    background: whitesmoke;
+    padding: 5px 10px;
+    border: 1px solid #dfdfdf;
+}
+.id-receiver {
+    background: #fff;
+}

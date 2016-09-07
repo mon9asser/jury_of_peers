@@ -107,6 +107,7 @@ $data = $image['output']['data'];
                         'post_type_num'=> 3 ,/*albume like (photo => 0 , music => 1  , video  => 2 , profile_pic => 3)*/
                         'post_album_id'=> $id_album->id , /*albume like (photo albume , music album , video albume)*/
                         'timestamps'=>  time() ,
+                        'timeupdates'=>time() ,
                         'post_serial_id'=>$post_serial_id ,
                         'is_shared'=> 1 ,
                         'posted_by_id'=>$_SESSION['user_info']['user_id']

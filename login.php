@@ -45,7 +45,12 @@
                         <div class="box-logs">
                             <input class="inputs" id="passworduser" placeholder="Password" type="password" />
                         </div>
-                        <a onclick="loginuser(this);" class="box-logs-btn text-center">
+                        <a rediectUrl="<?php
+                            if(isset($_GET['rediectUrl']))
+                                echo $_GET['rediectUrl'] ;
+                              else 
+                                  echo 0 ;
+                        ?>" onclick="loginuser(this);" class="box-logs-btn text-center">
                             Login
                         </a>
                         <div class="cont-another">

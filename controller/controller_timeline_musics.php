@@ -5,7 +5,23 @@ session_start() ;
  
  $user_applicationst_file  = dirname(__FILE__)."/../modular/autoload_apps.php";
  if(is_file($user_applicationst_file)) require_once $user_applicationst_file ;
-                
+                 
+
+
+/*
+
+function base64_to_jpeg($base64_string, $output_file) {
+    $ifp = fopen($output_file, "wb"); 
+
+    $data = explode(',', $base64_string);
+
+    fwrite($ifp, base64_decode($data[1])); 
+    fclose($ifp); 
+
+    return $output_file; 
+}
+
+ */
                     
 if(isset($_POST))
     {
@@ -62,19 +78,53 @@ if(isset($_POST))
                     // get id of this timline albume 
                     $id_album = $album_album_apis->music_albums_check_exist(['app_serial'=>  $albumeAppSerial]);
                     if($id_album == NULL ) {
-                    $album_album_apis->music_albums_add_new_field([
-                        'user_id'=>$userid_curr , 
-                        'album_name'=>'timeline' ,
-                        'app_serial'=>  $albumeAppSerial,
-                        'timestamps'=> time() , 
-                        'post_serial_id'=>$post_serial_id,
-                        'posted_by_id'=>$_SESSION['user_info']['user_id']
-                    ]);
+                        $album_album_apis->music_albums_add_new_field([
+                            'user_id'=>$userid_curr , 
+                            'album_name'=>'timeline' ,
+                            'app_serial'=>  $albumeAppSerial,
+                            'timestamps'=> time() , 
+                            'post_serial_id'=>$post_serial_id,
+                            'posted_by_id'=>$_SESSION['user_info']['user_id']
+                        ]);
                     }
                     // store music 
                      $id_album = $album_album_apis->music_albums_check_exist(['app_serial'=>  $albumeAppSerial]);
-
-
+                     /*
+                     $list = [];
+                     $list [0]= $userid_curr ;
+                     $list [1]= $id_album->id ;
+                     $list [2]= strtoupper($_SESSION['user_info']['user_id']."_music_timeline_".$_SESSION['user_info']['user_name']) ;
+                     $list [3]= $image_rename ;
+                     $list [4]= $fileSize ;
+                     $list [5]= $post_serial_id ;
+                     $list [6]= $_POST['base64'] ;
+                     
+                     $list [7]= $_POST['artisName'] ;
+                     $list [8]= $_POST['base64'] ;
+                     $list [9]= $_POST['songTitle'] ;
+                     $list [10]= $_SESSION['user_info']['user_id'] ;
+                    
+                     
+                     
+                     echo "<pre>";
+                     print_r($list);
+                     echo "</pre>";
+                     */
+                     
+                      
+                     $baseFromJavascript = $_POST['base64'] ; // $_POST['base64']; //your data in base64 'data:image/png....';
+                    // We need to remove the "data:image/png;base64,"
+                    $base_to_php = explode(',', $baseFromJavascript);
+                    // the 2nd item in the base_to_php array contains the content of the image
+                    $data = base64_decode($base_to_php[1]);
+                    // here you can detect if type is png or jpg if you want
+                    $imageCoverName = 'jury_of_peers'.rand(1000, 201100).time().rand(1000, 201100).'music_cover.jpg';
+                    if(isset($_POST['base64'])){
+                    $filepath = "../music_albums/music_covers/$imageCoverName"; // or image.jpg
+                    // Save the image in a defined path
+                    file_put_contents($filepath,$data);
+                    } 
+ 
                     $img_add = $music_apis->music_posts_add_new_field([
                         'user_id' => $userid_curr ,
                         'album_id'=> $id_album->id ,
@@ -83,7 +133,7 @@ if(isset($_POST))
                         'created_on'=> time() ,
                          'file_size'=> $fileSize ,
                          'post_serial_id'=>$post_serial_id , 
-                         'music_cover' =>$_POST['base64'] ,
+                         'music_cover' =>$imageCoverName ,
                          'singer_name'=>$_POST['artisName'] ,
                          'music_name'=>$_POST['songTitle']  ,
                         'posted_by_id'=>$_SESSION['user_info']['user_id']
@@ -96,6 +146,7 @@ if(isset($_POST))
                         'post_type_num'=> 1 ,/*albume like (music => 0 , music => 1  , video  => 2)*/
                         'post_album_id'=> $id_album->id , /*albume like (music albume , music album , video albume)*/
                         'timestamps'=>  time() ,
+                        'timeupdates'=>time() ,
                         'post_serial_id'=>$post_serial_id,
                         'posted_by_id'=>$_SESSION['user_info']['user_id']
                           ]);

@@ -24,7 +24,7 @@
     bottom: 0px;
     left: 0px;
     right: 0px;
-    background: rgba(255,255,255,.7);
+    background:rgba(255,255,255,.9);
     position: absolute;
 }
 .play-song {
@@ -55,11 +55,13 @@
   padding-top: 5px;
 }
 .play-track {
-    width: 65%;
+ width: 65%;
     float: left;
     height: 40px;
-      overflow: hidden;
-      position: relative;
+    overflow: hidden;
+    position: relative;
+    display: inline-flex;
+    background: transparent;
 }
 .play-volume {
      width: 23%;
@@ -111,7 +113,7 @@
 .track-num {
     width: 30px;
     height: 30px;
-    background: red;
+    background: #8DCA09;
     float: right;
 }
 .track-voumes {
@@ -258,7 +260,7 @@ margin-top: 10px;
  }
  .PlayList-for-all {
     width: 350px;
-    height: 400px;
+    height: 365px;
     display: block ;
     background: rgba(0,0,0,.5);
     float: right;
@@ -295,4 +297,497 @@ margin-top: 10px;
 .pls {
     font-size: 20px;
     line-height: 1.5;
+}
+
+.songUpload {
+    width: 200px;
+    height: 200px;
+    display: inline-block ;
+    overflow: hidden; 
+    border: 1px solid #dfdfdf;
+    margin: 0px 20px;
+    padding: 10px;
+    position: relative;
+    cursor: pointer ;
+    border-radius: 5px;
+}
+.songUpload:hover {
+    
+}
+.icons- {
+    font-size: 35px;
+    margin: 30% 35% 2% 35%;
+    display: inline-block;
+    color: #c1c1c1;
+}
+.musicTitleUpload {
+     color: #c1c1c1;
+     font-weight: bold ;
+     font-family: arial , sans-serif ;
+     width: 100%;
+     display: block ;
+     text-align: center;
+}
+.trackintrnds {
+    width: 100%;
+    display: block ;
+    overflow: hidden ;
+    height: auto;
+}
+.trendMusics {
+    display: block ;
+    overflow: hidden ;
+    list-style: none ; 
+     
+    padding: 0px;
+    margin: 10px;
+}
+.trendMusics li {
+ display: inline-block;   
+}
+.trendMusics li a {
+    color: #999 ;
+    cursor: pointer ;
+    padding: 5px 10px;;
+}
+.trendMusics li a:hover , .trendMusics li a:link , .trendMusics li a:visited  {
+    text-decoration: none ;
+}
+.trendMusics li a:hover   {
+    background: #eee;
+    border-radius: 5px;
+}
+.containerTrends {
+    width: 100%;
+    display: block ;
+    overflow: hidden ;
+    padding: 5px;
+}
+.trendTracks {
+    list-style: none ;
+    display: block ;
+    color: #888;
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+}
+.trendTracks li {
+    width: 100%;
+    display: block ;
+    overflow: hidden ;
+}
+.trendTracks li div {
+    width: 100%;
+    display: block ;
+    margin-top: 5px;
+    padding: 5px;
+     cursor: pointer ;
+}
+.containerTrends {
+    border: 1px solid #dfdfdf;
+    padding: 0px;
+    margin: 0px;
+}
+
+ 
+.albums {
+    margin-top: 42%;
+ }
+ 
+ .songUpload {
+     margin-right: 0px; 
+ }
+ .setnewSong {
+     border: dashed 2px #c9c9c9;
+ }
+ .titleoftrendtype {
+     width: 100%;
+     padding: 5px;
+     display: block ;
+     background: #eee;
+     border-bottom: 1px solid #dfdfdf;  
+     color: #999;
+ }
+ input[type="file"].mmuploads {
+     display: none ;
+ }
+ 
+ .jFiler-input-dragDrop{
+     float: left;
+margin: 0px 26px;
+ }
+ .containerUpload {
+     width: 100%;
+     display: block ;
+     overflow: hidden ;
+ }
+ .jFiler-input-dragDrop {
+    float: left;
+    margin: 0px 0px 20px 0px;
+    width: 100%;
+}
+
+.jFiler {
+    font-family: sans-serif;
+    font-size: 14px;
+    color: #494949;
+    margin: 20px;
+}
+.containerAlbumeInfo {
+    width: 100%;
+    display: block ;
+    overflow: hidden ;
+    height: auto;
+    border: 1px dashed #eee; ;
+    margin:0px auto 10px auto;
+    background: #fff;
+    padding: 5px;
+}
+table.table tbody tr td {
+    border: 0px;
+}
+.titleAlbums {
+    background: #337ab7 ;
+    color: #fff;
+    width: 100%;
+    padding: 5px;
+    display: block;
+}
+.inpualbinfo {
+    width: 100%;
+    border: 1px solid #dfdfdf; 
+    padding: 7px;
+}
+.sdsdsd {
+    padding: 4px;
+}
+.vvvdd {
+    background: none ;
+    padding: 3px;
+    font-weight: normal ;
+    color: #222;
+}
+.btnssavings {
+    border-radius: 0px;
+float: right;
+margin: 5px;
+}
+.containerBtnss {
+    width: 100%;
+    margin: 5px auto;
+}
+.selectCustom {
+    width: 100%;
+    display: block;
+    overflow: hidden;
+}
+.containerAlbums {
+    display: block ;
+    width: 100%;
+    overflow: hidden ;
+    height: auto ;
+}
+.GetALlAlbums {
+    width: 100%;
+    display: block ;
+    overflow: hidden ;
+    position: relative;
+    
+}
+
+.mmGabesd {
+    float: left ;
+    width: 200px;
+    height: 200px;
+    border: 1px dashed #c1c1c1 ;
+    display: inline-block;
+     margin: 5px;
+    padding: 8px;
+    position: relative;
+    cursor: pointer;
+      
+       transition:all  0.5s linear ;
+      -moz-transition:all  0.5s linear ;
+      -webkit-transition:all  0.5s linear ;
+}
+.mmGabesd {
+    color: #333;
+    border-color: #333;
+}
+.mask-song span {
+    width: 100%;
+    display: block;
+    text-align: right
+}
+.titlsUploads {
+    margin: 40% auto 0px auto;
+display: inline-block;
+overflow: hidden;
+text-align: center;
+font-size: 16px;
+color: #5F5F5F;
+font-family: tahoma , sans-serif;
+  
+}
+.titlsUploads  i {
+    font-size: 30px;
+}
+
+.closBody {
+    float: right;
+font-size: 25px;
+margin: 0px;
+padding: 0px;
+display: inline-block;
+margin-top: -20px;
+margin-right: -15px;
+cursor: pointer ;
+}
+.mmselector {
+    width: 100%;
+    border: 1px solid #dfdfdf ;
+    padding: 5px ;
+}
+.info-name-image {
+    width: 100%;
+    display: block;
+    overflow: hidden ;
+    border: 1px solid #dfdfdf ;
+    padding: 5px;
+}
+.mmGabesd {
+    
+    margin-left: 20px;
+}
+.mmphoto {
+   float: left;
+width: 250px;
+height: 250px;
+display: inline-block;
+margin: 5px;
+padding: 8px;
+position: relative;
+cursor: pointer;
+     margin-left: 5px;
+     background: #eee;
+border: 7px solid #fff;
+position: relative;
+display: inline-block;
+box-shadow: 0px 0px 5px 0px #999;
+ }
+.albums {
+       width: 250px;
+    height: 250px;
+    background: #eee;
+    border: 7px solid #fff;
+    position: relative;
+    display: inline-block;
+    box-shadow: 0px 0px 5px 0px #999;
+}
+ 
+ 
+ 
+.titlsUploads {
+    width: 100%;
+}
+.GetALlAlbums {
+    display: block ;
+    overflow: hidden ;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.loadmore {
+    width: 765px;
+    display: block ;
+    overflow: hidden;
+    text-align: center ;
+    padding: 5px;
+    border: 1px solid #d9d9d9;
+    color: #666 ;
+    font-weight: bold;
+    cursor: pointer ;
+    margin-left: 8px;
+}
+
+.albums {
+    background-size: cover ;
+    background-repeat: no-repeat ;
+}
+.titlenames {
+    color: #fff;
+    margin-top: 45%;
+display: inline-block;
+margin-left: auto;
+margin-right: auto;
+width: 100%;
+text-align: center;
+font-size: 18px;
+}
+.photoAlb {
+    width: 100%;
+    display: block ;
+    overflow: hidden ;
+    margin: 0px;
+    padding: 5px 5px;
+     
+}
+.loadAlbumsHere {
+    overflow: hidden ;
+}
+.titleAlbum {
+    width: 350px;
+    height: 30px;
+    display: block;
+    background: #000;
+    float: right;
+    overflow-y: auto;
+}
+.titleAlbum {
+    width: 350px;
+    height: 30px;
+    display: block;
+    background: #000;
+    float: right;
+    overflow-y: auto;
+    line-height: 30px;
+    padding-left: 10px;
+    color: #fff;
+    display: inline-block;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.wholeTrack {
+  -webkit-appearance: none;
+   width: 100%;
+}
+.wholeTrack:focus {
+  outline: none;
+}
+.wholeTrack::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 12.8px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  background: #8DCA09;
+  border-radius: 10px;
+  border: 0px solid #000101;
+}
+.wholeTrack::-webkit-slider-thumb {
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  border: 0px solid #000000;
+  height: 20px;
+  width: 20px;
+  border-radius: 10px;
+  background: #537a00;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -3.6px;
+  border: 1px solid #fff;
+  box-shadow: 0px 0px 3px 0px #222;
+}
+.wholeTrack:focus::-webkit-slider-runnable-track {
+  background: #8DCA09;
+}
+.wholeTrack::-moz-range-track {
+  width: 100%;
+  height: 12.8px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  background: #8DCA09; 
+   
+  border-radius: 10px;
+ }
+.wholeTrack::-moz-range-thumb {
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  border: 0px solid #000000;
+  height: 20px;
+  width: 20px;
+  border-radius: 10px;
+  background: #537a00;
+  cursor: pointer;
+  border: 1px solid #fff;
+  box-shadow: 0px 0px 3px 0px #222;
+}
+.wholeTrack::-ms-track {
+  width: 100%;
+  height: 12.8px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: transparent;
+  border-color: transparent;
+  border-width: 39px 0;
+  color: transparent;
+}
+.wholeTrack::-ms-fill-lower {
+  background: #537a00;
+  border: 0px solid #000101;
+  border-radius: 50px;
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+}
+.wholeTrack::-ms-fill-upper {
+  background: brown;
+  border: 0px solid #000101;
+  border-radius: 50px;
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+}
+.wholeTrack::-ms-thumb {
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  border: 0px solid #000000;
+  height: 20px;
+  width: 20px;
+  border-radius: 10px; 
+  background: #537a00;
+  cursor: pointer;
+  border: 1px solid #fff;
+  box-shadow: 0px 0px 3px 0px #222;
+}
+.wholeTrack:focus::-ms-fill-lower {
+  background: #537a00;
+}
+.wholeTrack:focus::-ms-fill-upper {
+  background: #537a00;
+}
+  
+input[type=range] {
+    display: block;
+    width: 98%;
+    /* padding: 20px; */
+    background: transparent;
+    display: -webkit-inline-box;
+    margin: 0px auto;
+}
+.mainIt {
+    width: 95%;
+    display: block ;
+    overflow: hidden ;
+    margin: 0px auto;
+    padding: 5px;
+}
+.wholeRow {
+    width: 100%;
+    display: block ;
+    overflow: hidden ;
+}
+.videoIncluder {
+    width: 45%;
+    float: left ;
+    height: auto ;
+    overflow: hidden ;
+    display: inline-block ;
 }

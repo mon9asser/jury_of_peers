@@ -72,6 +72,7 @@ if(isset($_POST['accessType']))
                         'user_id'             =>  $userid_curr , 
                         'post_text_id'        =>  $textId[count($textId)-1]->id ,
                         'timestamps'          =>  time()  ,
+                        'timeupdates'=>time() ,
                         'access_permission'   =>  $_POST['accessPremission'] ,
                         'is_shared'           =>  1 ,
                         'post_serial_id'      =>  $post_serial_id ,

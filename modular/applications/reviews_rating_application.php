@@ -23,6 +23,12 @@ class reviews_rating_applications extends jury_of_peers_tbls {
        $getApps = new main_get_app();
        return $getApps->get_all_rows ( $this->table() ,$args);   
     }
+    
+    public function reviews_rating_apis_get_sum_of_program ($args = NULL ){
+       $getApps = new main_get_app();
+       return $getApps->get_all_rows_sum ( $this->table() ,$args);   
+    }
+    
     public function reviews_rating_search_apis( $args, $operatorType /*Or - and */){
        $getApps = new main_get_app();
        return $getApps->get_data_according_to_array($this->table(), $args, '%', $operatorType);

@@ -24,7 +24,8 @@ $(document).ready(function (){
                    var dataStrings = {
                        'proccessType' : 'login_user' ,
                         'user_name' :useroremail.val() ,
-                        'password' :password.val() 
+                        'password' :password.val() ,
+                        'redirectUrl':$(_this).attr('rediectUrl')
                    };
                 $.ajax({
                      url :'controller/controller_logs.php',
@@ -39,7 +40,11 @@ $(document).ready(function (){
                          $('.error-logs').slideDown();
                           if($.trim(response) ==1){
                              $('.error-logs').css('display','none');
-                             window.location.href ='home' ;
+                             var refire = $(_this).attr('rediectUrl');
+                             if(refire != 0 )
+                                window.location.href = 'http://'+ refire;  
+                            else 
+                                window.location.href = 'home';  
                          }
                          
                      } 
@@ -143,7 +148,7 @@ $(document).ready(function (){
                          $(_this).html('Create my account now');
                          $('.error-logs').html(response);
                          $('.error-logs').slideDown();
-                         
+                         console.log(response);
                          if($.trim(response) ==1){
                              $('.error-logs').css('display','none');
                              window.location.href ='home' ;

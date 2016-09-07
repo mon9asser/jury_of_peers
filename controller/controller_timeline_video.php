@@ -98,6 +98,7 @@ if(isset($_POST))
                         'post_type_num'=> 2 ,/*albume like (music => 0 , music => 1  , video  => 2 , null )*/
                         'post_album_id'=> $id_album->id , /*albume like (music albume , music album , video albume)*/
                         'timestamps'=>  time() ,
+                        'timeupdates'=>time() ,
                         'post_serial_id'=>$post_serial_id,
                         'posted_by_id'=>$_SESSION['user_info']['user_id']
                           ]);

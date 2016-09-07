@@ -108,7 +108,8 @@ if(!isset($_SESSION['user_info']))
             $plaintiffInv = $plnInvitation->load_more_invitation_list($lastId  , 3 , $param );
            // print_r($plaintiffInv);
             $lstid = 0;
-            for($i=0;$i < count($plaintiffInv) ; $i++){
+            if(is_array($plaintiffInv)){
+              for($i=0;$i < count($plaintiffInv) ; $i++){
             $userInfos = $userApps->user_application_check_exist(['id'=>$plaintiffInv[$i]->user_id]);
             
              if(count($userInfos) != 0 ){
@@ -133,8 +134,11 @@ if(!isset($_SESSION['user_info']))
                 ?> <input class="lastIdCourt" value="<?php echo $lstid ; ?>" type="hidden" /><?php
                 }else {
                     echo "0";
-                }
-            }
+                }   
+            } 
+            }else {
+                    echo "0";
+                }   
             ?>
                
             <?php

@@ -1231,31 +1231,31 @@ if(is_file($imageProfile)) require_once $imageProfile ;
                     $('.file-video-upload').val(null);
              } 
              
-           // 2- music
-           window.remover_musicfile = function (){
-            $('.file-img-upload').val(null);
-                    $('.file-music-upload').val(null);
-                    $('.file-img-upload').val(null);
-                // delete the latest image that stored in database by this user 
-               $.ajax({
-                   url : '../controller/controller_timeline_musics.php' ,
-                   type : 'POST' , 
-                   data :{"proccessType":"DELETE_ALBUM_POST"} , 
-                   success : function (response){
-                      // alert(response);
-                        var isDeleted = $.trim(response);
-                       if(isDeleted == 1)
-                            {
-                                $('.file-included').css('display','none');
-                                // delete image from this node insid post 
-                                $('.file-included').html('<div class="muisc-masks"></div><div class="music-info mdoo"><ul><li style="background-image: url(music_albums/music_covers/default_music.jpg); " class="img-container img-artist"> </li><li class="info-msc"><h4 class="song-name">Song Name</h4><span class="singer-name"></span></li></ul></div><ul class="file-uploader-menu mdoo"><li><i class="fa fa-music"><span style="padding-left:3px;">-</span></i></i></li><li><div class="fileUpload"><div class="fileprogress"></div></div></li><li><i onclick="return remover_musicfile();"  class="fa fa-remove faremove"></i></li></ul>');
-                             }
-                    }
-               });
-               $('.file-img-upload').val(null);
-                    $('.file-music-upload').val(null);
-                    $('.file-video-upload').val(null);
-             }
+			   // 2- music
+			   window.remover_musicfile = function (){
+				$('.file-img-upload').val(null);
+						$('.file-music-upload').val(null);
+						$('.file-img-upload').val(null);
+					// delete the latest image that stored in database by this user 
+				   $.ajax({
+					   url : '../controller/controller_timeline_musics.php' ,
+					   type : 'POST' , 
+					   data :{"proccessType":"DELETE_ALBUM_POST"} , 
+					   success : function (response){
+						  // alert(response);
+							var isDeleted = $.trim(response);
+						   if(isDeleted == 1)
+								{
+									$('.file-included').css('display','none');
+									// delete image from this node insid post 
+									$('.file-included').html('<div class="muisc-masks"></div><div class="music-info mdoo"><ul><li style="background-image: url(music_albums/music_covers/default_music.jpg); " class="img-container img-artist"> </li><li class="info-msc"><h4 class="song-name">Song Name</h4><span class="singer-name"></span></li></ul></div><ul class="file-uploader-menu mdoo"><li><i class="fa fa-music"><span style="padding-left:3px;">-</span></i></i></li><li><div class="fileUpload"><div class="fileprogress"></div></div></li><li><i onclick="return remover_musicfile();"  class="fa fa-remove faremove"></i></li></ul>');
+								 }
+						}
+				   });
+				   $('.file-img-upload').val(null);
+						$('.file-music-upload').val(null);
+						$('.file-video-upload').val(null);
+				 }
            // 3- video 
            window.remove_thisvideo = function () {
                    
